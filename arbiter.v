@@ -156,7 +156,7 @@ wire [5:0] out2_1;
 wire [5:0] out2_2;
 //Out 1
 
-output wire [5:0] out;
+output [5:0] out;
 //32-Instantiation Level:
 	Arb Arb32_1 (
 		.in1 (in1),
@@ -241,7 +241,7 @@ output wire [5:0] out;
 	Arb Arb32_17 (
 		.in1 (in33),
 		.in2 (in34),
-		.out(out32_13)
+      .out(out32_17)
 		);
 	Arb Arb32_18 (
 		.in1 (in35),
@@ -266,7 +266,7 @@ output wire [5:0] out;
 	Arb Arb32_22 (
 		.in1 (in43),
 		.in2 (in44),
-		.out(out32_20)
+      .out(out32_22)
 		);
 	Arb Arb32_23 (
 		.in1 (in45),
@@ -472,7 +472,7 @@ Arb Arb2_1 (
 Arb Arb2_2 (
 		.in1 (out4_3),
 		.in2 (out4_4),
-		.out(out2_1)
+		.out(out2_2)
 		);
 //Arbiter Level 1
 Arb Arb1_1 (
