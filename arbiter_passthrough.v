@@ -775,17 +775,40 @@ Arb Arb4_2 (
 		.out(out4_2),
 		.outpos(out4pos_2)
 		);
+Arb Arb4_3 (
+		.in1 (out8_5),
+		.in2 (out8_6),
+		.inpos1 (out8pos_5)
+		.inpos2 (out8pos_6)
+		.out(out4_3),
+		.outpos(out4pos_3)
+		);
+Arb Arb4_4 (
+		.in1 (out8_7),
+		.in2 (out8_8),
+		.inpos1 (out8pos_7)
+		.inpos2 (out8pos_8)
+		.out(out4_4),
+		.outpos(out4pos_4)
+		);		
 //Arbiter Level 2
 Arb Arb2_1 (
 		.in1 (out4_1),
 		.in2 (out4_2),
-		.out(out2_1)
+		.inpos1 (out4pos_1)
+		.inpos2 (out4pos_2)
+		.out(out2_1),
+		.outpos(out2pos_1)
 		);
 Arb Arb2_2 (
 		.in1 (out4_3),
 		.in2 (out4_4),
-		.out(out2_2)
+		.inpos1 (out4pos_3)
+		.inpos2 (out4pos_4)
+		.out(out2_2),
+		.outpos(out2pos_1)
 		);
+
 //Arbiter Level 1
 Arb Arb1_1 (
 		.in1 (out2_1),
