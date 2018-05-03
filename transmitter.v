@@ -210,7 +210,7 @@ parameter BISHOP = 4'b0100;
 								RRD =SEND_EMPTY_KNIGHT;
 								
 							end
-						5'b11000: //KING
+						5'b00100: //KING
 							begin
 								U = { piece_reg[5:1], pos_reg};
 								R = { piece_reg[5:1], pos_reg};

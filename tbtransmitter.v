@@ -63,6 +63,9 @@ parameter BISHOP = 5'b01000;
 	#20
   $display("8 Outputs for non knight are: U:%b D:%b L:%b R:%b UL:%b UR:%b DL:%b DR:%b",U_out,D_out,L_out
   ,R_out,UL_out,UR_out,DL_out,DR_out);
+ 
+   $display("8 Outputs for knight are: UUL:%b UUR:%b DDL:%b DDR:%b LLU:%b RRU:%b LLD:%b RRD:%b",UUL_out,UUR_out,DDL_out
+  ,DDR_out,LLU_out,RRU_out,LLD_out,RRD_out);
 		  
 		  
 		  end
