@@ -1,5 +1,5 @@
 module piece_reg (//In
-								U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
+								CLOCK,U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
 								UUL_in,UUR_in,LLU_in,RRU_in,DDL_in,DDR_in,LLD_in,RRD_in
 								//Out
 								U_out,D_out,L_out,R_out,UL_out,UR_out,DL_out,DR_out, 
