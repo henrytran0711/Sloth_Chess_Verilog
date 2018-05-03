@@ -26,22 +26,22 @@ output reg [7:0] DDR;
 output reg [7:0] LLD;
 output reg [7:0] RRD;
 //Parameters
-parameter EMPTY = 5'b00000;
+parameter EMPTY = 6'b000000;
 parameter SEND_EMPTY = 11'b00000000000;
 parameter SEND_EMPTY_KNIGHT = 8'b00000000;
 parameter WHITE = 1'b1;
 parameter BLACK = 1'b0;
 
-parameter PAWN = 4'b0001;
+parameter PAWN = 5'b00010;
 parameter KNIGHT = 5'b00001;
-parameter KING = 4'b0010;
-parameter QUEEN = 4'b1100;
-parameter ROOK = 4'b1000;
-parameter BISHOP = 4'b0100;
+parameter KING = 5'b00100;
+parameter QUEEN = 5'b11000;
+parameter ROOK = 5'b10000;
+parameter BISHOP = 5'b01000;
 //Logic
  always @(*) 
     begin
-		if ( piece_reg[4:0] == EMPTY || piece_reg[5] != engine_color) //If piece reg is empty, no output is sent
+		if ( piece_reg == EMPTY || piece_reg[5] != engine_color) //If piece reg is empty, no output is sent
 			begin
 				U = SEND_EMPTY;
 				R = SEND_EMPTY;
@@ -66,10 +66,10 @@ parameter BISHOP = 4'b0100;
 	else if (engine_color == piece_reg[5])
 			begin
 				case (piece_reg[4:0])
-					5'b00010: //Pawn
+					PAWN: //Pawn
 						if(engine_color == WHITE)
 							begin //only goes up
-								U = { piece_reg[5:1], pos_reg[5:0]};
+								U = { piece_reg[5:1], pos_reg};
 								R = SEND_EMPTY;
 								L = SEND_EMPTY;
 								D = SEND_EMPTY;
@@ -111,7 +111,7 @@ parameter BISHOP = 4'b0100;
 								LLD = SEND_EMPTY_KNIGHT;
 								RRD =SEND_EMPTY_KNIGHT;
 						end 
-					5'b00001: //Knight
+					KNIGHT: //Knight
 						//All Non-knight pieces 0
 						begin
 								U = SEND_EMPTY;
@@ -135,7 +135,7 @@ parameter BISHOP = 4'b0100;
 								RRD = { piece_reg[5],piece_reg[0], pos_reg};
 						end		
 								
-					5'b10000: //Rook
+					ROOK: //Rook
 						begin
 								U = { piece_reg[5:1], pos_reg};
 								R = { piece_reg[5:1], pos_reg};
@@ -160,7 +160,7 @@ parameter BISHOP = 4'b0100;
 								RRD =SEND_EMPTY_KNIGHT;
 						
 						end
-					5'b11000: //Queen
+					QUEEN: //Queen
 						begin
 								U = { piece_reg[5:1], pos_reg};
 								R = { piece_reg[5:1], pos_reg};
@@ -185,12 +185,12 @@ parameter BISHOP = 4'b0100;
 								RRD =SEND_EMPTY_KNIGHT;
 							end
 					
-					5'b11000: //Bishop
+					BISHOP: //Bishop
 						begin
-								U = { EMPTY, pos_reg};
-								R = { EMPTY, pos_reg};
-								L = { EMPTY, pos_reg};
-								D = { EMPTY, pos_reg};
+								U = SEND_EMPTY;
+								R = SEND_EMPTY;
+								L = SEND_EMPTY;
+								D = SEND_EMPTY;
 
 								UL = 	{ piece_reg[5:1], pos_reg};
 								UR =		{ piece_reg[5:1], pos_reg};
@@ -210,7 +210,7 @@ parameter BISHOP = 4'b0100;
 								RRD =SEND_EMPTY_KNIGHT;
 								
 							end
-						5'b00100: //KING
+						KING: //KING
 							begin
 								U = { piece_reg[5:1], pos_reg};
 								R = { piece_reg[5:1], pos_reg};
@@ -236,6 +236,8 @@ parameter BISHOP = 4'b0100;
 							end
 				endcase
 			end
+			
+			
 
 end
 	
