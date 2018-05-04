@@ -1,5 +1,7 @@
 module transceiver(
-clk, engineColor, pieceReg, posReg, U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
+clk, engineColor, pieceReg, posReg,
+
+U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
 UUL_in,UUR_in,LLU_in,RRU_in,DDL_in,DDR_in,LLD_in,RRD_in,
 
 U_out,D_out,L_out,R_out,UL_out,UR_out,DL_out,DR_out, 
@@ -92,8 +94,28 @@ wire [7:0] DDR_trans;
 wire [7:0] LLD_trans;
 wire [7:0] RRD_trans;
 
+reg [10:0] U_move_in;
+reg [10:0] D_move_in ;
+reg [10:0] L_move_in;
+reg [10:0] R_move_in;
+reg [10:0] UL_move_in;
+reg [10:0] UR_move_in ;
+reg [10:0] DL_move_in;
+reg [10:0] DR_move_in;
+//Input knight
+reg [7:0] UUL_move_in;
+reg [7:0] UUR_move_in;
+reg [7:0] LLU_move_in;
+reg [7:0] RRU_move_in;
+reg [7:0] DDL_move_in;
+reg [7:0] DDR_move_in;
+reg [7:0] LLD_move_in;
+reg [7:0] RRD_move_in;
+
 
 parameter EMPTY_MOVE = 11'b000_0000_0000;
+parameter EMPTY_KNIGHT_MOVE = 8'b0000_0000;
+
 parameter EMPTY_PIECE_REG = 6'b00_0000;
 
 Transmitter Trans(
@@ -119,6 +141,90 @@ assign RRD_out = RRD_trans;
 
 
 always @(*) begin
+
+	// collisions of same color
+	
+	if (pieceReg[5] == U_in[10] && pieceReg != EMPTY_PIECE_REG)
+		U_move_in = EMPTY_MOVE;
+	else
+		U_move_in = U_in;
+		
+	if (pieceReg[5] == D_in[10] && pieceReg != EMPTY_PIECE_REG)
+		D_move_in = EMPTY_MOVE;
+	else
+		D_move_in = D_in;
+	
+	if (pieceReg[5] == L_in[10] && pieceReg != EMPTY_PIECE_REG)
+		L_move_in = EMPTY_MOVE;
+	else
+		L_move_in = L_in;
+	
+	if (pieceReg[5] == R_in[10] && pieceReg != EMPTY_PIECE_REG)
+		R_move_in = EMPTY_MOVE;
+	else
+		R_move_in = R_in;
+	
+	if (pieceReg[5] == UL_in[10] && pieceReg != EMPTY_PIECE_REG)
+		UL_move_in = EMPTY_MOVE;
+	else
+		UL_move_in = UL_in;
+	
+	if (pieceReg[5] == UR_in[10] && pieceReg != EMPTY_PIECE_REG)
+		UR_move_in = EMPTY_MOVE;
+	else
+		UR_move_in = UR_in;
+	
+	if (pieceReg[5] == DL_in[10] && pieceReg != EMPTY_PIECE_REG)
+		DL_move_in = EMPTY_MOVE;
+	else
+		DL_move_in = DL_in;
+	
+	if (pieceReg[5] == DR_in[10] && pieceReg != EMPTY_PIECE_REG)
+		DR_move_in = EMPTY_MOVE;
+	else
+		DR_move_in = DR_in;	
+		
+	if (pieceReg[5] == UUL_in[7] && pieceReg != EMPTY_PIECE_REG)
+		UUL_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		UUL_move_in = UUL_in;	
+
+	if (pieceReg[5] == UUR_in[7] && pieceReg != EMPTY_PIECE_REG)
+		UUR_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		UUR_move_in = UUR_in;
+		
+	if (pieceReg[5] == LLU_in[7] && pieceReg != EMPTY_PIECE_REG)
+		LLU_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		LLU_move_in = LLU_in;
+
+	if (pieceReg[5] == RRU_in[7] && pieceReg != EMPTY_PIECE_REG)
+		RRU_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		RRU_move_in = RRU_in;
+
+	if (pieceReg[5] == DDL_in[7] && pieceReg != EMPTY_PIECE_REG)
+		DDL_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		DDL_move_in = DDL_in;
+
+	if (pieceReg[5] == DDR_in[7] && pieceReg != EMPTY_PIECE_REG)
+		DDR_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		DDR_move_in = DDR_in;
+
+	if (pieceReg[5] == LLD_in[7] && pieceReg != EMPTY_PIECE_REG)
+		LLD_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		LLD_move_in = LLD_in;
+
+	if (pieceReg[5] == RRD_in[7] && pieceReg != EMPTY_PIECE_REG)
+		RRD_move_in = EMPTY_KNIGHT_MOVE;
+	else
+		RRD_move_in = RRD_in;
+
+	//pass through
 
 	if (U_move != EMPTY_MOVE && U_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		D_out = U_move;
@@ -164,26 +270,26 @@ end
 
  always @(posedge clk)
     begin
-		U_move <= U_in;
-		D_move <= D_in;
-		L_move <= L_in;
-		R_move <= R_in;
+		U_move <= U_move_in;
+		D_move <= D_move_in;
+		L_move <= L_move_in;
+		R_move <= R_move_in;
 		
-		UL_move <= UL_in;
-		UR_move <= UR_in;
-		DL_move <= DL_in;
-		DR_move <= DR_in;
+		UL_move <= UL_move_in;
+		UR_move <= UR_move_in;
+		DL_move <= DL_move_in;
+		DR_move <= DR_move_in;
 		
-		UUL_move <= UUL_in;
-		UUR_move <= UUR_in;
-		LLU_move <= LLU_in;
-		RRU_move <= RRU_in;
+		UUL_move <= UUL_move_in;
+		UUR_move <= UUR_move_in;
+		LLU_move <= LLU_move_in;
+		RRU_move <= RRU_move_in;
 		
-		DDL_move <= DDL_in;
-		DDR_move <= DDR_in;
-		LLD_move <= LLD_in;
-		RRD_move <= RRD_in;
+		DDL_move <= DDL_move_in;
+		DDR_move <= DDR_move_in;
+		LLD_move <= LLD_move_in;
+		RRD_move <= RRD_move_in;
 	end
 	
-	
+
 endmodule
