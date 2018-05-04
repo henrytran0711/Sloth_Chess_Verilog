@@ -142,129 +142,108 @@ assign RRD_out = RRD_trans;
 
 always @(*) begin
 
+	U_move_in = U_in;	
+	D_move_in = D_in;
+	L_move_in = L_in;
+	R_move_in = R_in;
+	UL_move_in = UL_in;
+	UR_move_in = UR_in;
+	DL_move_in = DL_in;
+	DR_move_in = DR_in;
+	
+	UUL_move_in = UUL_in;
+	UUR_move_in = UUR_in;
+	LLU_move_in = LLU_in;
+	RRU_move_in = RRU_in;
+	DDL_move_in = DDL_in;
+	DDR_move_in = DDR_in;
+	LLD_move_in = LLD_in;
+	RRD_move_in = RRD_in;
+	
 	// collisions of same color
 	
 	if (pieceReg[5] == U_in[10] && pieceReg != EMPTY_PIECE_REG)
 		U_move_in = EMPTY_MOVE;
-	else
-		U_move_in = U_in;
 		
 	if (pieceReg[5] == D_in[10] && pieceReg != EMPTY_PIECE_REG)
 		D_move_in = EMPTY_MOVE;
-	else
-		D_move_in = D_in;
 	
 	if (pieceReg[5] == L_in[10] && pieceReg != EMPTY_PIECE_REG)
 		L_move_in = EMPTY_MOVE;
-	else
-		L_move_in = L_in;
 	
 	if (pieceReg[5] == R_in[10] && pieceReg != EMPTY_PIECE_REG)
 		R_move_in = EMPTY_MOVE;
-	else
-		R_move_in = R_in;
 	
 	if (pieceReg[5] == UL_in[10] && pieceReg != EMPTY_PIECE_REG)
 		UL_move_in = EMPTY_MOVE;
-	else
-		UL_move_in = UL_in;
 	
 	if (pieceReg[5] == UR_in[10] && pieceReg != EMPTY_PIECE_REG)
 		UR_move_in = EMPTY_MOVE;
-	else
-		UR_move_in = UR_in;
 	
 	if (pieceReg[5] == DL_in[10] && pieceReg != EMPTY_PIECE_REG)
 		DL_move_in = EMPTY_MOVE;
-	else
-		DL_move_in = DL_in;
 	
 	if (pieceReg[5] == DR_in[10] && pieceReg != EMPTY_PIECE_REG)
 		DR_move_in = EMPTY_MOVE;
-	else
-		DR_move_in = DR_in;	
 		
 	if (pieceReg[5] == UUL_in[7] && pieceReg != EMPTY_PIECE_REG)
-		UUL_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		UUL_move_in = UUL_in;	
+		UUL_move_in = EMPTY_KNIGHT_MOVE;	
 
 	if (pieceReg[5] == UUR_in[7] && pieceReg != EMPTY_PIECE_REG)
 		UUR_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		UUR_move_in = UUR_in;
 		
 	if (pieceReg[5] == LLU_in[7] && pieceReg != EMPTY_PIECE_REG)
 		LLU_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		LLU_move_in = LLU_in;
 
 	if (pieceReg[5] == RRU_in[7] && pieceReg != EMPTY_PIECE_REG)
 		RRU_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		RRU_move_in = RRU_in;
 
 	if (pieceReg[5] == DDL_in[7] && pieceReg != EMPTY_PIECE_REG)
 		DDL_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		DDL_move_in = DDL_in;
 
 	if (pieceReg[5] == DDR_in[7] && pieceReg != EMPTY_PIECE_REG)
 		DDR_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		DDR_move_in = DDR_in;
 
 	if (pieceReg[5] == LLD_in[7] && pieceReg != EMPTY_PIECE_REG)
 		LLD_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		LLD_move_in = LLD_in;
 
 	if (pieceReg[5] == RRD_in[7] && pieceReg != EMPTY_PIECE_REG)
 		RRD_move_in = EMPTY_KNIGHT_MOVE;
-	else
-		RRD_move_in = RRD_in;
 
+	D_out = D_trans;
+	U_out = U_trans;
+	R_out = R_trans;
+	L_out = L_trans;
+	DR_out = DR_trans;
+	DL_out = DL_trans;
+	UR_out = UR_trans;
+	UL_out = UL_trans;
+	
 	//pass through
 
 	if (U_move != EMPTY_MOVE && U_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		D_out = U_move;
-	else
-		D_out = D_trans;
 		
 	if (D_move != EMPTY_MOVE && D_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		U_out = D_move;
-	else
-		U_out = U_trans;
 	
 	if (L_move != EMPTY_MOVE && L_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		R_out = L_move;
-	else
-		R_out = R_trans;
 	
 	if (R_move != EMPTY_MOVE && R_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		L_out = R_move;
-	else
-		L_out = L_trans;
 	
 	if (UL_move != EMPTY_MOVE && UL_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
 		DR_out = UL_move;
-	else
-		DR_out = DR_trans;
 	
 	if (UR_move != EMPTY_MOVE && UR_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
 		DL_out = UR_move;
-	else
-		DL_out = DL_trans;
 	
 	if (DL_move != EMPTY_MOVE && DL_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
-		UR_out = DL_move;
-	else
-		UR_out = UR_trans;	
+		UR_out = DL_move;	
 
 	if (DR_move != EMPTY_MOVE && DR_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
 		UL_out = DR_move;
-	else
-		UL_out = UL_trans;
 		
 end
 
