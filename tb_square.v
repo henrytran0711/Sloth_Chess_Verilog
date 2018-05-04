@@ -49,23 +49,23 @@ wire [7:0] RRD_out;
 
 
 //Move_Reg Non knight
-wire [23:0] U_move;
-wire [23:0] D_move;
-wire [23:0] L_move;
-wire [23:0] R_move;
-wire [23:0] UL_move;
-wire [23:0] UR_move;
-wire [23:0] DL_move;
-wire [23:0] DR_move;
+wire [31:0] U_move;
+wire [31:0] D_move;
+wire [31:0] L_move;
+wire [31:0] R_move;
+wire [31:0] UL_move;
+wire [31:0] UR_move;
+wire [31:0] DL_move;
+wire [31:0] DR_move;
 //Move_Reg knight
-wire [23:0] UUL_move;
-wire [23:0] UUR_move;
-wire [23:0] LLU_move;
-wire [23:0] RRU_move;
-wire [23:0] DDL_move;
-wire [23:0] DDR_move;
-wire [23:0] LLD_move;
-wire [23:0] RRD_move;
+wire [31:0] UUL_move;
+wire [31:0] UUR_move;
+wire [31:0] LLU_move;
+wire [31:0] RRU_move;
+wire [31:0] DDL_move;
+wire [31:0] DDR_move;
+wire [31:0] LLD_move;
+wire [31:0] RRD_move;
 
 parameter WHITE = 1'b1;
 parameter BLACK = 1'b0;
@@ -85,8 +85,8 @@ parameter ROOK_ATTACK = 4'b1000;
 parameter KING_ATTACK = 4'b0010;
 parameter BISHOP_ATTACK = 4'b0100;
 
-parameter EMPTY_MOVE = 24'h00_0000;
-parameter EMPTY_KNIGHT_MOVE = 24'h00_0000; 
+parameter EMPTY_MOVE = 32'h0000_0000;
+parameter EMPTY_KNIGHT_MOVE = 32'h0000_0000; 
 
 square square1(
 clk, engineColor, pieceReg, enable, clear, posReg, 
@@ -105,7 +105,7 @@ UUL_move,UUR_move,LLU_move,RRU_move,DDL_move,DDR_move,LLD_move,RRD_move
 initial begin
 	clk = 1'b0;
 	engineColor = BLACK;
-	pieceReg = {WHITE, BISHOP_PIECE};
+	pieceReg = {EMPTY_PIECE};
 	enable = 1'b1;
 	clear = 1'b0;
 	
