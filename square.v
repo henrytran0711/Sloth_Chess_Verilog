@@ -1,83 +1,72 @@
-module square(
-clk, engineColor, pieceReg, enable, clear, posReg, 
-
-U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
-UUL_in,UUR_in,LLU_in,RRU_in,DDL_in,DDR_in,LLD_in,RRD_in,
-
-U_out,D_out,L_out,R_out,UL_out,UR_out,DL_out,DR_out, 
-UUL_out,UUR_out,LLU_out,RRU_out,DDL_out,DDR_out,LLD_out,RRD_out,
-
-U_move_out,D_move_out,L_move_out,R_move_out,UL_move_out,UR_move_out,DL_move_out,DR_move_out, 
-UUL_move_out,UUR_move_out,LLU_move_out,RRU_move_out,DDL_move_out,DDR_move_out,LLD_move_out,RRD_move_out
-
-);
-								
+module square(			
 								
 //CLOCK
-input clk;
-input engineColor;
-input[5:0] pieceReg;
-input enable;
-input clear;
+input clk,
+input engineColor,
+input[5:0] pieceReg,
+input enable,
+input clear,
 
-input[5:0] posReg;
+input[5:0] posReg,
 //Input Reg
-input [10:0] U_in;
-input [10:0] D_in ;
-input [10:0] L_in;
-input [10:0] R_in;
-input [10:0] UL_in;
-input [10:0] UR_in ;
-input [10:0] DL_in;
-input [10:0] DR_in;
+input [10:0] U_in,
+input [10:0] D_in,
+input [10:0] L_in,
+input [10:0] R_in,
+input [10:0] UL_in,
+input [10:0] UR_in,
+input [10:0] DL_in,
+input [10:0] DR_in,
 //Input knight
-input [7:0] UUL_in;
-input [7:0] UUR_in;
-input [7:0] LLU_in;
-input [7:0] RRU_in;
-input [7:0] DDL_in;
-input [7:0] DDR_in;
-input [7:0] LLD_in;
-input [7:0] RRD_in;
+input [7:0] UUL_in,
+input [7:0] UUR_in,
+input [7:0] LLU_in,
+input [7:0] RRU_in,
+input [7:0] DDL_in,
+input [7:0] DDR_in,
+input [7:0] LLD_in,
+input [7:0] RRD_in,
 
 //Output Non knight
-output [10:0] U_out;
-output [10:0] D_out;
-output [10:0] L_out;
-output [10:0] R_out;
-output [10:0] UL_out;
-output [10:0] UR_out;
-output [10:0] DL_out;
-output [10:0] DR_out;
+output [10:0] U_out,
+output [10:0] D_out,
+output [10:0] L_out,
+output [10:0] R_out,
+output [10:0] UL_out,
+output [10:0] UR_out,
+output [10:0] DL_out,
+output [10:0] DR_out,
 //Output knight
-output [7:0] UUL_out;
-output [7:0] UUR_out;
-output [7:0] LLU_out;
-output [7:0] RRU_out;
-output [7:0] DDL_out;
-output [7:0] DDR_out;
-output [7:0] LLD_out;
-output [7:0] RRD_out;
+output [7:0] UUL_out,
+output [7:0] UUR_out,
+output [7:0] LLU_out,
+output [7:0] RRU_out,
+output [7:0] DDL_out,
+output [7:0] DDR_out,
+output [7:0] LLD_out,
+output [7:0] RRD_out,
 
 
 //Output Non knight
-output reg [31:0] U_move_out;
-output reg [31:0] D_move_out;
-output reg [31:0] L_move_out;
-output reg [31:0] R_move_out;
-output reg [31:0] UL_move_out;
-output reg [31:0] UR_move_out;
-output reg [31:0] DL_move_out;
-output reg [31:0] DR_move_out;
+output reg [31:0] U_move_out,
+output reg [31:0] D_move_out,
+output reg [31:0] L_move_out,
+output reg [31:0] R_move_out,
+output reg [31:0] UL_move_out,
+output reg [31:0] UR_move_out,
+output reg [31:0] DL_move_out,
+output reg [31:0] DR_move_out,
 //Output knight
-output reg [31:0] UUL_move_out;
-output reg [31:0] UUR_move_out;
-output reg [31:0] LLU_move_out;
-output reg [31:0] RRU_move_out;
-output reg [31:0] DDL_move_out;
-output reg [31:0] DDR_move_out;
-output reg [31:0] LLD_move_out;
-output reg [31:0] RRD_move_out;
+output reg [31:0] UUL_move_out,
+output reg [31:0] UUR_move_out,
+output reg [31:0] LLU_move_out,
+output reg [31:0] RRU_move_out,
+output reg [31:0] DDL_move_out,
+output reg [31:0] DDR_move_out,
+output reg [31:0] LLD_move_out,
+output reg [31:0] RRD_move_out
+
+);
 
 wire [10:0] U_move;
 wire [10:0] D_move;
@@ -138,16 +127,16 @@ pieceReg pieceReg1(
 
 transceiver Transceiver1(
 
-clk, engineColor, pieceRegOut, posReg,
+.clk(clk), .engineColor(engineColor), .pieceReg(pieceRegOut), .posReg(posReg),
 
-U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
-UUL_in,UUR_in,LLU_in,RRU_in,DDL_in,DDR_in,LLD_in,RRD_in,
+.U_in(U_in), .D_in(D_in), .L_in(L_in), .R_in(R_in), .UL_in(UL_in), .UR_in(UR_in), .DL_in(DL_in), .DR_in(DR_in), 
+.UUL_in(UUL_in), .UUR_in(UUR_in), .LLU_in(LLU_in), .RRU_in(RRU_in), .DDL_in(DDL_in), .DDR_in(DDR_in), .LLD_in(LLD_in), .RRD_in(RRD_in),
 
-U_out,D_out,L_out,R_out,UL_out,UR_out,DL_out,DR_out, 
-UUL_out,UUR_out,LLU_out,RRU_out,DDL_out,DDR_out,LLD_out,RRD_out,
+.U_out(U_out), .D_out(D_out), .L_out(L_out), .R_out(R_out), .UL_out(UL_out), .UR_out(UR_out), .DL_out(DL_out), .DR_out(DR_out), 
+.UUL_out(UUL_out), .UUR_out(UUR_out), .LLU_out(LLU_out), .RRU_out(RRU_out), .DDL_out(DDL_out), .DDR_out(DDR_out), .LLD_out(LLD_out), .RRD_out(RRD_out),
 
-U_move,D_move,L_move,R_move,UL_move,UR_move,DL_move,DR_move, 
-UUL_move,UUR_move,LLU_move,RRU_move,DDL_move,DDR_move,LLD_move,RRD_move
+.U_move(U_move), .D_move(D_move), .L_move(L_move), .R_move(R_move), .UL_move(UL_move), .UR_move(UR_move), .DL_move(DL_move), .DR_move(DR_move), 
+.UUL_move(UUL_move), .UUR_move(UUR_move), .LLU_move(LLU_move), .RRU_move(RRU_move), .DDL_move(DDL_move), .DDR_move(DDR_move), .LLD_move(LLD_move), .RRD_move(RRD_move)
 
 );
 
