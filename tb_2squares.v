@@ -328,15 +328,29 @@ RRD_in2 = EMPTY_KNIGHT_MOVE;
 	
 	
 	#40;
-	$display(" L Output (32 bits) for LEFT SQUARE:");
+	$display(" L Move Output (32 bits) for LEFT SQUARE:");
 	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_move1[29:24],L_move1[21:16],L_move1[13:8],L_move1[5:0]);
-	$display(" R Output (32 bits) for LEFT SQUARE:");
+	$display(" R Move Output (32 bits) for LEFT SQUARE:");
 	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move1[29:24],R_move1[21:16],R_move1[13:8],R_move1[5:0]);
-	$display(" U Output (32 bits) for LEFT SQUARE:");
+	$display(" U Move Output (32 bits) for LEFT SQUARE:");
 	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",U_move1[29:24],U_move1[21:16],U_move1[13:8],U_move1[5:0]);
-	$display(" D Output (32 bits) for LEFT SQUARE:");
+	$display(" D Move Output (32 bits) for LEFT SQUARE:");
 	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",D_move1[29:24],D_move1[21:16],D_move1[13:8],D_move1[5:0]);
 	
+	
+	
+	$display(" UUL Move Output (32 bits) for LEFT SQUARE:");
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",UUL_move1[29:24],UUL_move1[21:16],UUL_move1[13:8],UUL_move1[5:0]);
+	$display(" UUR Move Output (32 bits) for LEFT SQUARE:");
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",UUR_move1[29:24],UUR_move1[21:16],UUR_move1[13:8],UUR_move1[5:0]);
+	
+	
+	
+	$display(" L Output (11 bits) for LEFT SQUARE:");
+	$display("Attacking Piece:%b Position of Attacker:%b ", L_out1[10:6],L_out1[5:0]);
+	
+	$display(" R Output (11 bits) for RIGHT SQUARE:");
+	$display("Attacking Piece:%b Position of Attacker:%b ", R_out2[10:6],R_out2[5:0]);
 	
 	
 	
