@@ -166,8 +166,6 @@ UUL_out2,UUR_out2,LLU_out2,RRU_out2,DDL_out2,DDR_out2,LLD_out2,RRD_out2,
 U_move_out2,D_move_out2,L_move_out2,R_move_out2,UL_move_out2,UR_move_out2,DL_move_out2,DR_move_out2, 
 UUL_move_out2,UUR_move_out2,LLU_move_out2,RRU_move_out2,DDL_move_out2,DDR_move_out2,LLD_move_out2,RRD_move_out2
 
-
-
 );
 
 
