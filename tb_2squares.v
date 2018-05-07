@@ -286,8 +286,8 @@ initial begin
 	enable = 1'b1;
 	clear = 1'b0;
 	
-	pieceReg1 = {BLACK,ROOK_PIECE};
-	pieceReg1 = {BLACK,QUEEN_PIECE};
+	pieceReg1 = {EMPTY_PIECE};
+	pieceReg2 = {BLACK,QUEEN_PIECE};
 //Square Left
 U_in1 = EMPTY_MOVE;
 D_in1 = {BLACK, ROOK_ATTACK, 6'b01_0100}; // 20
