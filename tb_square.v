@@ -89,7 +89,7 @@ parameter EMPTY_MOVE = 32'h0000_0000;
 parameter EMPTY_KNIGHT_MOVE = 32'h0000_0000; 
 
 square square1(
-clk, engineColor, pieceReg, enable, clear, posReg, 
+clk, engineColor, enable, clear, pieceReg, posReg, 
 
 U_in,D_in,L_in,R_in,UL_in,UR_in,DL_in,DR_in, 
 UUL_in,UUR_in,LLU_in,RRU_in,DDL_in,DDR_in,LLD_in,RRD_in,
@@ -105,7 +105,7 @@ UUL_move,UUR_move,LLU_move,RRU_move,DDL_move,DDR_move,LLD_move,RRD_move
 initial begin
 	clk = 1'b0;
 	engineColor = BLACK;
-	pieceReg = {EMPTY_PIECE};
+	pieceReg = {WHITE, QUEEN_PIECE};
 	enable = 1'b1;
 	clear = 1'b0;
 	
