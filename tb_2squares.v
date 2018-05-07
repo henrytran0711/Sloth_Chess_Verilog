@@ -329,9 +329,9 @@ RRD_in2 = EMPTY_KNIGHT_MOVE;
 	
 	#40;
 	$display(" L Output (32 bits) for LEFT SQUARE:");
-	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_out1[29:24],L_out1[21:16],L_out1[13:8],L_out1[5:0]);
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_move1[29:24],L_move1[21:16],L_move1[13:8],L_move1[5:0]);
 	$display(" R Output (32 bits) for RIGHT SQUARE:");
-	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_out2[29:24],R_out1[21:16],R_out1[13:8],R_out1[5:0]);
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move2[29:24],R_move2[21:16],R_move2[13:8],R_move2[5:0]);
 
 	
 	$finish;
