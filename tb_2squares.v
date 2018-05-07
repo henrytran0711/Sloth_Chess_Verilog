@@ -150,9 +150,9 @@ testTwoSquares test2squares(
 
 
 .clk(clk),
-.engineColor(BLACK),
-.enable(1),
-.clear(0),
+.engineColor(engineColor),
+.enable(enable),
+.clear(clear),
 
 .pieceReg1(pieceReg1),
 
@@ -331,11 +331,11 @@ RRD_in2 = EMPTY_KNIGHT_MOVE;
 	$display(" L Output (32 bits) for LEFT SQUARE:");
 	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_move1[29:24],L_move1[21:16],L_move1[13:8],L_move1[5:0]);
 	$display(" R Output (32 bits) for LEFT SQUARE:");
-	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move1[29:24],R_move1[21:16],R_move1[13:8],L_move1[5:0]);
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move1[29:24],R_move1[21:16],R_move1[13:8],R_move1[5:0]);
 	$display(" U Output (32 bits) for LEFT SQUARE:");
-	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",U_move1[29:24],U_move1[21:16],U_move1[13:8],L_move1[5:0]);
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",U_move1[29:24],U_move1[21:16],U_move1[13:8],U_move1[5:0]);
 	$display(" D Output (32 bits) for LEFT SQUARE:");
-	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",D_move1[29:24],D_move1[21:16],D_move1[13:8],L_move1[5:0]);
+	$display("Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",D_move1[29:24],D_move1[21:16],D_move1[13:8],D_move1[5:0]);
 	
 	
 	
