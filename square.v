@@ -3,10 +3,10 @@ module square(
 //CLOCK
 input clk,
 input engineColor,
-input[5:0] pieceReg,
 input enable,
 input clear,
 
+input[5:0] pieceReg,
 input[5:0] posReg,
 //Input Reg
 input [10:0] U_in,
@@ -177,21 +177,21 @@ always @(*) begin
 	if (DR_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceDR = pieceRegOut;  
 
-	if (UUL_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (UUL_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceUUL = pieceRegOut; 
-	if (UUR_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (UUR_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceUUR = pieceRegOut; 
-	if (LLU_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (LLU_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceLLU = pieceRegOut; 
-	if (RRU_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (RRU_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceRRU = pieceRegOut; 
-	if (DDL_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (DDL_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceDDL = pieceRegOut; 
-	if (DDR_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (DDR_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceDDR = pieceRegOut; 
-	if (LLD_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (LLD_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceLLD = pieceRegOut; 
-	if (RRD_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
+	if (RRD_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceRRD = pieceRegOut; 
 		
 

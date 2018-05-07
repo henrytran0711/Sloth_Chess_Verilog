@@ -3,9 +3,10 @@ module testTwoSquares(
 //CLOCK
 input clk,
 input engineColor,
-input[5:0] pieceReg1,
 input enable,
 input clear,
+
+input[5:0] pieceReg1,
 
 //Input Reg
 input [10:0] U_in1,
@@ -110,23 +111,23 @@ output [7:0] RRD_out2,
 
 
 //Output Non knight
-output reg [31:0] U_move_out2,
-output reg [31:0] D_move_out2,
-output reg [31:0] L_move_out2,
-output reg [31:0] R_move_out2,
-output reg [31:0] UL_move_out2,
-output reg [31:0] UR_move_out2,
-output reg [31:0] DL_move_out2,
-output reg [31:0] DR_move_out2,
+output  [31:0] U_move_out2,
+output [31:0] D_move_out2,
+output [31:0] L_move_out2,
+output [31:0] R_move_out2,
+output [31:0] UL_move_out2,
+output  [31:0] UR_move_out2,
+output [31:0] DL_move_out2,
+output [31:0] DR_move_out2,
 //Output knight
-output reg [31:0] UUL_move_out2,
-output reg [31:0] UUR_move_out2,
-output reg [31:0] LLU_move_out2,
-output reg [31:0] RRU_move_out2,
-output reg [31:0] DDL_move_out2,
-output reg [31:0] DDR_move_out2,
-output reg [31:0] LLD_move_out2,
-output reg [31:0] RRD_move_out2
+output  [31:0] UUL_move_out2,
+output  [31:0] UUR_move_out2,
+output [31:0] LLU_move_out2,
+output [31:0] RRU_move_out2,
+output [31:0] DDL_move_out2,
+output [31:0] DDR_move_out2,
+output [31:0] LLD_move_out2,
+output [31:0] RRD_move_out2
 
 );
 
@@ -136,7 +137,7 @@ wire [10:0] transmit_left;
 
 square SquareLeft(
 
-clk, engineColor, pieceReg1, enable, clear, 6'd26, //6'b01_1100 
+clk, engineColor,  enable, clear,pieceReg1, 6'd27, //6'b01_1100 
 
 U_in1,D_in1,L_in1,transmit_left,UL_in1,UR_in1,DL_in1,DR_in1, 
 UUL_in1,UUR_in1,LLU_in1,RRU_in1,DDL_in1,DDR_in1,LLD_in1,RRD_in1,
@@ -154,7 +155,7 @@ UUL_move_out1,UUR_move_out1,LLU_move_out1,RRU_move_out1,DDL_move_out1,DDR_move_o
 
 square SquareRight(
 
-clk, engineColor, pieceReg2, enable, clear, 6'd27, //6'b01_1101 
+clk, engineColor,  enable, clear,pieceReg2, 6'd26, //6'b01_1101 
 
 U_in2,D_in2,transmit_right,R_in2,UL_in2,UR_in2,DL_in2,DR_in2, 
 UUL_in2,UUR_in2,LLU_in2,RRU_in2,DDL_in2,DDR_in2,LLD_in2,RRD_in2,
