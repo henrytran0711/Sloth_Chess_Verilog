@@ -198,6 +198,31 @@ always @(*) begin
 
 	if (pieceReg[5] == RRD_in[7] && pieceReg != EMPTY_PIECE_REG)
 		RRD_move_in = EMPTY_KNIGHT_MOVE;
+		
+		
+	//pawns cannot capture straight
+		
+	if (U_in[6] == 1'b1 && pieceReg != EMPTY_PIECE_REG)
+		U_move_in = EMPTY_MOVE;
+		
+	if (D_in[6] == 1'b1 && pieceReg != EMPTY_PIECE_REG)
+		D_move_in = EMPTY_MOVE;
+		
+		
+	// pawns cannot quiet move diagonally
+	
+	if (UL_in[6] == 1'b1 && pieceReg == EMPTY_PIECE_REG)
+		UL_move_in = EMPTY_MOVE;
+		
+	if (UR_in[6] == 1'b1 && pieceReg == EMPTY_PIECE_REG)
+		UR_move_in = EMPTY_MOVE;
+		
+	if (DL_in[6] == 1'b1 && pieceReg == EMPTY_PIECE_REG)
+		DL_move_in = EMPTY_MOVE;
+	
+	if (DR_in[6] == 1'b1 && pieceReg == EMPTY_PIECE_REG)
+		DR_move_in = EMPTY_MOVE;
+	
 
 	D_out = D_trans;
 	U_out = U_trans;
