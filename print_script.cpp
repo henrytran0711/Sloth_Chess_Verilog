@@ -29,9 +29,11 @@ int main()
             knight_dir[i] = "";
         }
 
-  /////////////////Group 1, general direction://///////////////////////
-	for (int j = 18 ; j < 42 ; j = j+8){
-        for (int k = 0; k < 4; k++){ //For Group 18-> 21,  26->29, 34-> 37, 42 -> 45
+
+	
+	//////////////General Direction, Group 1/////////
+	for (int j = 9 ; j < 50 ; j = j+8){
+        for (int k = 0; k < 6; k++){ //For Group 9-> 14 till  49->54
 			i = k + j;
             general_dir[i].append("square Square");
             self << i;
@@ -408,8 +410,28 @@ int main()
 			general_dir[i].append(move_out[move_counter]);
 			  move_counter++;
 
-			///Knight Move Outs/////
+			
 
+
+
+            self.str("");
+            temp.str("");
+
+
+            }
+
+	}
+	i = 0;
+	////Next for loop
+  /////////////////Group 1, Knight Directions ://///////////////////////
+	for (int j = 18 ; j < 43 ; j = j+8){
+        for (int k = 0; k < 4; k++){ //For Group 18-> 21,  26->29, 34-> 37, 42 -> 45
+			i = k + j;
+            self << i;
+            converted_self = self.str();
+
+			///Knight Move Outs/////
+	//////////////////////////////////////
 			    //For Up Up Left out//
 			general_dir[i].append("),\n.UUL_move_out(");
 
@@ -658,6 +680,8 @@ int main()
 
 
 ///For Knight Out/////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
 
 			//For Up Up Left Out
 			knight_dir[i].append("),\n.UUL_out(transmit");
@@ -803,8 +827,6 @@ int main()
 
 	}
 	i = 0;
-	////Next for loop
-
 
 
         //Print
