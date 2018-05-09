@@ -14,6 +14,7 @@ int main()
     int wire_counter = 0;
     int knight_wire_counter = 0;
     int move_counter = 0;
+	int i = 0;
     string general_dir[SQUARES];
     string knight_dir[SQUARES];
     string wire[SIZE];
@@ -813,15 +814,15 @@ int main()
 
         }
         for (int i = 0; i < wire_counter; i++){
-            myfile << "wire [10:0]" << wire[i] <<";" << endl;
+            myfile << "wire [10:0] " << wire[i] <<";" << endl;
         }
         
          for (int i = 0; i < knight_wire_counter; i++){
-            myfile << "wire [7:0]" << knight_wire[i] <<";" << endl;
+            myfile << "wire [7:0] " << knight_wire[i] <<";" << endl;
         }
 		
 		for (int i = 0; i < move_counter; i++){
-            myfile << "output [31:0]" << move_out[i] <<";" << endl;
+            myfile << "output [31:0] " << move_out[i] <<";" << endl;
         }
          myfile.close();
     return 0;
