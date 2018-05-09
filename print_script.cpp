@@ -29,8 +29,9 @@ int main()
         }
 
   /////////////////Group 1, general direction://///////////////////////
-
-        for (int i = 19; i < 55; i++){ //For Group 19 -> 54
+	for (int j = 18 ; j < 42 ; j = j+8){
+        for (int k = 0; k < 4; k++){ //For Group 18-> 21,  26->29, 34-> 37, 42 -> 45
+			i = k + j;
             general_dir[i].append("square Square");
             self << i;
             converted_self = self.str();
@@ -799,8 +800,9 @@ int main()
 
             }
 
-
-
+	}
+	i = 0;
+	////Next for loop
 
 
 
