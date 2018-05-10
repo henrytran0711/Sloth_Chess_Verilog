@@ -2854,229 +2854,132 @@ move_knight_UUL_out = 1;
 	i = 0;	
 	
 /////////////////Group 2 West Knight Directions ://///////////////////////
-	for (int j = 23 ; j < 48 ; j = j+8){
+	
+move_knight_UUL_out = 0;
+	 move_knight_UUR_out = 1;
+	 move_knight_LLU_out = 0;
+	 move_knight_RRU_out = 1;
+	 move_knight_DDL_out = 0;
+	 move_knight_DDR_out = 1;
+	 move_knight_LLD_out = 0;
+	 move_knight_RRD_out = 1;
+
+	knight_UUL_out = 0;
+	knight_UUR_out = 1;
+	knight_LLU_out = 0;
+	knight_RRU_out = 1;
+	knight_DDL_out = 0;
+	 knight_DDR_out = 1;
+	 knight_LLD_out = 0;
+	 knight_RRD_out = 1;
+	 
+	 knight_UUL_in = 0;
+	knight_UUR_in = 1;
+	knight_LLU_in = 0;
+	knight_RRU_in = 1;
+	knight_DDL_in = 0;
+	 knight_DDR_in = 1;
+	 knight_LLD_in = 0;
+	 knight_RRD_in = 1;	
+	 
+		for (int j = 23 ; j < 48 ; j = j+8){
         for (int k = 0; k < 1; k++){ //For Group 23->47, left most knight move
+					
 			i = k + j;
             self << i;
             converted_self = self.str();
-			
-	// Group 2 West Knight won't have: LLU,LLD,UUL,DDL
 
 			///Knight Move Outs/////
-	//////////////////////////////////////
-			    
-
-			//For Up Up Right out//
-			general_dir[i].append("),\n.UUR_move_out(");
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("UUR_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
-
-			//For Move Right Right Up out//
-			general_dir[i].append("),.RRU_move_out(");
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("RRU_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
-
-		
-
-			//For Move Down Down Right out//
-			general_dir[i].append("),.DDR_move_out(");
-
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("DDR_move_out");
-            move_out[move_counter].append(converted_self);
-          general_dir[i].append(move_out[move_counter]);
-			  move_counter++;
-
-
+			//////////////////////////////////////
+			if(move_knight_UUL_out)
+				print_move_knight_UUL_out(i);
 			
-			//For Move Right Right Down out//
-			general_dir[i].append("),.RRD_move_out(");
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("RRD_move_out");
-            move_out[move_counter].append(converted_self);
-
-
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
+			if(move_knight_UUR_out)
+				print_move_knight_UUR_out(i);
+			
+			if(move_knight_LLU_out)
+				print_move_knight_LLU_out(i);
+			
+			if(move_knight_RRU_out)
+				print_move_knight_RRU_out( i);
+			
+			if(move_knight_DDL_out)
+				print_move_knight_DDL_out(i);
+			
+			if(move_knight_DDR_out)
+				print_move_knight_DDR_out(i);
+			
+			if(move_knight_LLD_out)
+				print_move_knight_LLD_out(i);
+			
+			if(move_knight_RRD_out)
+				print_move_knight_RRD_out(i);
+	
 
 
 	     /////////For knights in //////////////////////
-				///input [7:0] UUL_in,
-			//	input [7:0] UUR_in,
-				//input [7:0] LLU_in,
-				//input [7:0] RRU_in,
-				//input [7:0] DDL_in,
-				//input [7:0] DDR_in,
-			//	input [7:0] LLD_in,
-			//	input [7:0] RRD_in,
+			///input [7:0] UUL_in,
+			//input [7:0] UUR_in,
+			//input [7:0] LLU_in,
+			//input [7:0] RRU_in,
+			//input [7:0] DDL_in,
+			//input [7:0] DDR_in,
+			//input [7:0] LLD_in,
+			//input [7:0] RRD_in,
 
-		
-			 //For Up Up Right in
-			 knight_dir[i].append("),\n.UUR_in(transmit");
-            temp << i + 8 + 8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Right Right Up in
-			 knight_dir[i].append("),.RRU_in(transmit");
-            temp << i - 1 -1 +8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-			   //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-
-			 //For Down Down Right in
-			 knight_dir[i].append("),.DDR_in(transmit");
-            temp << i - 8 -8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
+				if(knight_UUL_in)
+				print_knight_UUL_in(i);
 			
-			 //For Right Right Down
-			 knight_dir[i].append("),.RRD_in(transmit");
-            temp << i - 1 -1 -8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
+			if(knight_UUR_in)
+				print_knight_UUR_in(i);
+			
+			if(knight_LLU_in)
+				print_knight_LLU_in(i);
+			
+			if(knight_RRU_in)
+				print_knight_RRU_in(i);
+			
+			if(knight_DDL_in)
+				print_knight_DDL_in(i);
+			
+			if(knight_DDR_in)
+				print_knight_DDR_in(i);
+			
+			if(knight_LLD_in)
+				print_knight_LLD_in(i);
+			
+			if(knight_RRD_in)
+				print_knight_RRD_in(i);
+	
 
 
 ///For Knight Out/////////////////////////////////
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-
-
-			 //For Up Up Right out
-			 knight_dir[i].append("),\n.UUR_out(transmit");
-            temp << i + 8 + 8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Right Right Up in
-			 knight_dir[i].append("),.RRU_out(transmit");
-            temp << i - 1 -1 +8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-			   //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-		
-			 //For Down Down Right in
-			 knight_dir[i].append("),.DDR_out(transmit");
-            temp << i - 8 -8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
+			if(knight_UUL_out)
+				print_knight_UUL_out(i);
 			
-			 //For Right Right Down Out
-			 knight_dir[i].append("),.RRD_out(transmit");
-            temp << i - 1 -1 -8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
+			if(knight_UUR_out)
+				print_knight_UUR_out(i);
+			
+			if(knight_LLU_out)
+				print_knight_LLU_out(i);
+			
+			if(knight_RRU_out)
+				print_knight_RRU_out(i);
+			
+			if(knight_DDL_out)
+				print_knight_DDL_out(i);
+			
+			if(knight_DDR_out)
+				print_knight_DDR_out(i);
+			
+			if(knight_LLD_out)
+				print_knight_LLD_out(i);
+			
+			if(knight_RRD_out)
+				print_knight_RRD_out(i);
+			
 
 
 
@@ -3087,7 +2990,7 @@ move_knight_UUL_out = 1;
             }
 
 	}//Group 2 West Knight
-	i = 0;		
+	i = 0;	
 /////////////////Group 1 Center Knight Directions ://///////////////////////
 	move_knight_UUL_out = 1;
 	 move_knight_UUR_out = 1;
