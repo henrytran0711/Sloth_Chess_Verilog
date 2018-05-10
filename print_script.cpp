@@ -1058,6 +1058,315 @@ int main()
 
 	}
 	i = 0;
+/////////////////////////General Direction  South, Group 2///////////
+	//In//
+	Down_in = 0;
+	Up_in = 1;
+	Left_in = 1;
+	Right_in = 1;
+	
+	Down_left_in = 0;
+	Down_right_in = 0;
+	Up_left_in = 1;
+	Up_right_in = 1;
+	//Out//
+	Down_out = 0;
+	Up_out = 1;
+	Left_out = 1;
+	Right_out = 1;
+	
+	Down_left_out = 0;
+	Down_right_out = 0;
+	Up_left_out = 1;
+	Up_right_out = 1;
+	//Move out//
+	Move_Down_out = 0;
+	Move_Up_out = 1;
+	Move_Left_out = 1;
+	Move_Right_out = 1;
+	
+	Move_Down_left_out = 0;
+	Move_Down_right_out = 0;
+	Move_Up_left_out = 1;
+	Move_Up_right_out = 1;
+	
+	for (int j = 1 ; j < 7 ; j++){
+        for (int k = 0; k < 1; k++){ //For Group 9-> 14 till  49->54
+			i = k + j;
+			
+			print_setup (i);
+
+			//Print Down in
+			if(Down_in)
+			print_Down_in(i);
+
+			//Print Up in
+			if(Up_in)
+			print_Up_in(i);
+
+			//Print Left in
+			if(Left_in)
+			print_Left_in(i);
+
+			//Print Right in
+			if(Right_in)
+			print_Right_in(i);
+
+			//Print Down Left in
+			if(Down_left_in)
+			print_Down_left_in(i);	
+			
+			//Print Down Right in
+			if(Down_right_in)
+			print_Down_right_in(i);	
+			
+			//Print Up Left in
+			if(Up_left_in)
+			print_Up_left_in(i);	
+			
+			//Print Up Right in
+			if(Up_right_in)
+			print_Up_right_in(i);	
+		
+			
+
+		
+
+////////////////For Out/////////////////////////////////
+
+				//Print Down out
+			if(Down_out)
+			print_Down_out(i);
+
+			//Print Up out
+			if(Up_out)
+			print_Up_out(i);
+
+			//Print Left out
+			if(Left_out)
+			print_Left_out(i);
+
+			//Print Right out
+			if(Right_out)
+			print_Right_out(i);
+
+			//Print Down Left out
+			if(Down_left_out)
+			print_Down_left_out(i);	
+			
+			//Print Down Right out
+			if(Down_right_out)
+			print_Down_right_out(i);	
+			
+			//Print Up Left out
+			if(Up_left_out)
+			print_Up_left_out(i);	
+			
+			//Print Up Right out
+			if(Up_right_out)
+			print_Up_right_out(i);	
+		   
+
+			////////////////For Move Out/////////////////////////////////
+		   
+
+			//Print Move Down out
+			if(Move_Down_out)
+			print_Move_Down_out(i);
+
+			//Print Move  Up out
+			if(Move_Up_out)
+			print_Move_Up_out(i);
+
+			//Print Move  Left out
+			if(Move_Left_out)
+			print_Move_Left_out(i);
+
+			//Print Move  Right out
+			if(Move_Right_out)
+			print_Move_Right_out(i);
+
+			//Print Move  Down Left out
+			if(Move_Down_left_out)
+			print_Move_Down_left_out(i);	
+			
+			//Print Move  Down Right out
+			if(Move_Down_right_out)
+			print_Move_Down_right_out(i);	
+			
+			//Print Move  Up Left out
+			if(Move_Up_left_out)
+			print_Move_Up_left_out(i);	
+			
+			//Print Move  Up Right out
+			if(Move_Up_right_out)
+			print_Move_Up_right_out(i);	
+
+
+
+            self.str("");
+            temp.str("");
+
+
+            }
+
+	}
+	i = 0;
+//////General Direction Group 2 East ///////////////////////
+	//In//
+	Down_in = 1;
+	Up_in = 1;
+	Left_in = 1;
+	Right_in = 0;
+	
+	Down_left_in = 1;
+	Down_right_in = 0;
+	Up_left_in = 1;
+	Up_right_in = 0;
+	//Out//
+	Down_out = 1;
+	Up_out = 1;
+	Left_out = 1;
+	Right_out = 0;
+	
+	Down_left_out = 1;
+	Down_right_out = 0;
+	Up_left_out = 1;
+	Up_right_out = 0;
+	//Move out//
+	Move_Down_out = 1;
+	Move_Up_out = 1;
+	Move_Left_out = 1;
+	Move_Right_out = 0;
+	
+	Move_Down_left_out = 1;
+	Move_Down_right_out = 0;
+	Move_Up_left_out = 1;
+	Move_Up_right_out = 0;
+	
+	for (int j = 16 ; j < 41 ; j = j+8){
+        for (int k = 0; k < 1; k++){ //16 24 32 40
+			i = k + j;
+			
+			print_setup (i);
+
+			//Print Down in
+			if(Down_in)
+			print_Down_in(i);
+
+			//Print Up in
+			if(Up_in)
+			print_Up_in(i);
+
+			//Print Left in
+			if(Left_in)
+			print_Left_in(i);
+
+			//Print Right in
+			if(Right_in)
+			print_Right_in(i);
+
+			//Print Down Left in
+			if(Down_left_in)
+			print_Down_left_in(i);	
+			
+			//Print Down Right in
+			if(Down_right_in)
+			print_Down_right_in(i);	
+			
+			//Print Up Left in
+			if(Up_left_in)
+			print_Up_left_in(i);	
+			
+			//Print Up Right in
+			if(Up_right_in)
+			print_Up_right_in(i);	
+		
+			
+
+		
+
+////////////////For Out/////////////////////////////////
+
+				//Print Down out
+			if(Down_out)
+			print_Down_out(i);
+
+			//Print Up out
+			if(Up_out)
+			print_Up_out(i);
+
+			//Print Left out
+			if(Left_out)
+			print_Left_out(i);
+
+			//Print Right out
+			if(Right_out)
+			print_Right_out(i);
+
+			//Print Down Left out
+			if(Down_left_out)
+			print_Down_left_out(i);	
+			
+			//Print Down Right out
+			if(Down_right_out)
+			print_Down_right_out(i);	
+			
+			//Print Up Left out
+			if(Up_left_out)
+			print_Up_left_out(i);	
+			
+			//Print Up Right out
+			if(Up_right_out)
+			print_Up_right_out(i);	
+		   
+
+			////////////////For Move Out/////////////////////////////////
+		   
+
+			//Print Move Down out
+			if(Move_Down_out)
+			print_Move_Down_out(i);
+
+			//Print Move  Up out
+			if(Move_Up_out)
+			print_Move_Up_out(i);
+
+			//Print Move  Left out
+			if(Move_Left_out)
+			print_Move_Left_out(i);
+
+			//Print Move  Right out
+			if(Move_Right_out)
+			print_Move_Right_out(i);
+
+			//Print Move  Down Left out
+			if(Move_Down_left_out)
+			print_Move_Down_left_out(i);	
+			
+			//Print Move  Down Right out
+			if(Move_Down_right_out)
+			print_Move_Down_right_out(i);	
+			
+			//Print Move  Up Left out
+			if(Move_Up_left_out)
+			print_Move_Up_left_out(i);	
+			
+			//Print Move  Up Right out
+			if(Move_Up_right_out)
+			print_Move_Up_right_out(i);	
+
+
+
+            self.str("");
+            temp.str("");
+
+
+            }
+
+	}//Group 2 General DIrection East
+	i = 0;
+
 
 //////////////General Direction West, Group 2/////////
 	for (int j = 15 ; j < 56 ; j = j+8){
@@ -1323,7 +1632,7 @@ int main()
 
             }
 
-	}
+	}//General Direction West Group 2
 	i = 0;
 	
 
@@ -1918,13 +2227,13 @@ int main()
 	i = 0;
 	
 	
- /////////////////Group 1 West Knight Directions ://///////////////////////
+ /////////////////Group 1 East Knight Directions ://///////////////////////
 	for (int j = 17 ; j < 42 ; j = j+8){
         for (int k = 0; k < 1; k++){ //For Group 1 West
 			i = k + j;
             self << i;
             converted_self = self.str();
-//Group 1 West won't have RRU,RRD
+//Group 1 East won't have RRU,RRD
 
 			///Knight Move Outs/////
 	//////////////////////////////////////
@@ -2237,10 +2546,10 @@ int main()
 
             }
 
-	}//Group 1 West Knight
+	}//Group 1 East Knight
 	i = 0;
 	
-/////////////////Group 1 East Knight Directions ://///////////////////////
+/////////////////Group 1 West Knight Directions ://///////////////////////
 	for (int j = 22 ; j < 47 ; j = j+8){
         for (int k = 0; k < 1; k++){ //For 22, 30, 38, 46
 			i = k + j;
@@ -2555,7 +2864,7 @@ int main()
 
             }
 
-	}//Group 1 East Knight
+	}//Group 1 West Knight
 	i = 0;
 	
 /////////////////Group 1 South Knight Directions ://///////////////////////
@@ -3246,7 +3555,284 @@ int main()
 
 	}//Group 1 Center Knight
 	i = 0;	
+
 	
+	//////////////////////////////////////////////////////////
+//////////////////Group 2 South, Knight Directions://////////////////////
+move_knight_UUL_out = 1;
+	 move_knight_UUR_out = 1;
+	 move_knight_LLU_out = 1;
+	 move_knight_RRU_out = 1;
+	 move_knight_DDL_out = 0;
+	 move_knight_DDR_out = 0;
+	 move_knight_LLD_out = 0;
+	 move_knight_RRD_out = 0;
+
+	knight_UUL_out = 1;
+	knight_UUR_out = 1;
+	knight_LLU_out = 1;
+	knight_RRU_out = 1;
+	knight_DDL_out = 0;
+	 knight_DDR_out = 0;
+	 knight_LLD_out = 0;
+	 knight_RRD_out = 0;
+	 
+	 knight_UUL_in = 1;
+	knight_UUR_in = 1;
+	knight_LLU_in = 1;
+	knight_RRU_in = 1;
+	knight_DDL_in = 0;
+	 knight_DDR_in = 0;
+	 knight_LLD_in = 0;
+	 knight_RRD_in = 0;	
+	 
+	for (int j = 2 ; j < 6 ; j++){
+        for (int k = 0; k < 1; k++){ //2,3,4,5
+			i = k + j;
+            self << i;
+            converted_self = self.str();
+
+			///Knight Move Outs/////
+			//////////////////////////////////////
+			if(move_knight_UUL_out)
+				print_move_knight_UUL_out(i);
+			
+			if(move_knight_UUR_out)
+				print_move_knight_UUR_out(i);
+			
+			if(move_knight_LLU_out)
+				print_move_knight_LLU_out(i);
+			
+			if(move_knight_RRU_out)
+				print_move_knight_RRU_out( i);
+			
+			if(move_knight_DDL_out)
+				print_move_knight_DDL_out(i);
+			
+			if(move_knight_DDR_out)
+				print_move_knight_DDR_out(i);
+			
+			if(move_knight_LLD_out)
+				print_move_knight_LLD_out(i);
+			
+			if(move_knight_RRD_out)
+				print_move_knight_RRD_out(i);
+	
+
+
+	     /////////For knights in //////////////////////
+			///input [7:0] UUL_in,
+			//input [7:0] UUR_in,
+			//input [7:0] LLU_in,
+			//input [7:0] RRU_in,
+			//input [7:0] DDL_in,
+			//input [7:0] DDR_in,
+			//input [7:0] LLD_in,
+			//input [7:0] RRD_in,
+
+				if(knight_UUL_in)
+				print_knight_UUL_in(i);
+			
+			if(knight_UUR_in)
+				print_knight_UUR_in(i);
+			
+			if(knight_LLU_in)
+				print_knight_LLU_in(i);
+			
+			if(knight_RRU_in)
+				print_knight_RRU_in(i);
+			
+			if(knight_DDL_in)
+				print_knight_DDL_in(i);
+			
+			if(knight_DDR_in)
+				print_knight_DDR_in(i);
+			
+			if(knight_LLD_in)
+				print_knight_LLD_in(i);
+			
+			if(knight_RRD_in)
+				print_knight_RRD_in(i);
+	
+
+
+///For Knight Out/////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+			if(knight_UUL_out)
+				print_knight_UUL_out(i);
+			
+			if(knight_UUR_out)
+				print_knight_UUR_out(i);
+			
+			if(knight_LLU_out)
+				print_knight_LLU_out(i);
+			
+			if(knight_RRU_out)
+				print_knight_RRU_out(i);
+			
+			if(knight_DDL_out)
+				print_knight_DDL_out(i);
+			
+			if(knight_DDR_out)
+				print_knight_DDR_out(i);
+			
+			if(knight_LLD_out)
+				print_knight_LLD_out(i);
+			
+			if(knight_RRD_out)
+				print_knight_RRD_out(i);
+			
+
+
+
+            self.str("");
+            temp.str("");
+
+
+            }
+
+	}//Group 1 Center Knight
+	i = 0;	
+	
+///////////////////Group 2 East, Knight DIrections////////////////////////
+move_knight_UUL_out = 1;
+	 move_knight_UUR_out = 0;
+	 move_knight_LLU_out = 1;
+	 move_knight_RRU_out = 0;
+	 move_knight_DDL_out = 1;
+	 move_knight_DDR_out = 0;
+	 move_knight_LLD_out = 1;
+	 move_knight_RRD_out = 0;
+
+	knight_UUL_out = 1;
+	knight_UUR_out = 0;
+	knight_LLU_out = 1;
+	knight_RRU_out = 0;
+	knight_DDL_out = 1;
+	 knight_DDR_out = 0;
+	 knight_LLD_out = 1;
+	 knight_RRD_out = 0;
+	 
+	 knight_UUL_in = 1;
+	knight_UUR_in = 0;
+	knight_LLU_in = 1;
+	knight_RRU_in = 0;
+	knight_DDL_in = 1;
+	 knight_DDR_in = 0;
+	 knight_LLD_in = 1;
+	 knight_RRD_in = 0;	
+	 
+	for (int j = 16 ; j < 41 ; j = j + 8){
+        for (int k = 0; k < 1; k++){ //For Group 16 24 32 40
+			i = k + j;
+            self << i;
+            converted_self = self.str();
+
+			///Knight Move Outs/////
+			//////////////////////////////////////
+			if(move_knight_UUL_out)
+				print_move_knight_UUL_out(i);
+			
+			if(move_knight_UUR_out)
+				print_move_knight_UUR_out(i);
+			
+			if(move_knight_LLU_out)
+				print_move_knight_LLU_out(i);
+			
+			if(move_knight_RRU_out)
+				print_move_knight_RRU_out( i);
+			
+			if(move_knight_DDL_out)
+				print_move_knight_DDL_out(i);
+			
+			if(move_knight_DDR_out)
+				print_move_knight_DDR_out(i);
+			
+			if(move_knight_LLD_out)
+				print_move_knight_LLD_out(i);
+			
+			if(move_knight_RRD_out)
+				print_move_knight_RRD_out(i);
+	
+
+
+	     /////////For knights in //////////////////////
+			///input [7:0] UUL_in,
+			//input [7:0] UUR_in,
+			//input [7:0] LLU_in,
+			//input [7:0] RRU_in,
+			//input [7:0] DDL_in,
+			//input [7:0] DDR_in,
+			//input [7:0] LLD_in,
+			//input [7:0] RRD_in,
+
+				if(knight_UUL_in)
+				print_knight_UUL_in(i);
+			
+			if(knight_UUR_in)
+				print_knight_UUR_in(i);
+			
+			if(knight_LLU_in)
+				print_knight_LLU_in(i);
+			
+			if(knight_RRU_in)
+				print_knight_RRU_in(i);
+			
+			if(knight_DDL_in)
+				print_knight_DDL_in(i);
+			
+			if(knight_DDR_in)
+				print_knight_DDR_in(i);
+			
+			if(knight_LLD_in)
+				print_knight_LLD_in(i);
+			
+			if(knight_RRD_in)
+				print_knight_RRD_in(i);
+	
+
+
+///For Knight Out/////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+			if(knight_UUL_out)
+				print_knight_UUL_out(i);
+			
+			if(knight_UUR_out)
+				print_knight_UUR_out(i);
+			
+			if(knight_LLU_out)
+				print_knight_LLU_out(i);
+			
+			if(knight_RRU_out)
+				print_knight_RRU_out(i);
+			
+			if(knight_DDL_out)
+				print_knight_DDL_out(i);
+			
+			if(knight_DDR_out)
+				print_knight_DDR_out(i);
+			
+			if(knight_LLD_out)
+				print_knight_LLD_out(i);
+			
+			if(knight_RRD_out)
+				print_knight_RRD_out(i);
+			
+
+
+
+            self.str("");
+            temp.str("");
+
+
+            }
+
+	}//Group 2  Knight East
+	i = 0;	
+
+		
  /////////////////Group 2 North, Knight Directions ://///////////////////////
 	for (int j = 58 ; j < 62 ; j++){
         for (int k = 0; k < 1; k++){ //For Group 59->61
