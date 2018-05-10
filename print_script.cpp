@@ -4,184 +4,191 @@
 #include <fstream>
 using namespace std;
 
-int main()
-{
-    ofstream myfile;
-    myfile.open ("output.txt");
 
-    const int SIZE = 1000;
-    const int SQUARES = 64;
-    int wire_counter = 0;
-    int knight_wire_counter = 0;
-    int move_counter = 0;
-	int i = 0;
-    string general_dir[SQUARES];
-    string knight_dir[SQUARES];
-    string wire[SIZE];
-    string knight_wire[SIZE];
-    string move_out[SIZE];
-    string converted_self;
-    string converted_temp;
-    ostringstream temp;
-    ostringstream self;
-        for (int i = 0; i < SQUARES; i++){
-            general_dir[i] = "";
-            knight_dir[i] = "";
-        }
+const int SIZE = 1000;
+const int SQUARES = 64;
+int wire_counter = 0;
+int knight_wire_counter = 0;
+int move_counter = 0;
+int i = 0;
+string general_dir[SQUARES];
+string knight_dir[SQUARES];
+string wire[SIZE];
+string knight_wire[SIZE];
+string move_out[SIZE];
+string converted_self;
+string converted_temp;
+ostringstream temp;
+ostringstream self;
+ ofstream myfile;
 
+void print_setup (int i){
+general_dir[i].append("square Square");
+self << i;
+converted_self = self.str();
+
+general_dir[i].append(converted_self);
+general_dir[i].append("(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg");
+general_dir[i].append(converted_self);
+general_dir[i].append("),.posReg(6'd");
+general_dir[i].append(converted_self);
+}
+
+void print_Down_in (int i){
+//For Down in
+general_dir[i].append("),\n.D_in(transmit");
+temp << i - 8;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");
+}
+
+void print_Up_in(int i) {//For Up in
+general_dir[i].append("),.U_in(transmit");
+temp << i + 8;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");
+}
+
+void print_Left_in(int i){
+//For Left in
+ general_dir[i].append("),.L_in(transmit");
+temp << i + 1;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");
+	
+}
+
+
+void print_Right_in(int i){
+ //For Right in
+general_dir[i].append("),.R_in(transmit");
+temp << i - 1;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+   //Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");	
+	
+}
+
+void print_Down_left_in(int i){
+//For Down Left in
+general_dir[i].append("),\n.DL_in(transmit");
+temp << i - 7;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");	
+
+}
+void print_Down_right_in(int i){
+//For Down Right in
+general_dir[i].append("),.DR_in(transmit");
+temp << i - 9;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");	
+}
+
+void print_Up_left_in(int i){
+ //For Up Left in
+ general_dir[i].append("),.UL_in(transmit");
+temp << i + 9;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");	
+}
+
+void print_Up_right_in(int i){
+//For Up Right in
+ general_dir[i].append("),.UR_in(transmit");
+temp << i + 7;
+converted_temp = temp.str();
+
+general_dir[i].append(converted_temp);
+general_dir[i].append("_");
+general_dir[i].append(converted_self);
+
+//Save wire connection
+wire[wire_counter].append("transmit");
+wire[wire_counter].append(converted_temp);
+wire[wire_counter].append("_");
+wire[wire_counter].append(converted_self);
+wire_counter++;
+temp.str("");
 
 	
-	//////////////General Direction, Group 1/////////
-	for (int j = 9 ; j < 50 ; j = j+8){
-        for (int k = 0; k < 6; k++){ //For Group 9-> 14 till  49->54
-			i = k + j;
-            general_dir[i].append("square Square");
-            self << i;
-            converted_self = self.str();
-
-            general_dir[i].append(converted_self);
-            general_dir[i].append("(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg");
-            general_dir[i].append(converted_self);
-            general_dir[i].append("),.posReg(6'd");
-            general_dir[i].append(converted_self);
-
-
-            //For Down in
-			general_dir[i].append("),\n.D_in(transmit");
-            temp << i - 8;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			 //For Up in
-			 general_dir[i].append("),.U_in(transmit");
-            temp << i + 8;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			 //For Left in
-			 general_dir[i].append("),.L_in(transmit");
-            temp << i + 1;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			 //For Right in
-			 general_dir[i].append("),.R_in(transmit");
-            temp << i - 1;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-			   //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			//For Down Left in
-			general_dir[i].append("),\n.DL_in(transmit");
-            temp << i - 7;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			 //For Down Right in
-			 general_dir[i].append("),.DR_in(transmit");
-            temp << i - 9;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			 //For Up Left in
-			 general_dir[i].append("),.UL_in(transmit");
-            temp << i + 9;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-			 //For Up Right in
-			 general_dir[i].append("),.UR_in(transmit");
-            temp << i + 7;
-            converted_temp = temp.str();
-
-            general_dir[i].append(converted_temp);
-            general_dir[i].append("_");
-            general_dir[i].append(converted_self);
-
-            //Save wire connection
-            wire[wire_counter].append("transmit");
-            wire[wire_counter].append(converted_temp);
-            wire[wire_counter].append("_");
-            wire[wire_counter].append(converted_self);
-            wire_counter++;
-			temp.str("");
-
-
-////////////////For Out/////////////////////////////////
-		    //For Down out
+}
+////////////Out General Directions/////////////////
+void print_Down_out(int i){
+ //For Down out
 			general_dir[i].append("),\n.D_out(transmit");
             temp << i - 8;
             converted_temp = temp.str();
@@ -196,7 +203,8 @@ int main()
             wire[wire_counter].append(converted_temp);
             wire_counter++;
 			temp.str("");
-
+}
+void print_Up_out(int i){
 			 //For Up out
 			 general_dir[i].append("),.U_out(transmit");
             temp << i + 8;
@@ -213,7 +221,8 @@ int main()
             wire[wire_counter].append(converted_temp);
             wire_counter++;
 			temp.str("");
-
+}
+void print_Left_out(int i){
 			 //For Left out
 			 general_dir[i].append("),.L_out(");
             temp << i + 1;
@@ -231,8 +240,10 @@ int main()
 
             wire_counter++;
 			temp.str("");
+}
 
-			 //For Right out
+void print_Right_out(int i){			 
+		//For Right out
 			 general_dir[i].append("),.R_out(");
             temp << i - 1;
             converted_temp = temp.str();
@@ -245,7 +256,8 @@ int main()
 			 general_dir[i].append(wire[wire_counter]);
             wire_counter++;
 			temp.str("");
-
+}
+			void print_Down_left_out(int i){
 			//For Down Left out
 			general_dir[i].append("),\n.DL_out(");
             temp << i - 7;
@@ -261,8 +273,9 @@ int main()
 			general_dir[i].append(wire[wire_counter]);
             wire_counter++;
 			temp.str("");
-
-			 //For Down Right out
+			}
+			
+		void print_Down_right_out(int i){	 //For Down Right out
 			 general_dir[i].append("),.DR_out(");
             temp << i - 9;
             converted_temp = temp.str();
@@ -278,7 +291,9 @@ int main()
 			general_dir[i].append(wire[wire_counter]);
             wire_counter++;
 			temp.str("");
+		}
 
+		void print_Up_left_out(int i){
 			 //For Up Left out
 			general_dir[i].append("),.UL_out(");
             temp << i + 9;
@@ -294,7 +309,9 @@ int main()
 			general_dir[i].append(wire[wire_counter]);
             wire_counter++;
 			temp.str("");
-
+		}
+		
+		void print_Up_right_out(int i){
 			 //For Up Right out
 			 general_dir[i].append("),.UR_out(");
             temp << i + 7;
@@ -308,9 +325,11 @@ int main()
 			general_dir[i].append(wire[wire_counter]);
             wire_counter++;
 			temp.str("");
+		}
 
-			////////////////For Move Out/////////////////////////////////
-		    //For Move Down out//
+//Move out, General Direction///////////////////////
+void print_Move_Down_out(int i){
+ //For Move Down out//
 			general_dir[i].append("),\n.D_move_out(");
 
 
@@ -321,8 +340,8 @@ int main()
             move_out[move_counter].append(converted_self);
 			general_dir[i].append(move_out[move_counter]);
 			move_counter++;
-
-
+}
+void print_Move_Up_out(int i){
 			//For Move Up out//
 			general_dir[i].append("),.U_move_out(");
 
@@ -333,7 +352,9 @@ int main()
             move_out[move_counter].append(converted_self);
 			general_dir[i].append(move_out[move_counter]);
 			 move_counter++;
+}
 
+void print_Move_Left_out(int i){
 			//For Move Left out//
 			general_dir[i].append("),.L_move_out(");
 
@@ -345,6 +366,8 @@ int main()
             move_out[move_counter].append(converted_self);
 			general_dir[i].append(move_out[move_counter]);
 			 move_counter++;
+}
+void print_Move_Right_out(int i){
 
 			//For Move Right out//
 			general_dir[i].append("),.R_move_out(");
@@ -357,7 +380,8 @@ int main()
 			general_dir[i].append(move_out[move_counter]);
 			 move_counter++;
 
-
+}
+void print_Move_Up_left_out(int i){
 			//For Move Up Left out//
 			general_dir[i].append("),\n.UL_move_out(");
 
@@ -369,7 +393,8 @@ int main()
             move_out[move_counter].append(converted_self);
 			general_dir[i].append(move_out[move_counter]);
 			            move_counter++;
-
+}
+void print_Move_Up_right_out(int i){
 			//For Move Up Right out//
 			general_dir[i].append("),.UR_move_out(");
 
@@ -381,7 +406,8 @@ int main()
             move_out[move_counter].append(converted_self);
           general_dir[i].append(move_out[move_counter]);
 			  move_counter++;
-
+}
+void print_Move_Down_left_out(int i){
 
 			//For Move Down Left out//
 			general_dir[i].append("),.DL_move_out(");
@@ -394,8 +420,8 @@ int main()
             move_out[move_counter].append(converted_self);
 			general_dir[i].append(move_out[move_counter]);
             move_counter++;
-
-
+}
+void print_Move_Down_right_out(int i){
 
 			//For Move Down Right out//
 			general_dir[i].append("),.DR_move_out(");
@@ -409,8 +435,618 @@ int main()
 
 			general_dir[i].append(move_out[move_counter]);
 			  move_counter++;
+}
+//Move Knight Out///////////
+///////////////////////////////////
+void print_move_knight_UUL_out(int i){
+ //For Up Up Left out//
+general_dir[i].append("),\n.UUL_move_out(");
 
+
+//Save Move_out connection
+move_out[move_counter].append("UUL_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+move_counter++;
+}
+void print_move_knight_UUR_out(int i){
+//For Up Up Right out//
+general_dir[i].append("),.UUR_move_out(");
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("UUR_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+ move_counter++;
+}
+void print_move_knight_LLU_out(int i){
+//For Left Left Up move out//
+general_dir[i].append("),.LLU_move_out(");
+
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("LLU_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+ move_counter++;
+}
+void print_move_knight_RRU_out(int i){
+//For Move Right Right Up out//
+general_dir[i].append("),.RRU_move_out(");
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("RRU_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+ move_counter++;
+}
+
+void print_move_knight_DDL_out(int i){
+//For Move Down Down Left out//
+general_dir[i].append("),\n.DDL_move_out(");
+
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("DDL_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+			move_counter++;
+}
+
+void print_move_knight_DDR_out(int i){
+//For Move Down Down Right out//
+general_dir[i].append("),.DDR_move_out(");
+
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("DDR_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+  move_counter++;
+}
+
+void print_move_knight_LLD_out(int i){
+//For Move Left Left Down out//
+general_dir[i].append("),.LLD_move_out(");
+
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("LLD_move_out");
+move_out[move_counter].append(converted_self);
+general_dir[i].append(move_out[move_counter]);
+move_counter++;
+}
+
+void print_move_knight_RRD_out(int i){
+//For Move Right Right Down out//
+general_dir[i].append("),.RRD_move_out(");
+
+
+
+//Save Move_out connection
+move_out[move_counter].append("RRD_move_out");
+move_out[move_counter].append(converted_self);
+
+
+general_dir[i].append(move_out[move_counter]);
+ move_counter++;
+}
+
+//////////////Print Knight In/////////////////
+
+void print_knight_UUL_in(int i){
+//For Up Up Left in
+			knight_dir[i].append("),\n.UUL_in(transmit");
+            temp << i + 8 + 8 +1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_UUR_in(int i){
+			 //For Up Up Right in
+			 knight_dir[i].append("),.UUR_in(transmit");
+            temp << i + 8 + 8 -1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_LLU_in(int i){
+			 //For Left Left Up in
+			 knight_dir[i].append("),.LLU_in(transmit");
+            temp << i + 1 + 1 +8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_RRU_in(int i){
+			 //For Right Right Up in
+			 knight_dir[i].append("),.RRU_in(transmit");
+            temp << i - 1 -1 +8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+			   //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_DDL_in(int i){
+			//For Down Down Left in
+			knight_dir[i].append("),\n.DDL_in(transmit");
+            temp << i - 8 -8 +1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_DDR_in(int i){
+			 //For Down Down Right in
+			 knight_dir[i].append("),.DDR_in(transmit");
+            temp << i - 8 -8 -1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_LLD_in(int i){
+			 //For  Left Left Down in
+			 knight_dir[i].append("),.LLD_in(transmit");
+            temp << i + 1 +1 -8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_RRD_in(int i){
+			 //For Right Right Down
+			 knight_dir[i].append("),.RRD_in(transmit");
+            temp << i - 1 -1 -8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_temp);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_self);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire_counter++;
+			temp.str("");
+
+}
+
+////Print Knight Out///////////////////////////
+void print_knight_UUL_out(int i){
+			//For Up Up Left Out
+			knight_dir[i].append("),\n.UUL_out(transmit");
+            temp << i + 8 + 8 +1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_UUR_out(int i){
+			 //For Up Up Right out
+			 knight_dir[i].append("),.UUR_out(transmit");
+            temp << i + 8 + 8 -1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_LLU_out(int i){
+			 //For Left Left Up Out
+			 knight_dir[i].append("),.LLU_out(transmit");
+            temp << i + 1 + 1 +8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_RRU_out(int i){
+			 //For Right Right Up in
+			 knight_dir[i].append("),.RRU_out(transmit");
+            temp << i - 1 -1 +8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+			   //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_DDL_out(int i){
+			//For Down Down Left in
+			knight_dir[i].append("),\n.DDL_out(transmit");
+            temp << i - 8 -8 +1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+void print_knight_DDR_out(int i){
+			 //For Down Down Right in
+			 knight_dir[i].append("),.DDR_out(transmit");
+            temp << i - 8 -8 -1;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_LLD_out(int i){
+			 //For  Left Left Down out
+			 knight_dir[i].append("),.LLD_out(transmit");
+            temp << i + 1 +1 -8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+void print_knight_RRD_out(int i){
+			 //For Right Right Down Out
+			 knight_dir[i].append("),.RRD_out(transmit");
+            temp << i - 1 -1 -8;
+            converted_temp = temp.str();
+
+            knight_dir[i].append(converted_self);
+            knight_dir[i].append("_");
+            knight_dir[i].append(converted_temp);
+
+            //Save knight_wire connection
+            knight_wire[knight_wire_counter].append("transmit");
+            knight_wire[knight_wire_counter].append(converted_self);
+            knight_wire[knight_wire_counter].append("_");
+            knight_wire[knight_wire_counter].append(converted_temp);
+            knight_wire_counter++;
+			temp.str("");
+}
+
+int main()
+{
+   
+    myfile.open ("output.txt");
+
+        for (int i = 0; i < SQUARES; i++){
+            general_dir[i] = "";
+            knight_dir[i] = "";
+        }
+	int Down_in = 0;
+	int Up_in = 0;
+	int Left_in = 0;
+	int Right_in = 0;
+	int Down_left_in = 0;
+	int Down_right_in = 0;
+	int Up_left_in = 0;
+	int Up_right_in = 0;
+	
+	int Down_out = 0;
+	int Up_out = 0;
+	int Left_out= 0;
+	int Right_out = 0;
+	int Down_left_out = 0;
+	int Down_right_out = 0;
+	int Up_left_out = 0;
+	int Up_right_out = 0;
+	
+	
+	int Move_Down_out = 0;
+	int Move_Up_out = 0;
+	int Move_Left_out= 0;
+	int Move_Right_out = 0;
+	int Move_Down_left_out = 0;
+	int Move_Down_right_out = 0;
+	int Move_Up_left_out = 0;
+	int Move_Up_right_out = 0;
+	
+	int move_knight_UUL_out = 0;
+	int move_knight_UUR_out = 0;
+	int move_knight_LLU_out = 0;
+	int move_knight_RRU_out = 0;
+	int move_knight_DDL_out = 0;
+	int move_knight_DDR_out = 0;
+	int move_knight_LLD_out = 0;
+	int move_knight_RRD_out = 0;
+	
+	int	knight_UUL_out = 0;
+	int knight_UUR_out = 0;
+	int knight_LLU_out = 0;
+	int knight_RRU_out = 0;
+	int knight_DDL_out = 0;
+	int knight_DDR_out = 0;
+	int  knight_LLD_out = 0;
+	int  knight_RRD_out = 0;
+	 
+	int knight_UUL_in = 0;
+	int knight_UUR_in = 0;
+	int knight_LLU_in = 0;
+	int knight_RRU_in = 0;
+	int knight_DDL_in = 0;
+	int knight_DDR_in = 0;
+	int knight_LLD_in = 0;
+	int knight_RRD_in = 0;	
+	 
+	
+	//////////////General Direction, Group 1/////////
+	//In//
+	Down_in = 1;
+	Up_in = 1;
+	Left_in = 1;
+	Right_in = 1;
+	
+	Down_left_in = 1;
+	Down_right_in = 1;
+	Up_left_in = 1;
+	Up_right_in = 1;
+	//Out//
+	Down_out = 1;
+	Up_out = 1;
+	Left_out = 1;
+	Right_out = 1;
+	
+	Down_left_out = 1;
+	Down_right_out = 1;
+	Up_left_out = 1;
+	Up_right_out = 1;
+	//Move out//
+	Move_Down_out = 1;
+	Move_Up_out = 1;
+	Move_Left_out = 1;
+	Move_Right_out = 1;
+	
+	Move_Down_left_out = 1;
+	Move_Down_right_out = 1;
+	Move_Up_left_out = 1;
+	Move_Up_right_out = 1;
+	
+	for (int j = 9 ; j < 50 ; j = j+8){
+        for (int k = 0; k < 6; k++){ //For Group 9-> 14 till  49->54
+			i = k + j;
 			
+			print_setup (i);
+
+			//Print Down in
+			if(Down_in)
+			print_Down_in(i);
+
+			//Print Up in
+			if(Up_in)
+			print_Up_in(i);
+
+			//Print Left in
+			if(Left_in)
+			print_Left_in(i);
+
+			//Print Right in
+			if(Right_in)
+			print_Right_in(i);
+
+			//Print Down Left in
+			if(Down_left_in)
+			print_Down_left_in(i);	
+			
+			//Print Down Right in
+			if(Down_right_in)
+			print_Down_right_in(i);	
+			
+			//Print Up Left in
+			if(Up_left_in)
+			print_Up_left_in(i);	
+			
+			//Print Up Right in
+			if(Up_right_in)
+			print_Up_right_in(i);	
+		
+			
+
+		
+
+////////////////For Out/////////////////////////////////
+
+				//Print Down out
+			if(Down_out)
+			print_Down_out(i);
+
+			//Print Up out
+			if(Up_out)
+			print_Up_out(i);
+
+			//Print Left out
+			if(Left_out)
+			print_Left_out(i);
+
+			//Print Right out
+			if(Right_out)
+			print_Right_out(i);
+
+			//Print Down Left out
+			if(Down_left_out)
+			print_Down_left_out(i);	
+			
+			//Print Down Right out
+			if(Down_right_out)
+			print_Down_right_out(i);	
+			
+			//Print Up Left out
+			if(Up_left_out)
+			print_Up_left_out(i);	
+			
+			//Print Up Right out
+			if(Up_right_out)
+			print_Up_right_out(i);	
+		   
+
+			////////////////For Move Out/////////////////////////////////
+		   
+
+			//Print Move Down out
+			if(Move_Down_out)
+			print_Move_Down_out(i);
+
+			//Print Move  Up out
+			if(Move_Up_out)
+			print_Move_Up_out(i);
+
+			//Print Move  Left out
+			if(Move_Left_out)
+			print_Move_Left_out(i);
+
+			//Print Move  Right out
+			if(Move_Right_out)
+			print_Move_Right_out(i);
+
+			//Print Move  Down Left out
+			if(Move_Down_left_out)
+			print_Move_Down_left_out(i);	
+			
+			//Print Move  Down Right out
+			if(Move_Down_right_out)
+			print_Move_Down_right_out(i);	
+			
+			//Print Move  Up Left out
+			if(Move_Up_left_out)
+			print_Move_Up_left_out(i);	
+			
+			//Print Move  Up Right out
+			if(Move_Up_right_out)
+			print_Move_Up_right_out(i);	
 
 
 
@@ -958,14 +1594,17 @@ int main()
 	}// General Direction North Group 2
 	i = 0;
 	
-
+////////////////////////////////////////
+////KNIGHT APPENDING STRING///////////
+////////////////////////////////////////  
+  
   /////////////////Group 1 North, Knight Directions ://///////////////////////
 	for (int j = 50 ; j < 54 ; j++){
         for (int k = 0; k < 1; k++){ //For Group  50->53
 			i = k + j;
             self << i;
             converted_self = self.str();
-// No UUL,UUR 
+				// No UUL,UUR 
 			///Knight Move Outs/////
 	//////////////////////////////////////
 			    
@@ -1163,7 +1802,6 @@ int main()
 
 
 ///For Knight Out/////////////////////////////////
-///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 
 			
@@ -2473,6 +3111,33 @@ int main()
 	}//Group 2 West Knight
 	i = 0;		
 /////////////////Group 1 Center Knight Directions ://///////////////////////
+	move_knight_UUL_out = 1;
+	 move_knight_UUR_out = 1;
+	 move_knight_LLU_out = 1;
+	 move_knight_RRU_out = 1;
+	 move_knight_DDL_out = 1;
+	 move_knight_DDR_out = 1;
+	 move_knight_LLD_out = 1;
+	 move_knight_RRD_out = 1;
+
+	knight_UUL_out = 1;
+	knight_UUR_out = 1;
+	knight_LLU_out = 1;
+	knight_RRU_out = 1;
+	knight_DDL_out = 1;
+	 knight_DDR_out = 1;
+	 knight_LLD_out = 1;
+	 knight_RRD_out = 1;
+	 
+	 knight_UUL_in = 1;
+	knight_UUR_in = 1;
+	knight_LLU_in = 1;
+	knight_RRU_in = 1;
+	knight_DDL_in = 1;
+	 knight_DDR_in = 1;
+	 knight_LLD_in = 1;
+	 knight_RRD_in = 1;	
+	 
 	for (int j = 18 ; j < 43 ; j = j+8){
         for (int k = 0; k < 4; k++){ //For Group 18-> 21,  26->29, 34-> 37, 42 -> 45
 			i = k + j;
@@ -2480,391 +3145,96 @@ int main()
             converted_self = self.str();
 
 			///Knight Move Outs/////
-	//////////////////////////////////////
-			    //For Up Up Left out//
-			general_dir[i].append("),\n.UUL_move_out(");
-
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("UUL_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			move_counter++;
-
-
-			//For Up Up Right out//
-			general_dir[i].append("),.UUR_move_out(");
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("UUR_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
-			//For Left Left Up move out//
-			general_dir[i].append("),.LLU_move_out(");
-
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("LLU_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
-			//For Move Right Right Up out//
-			general_dir[i].append("),.RRU_move_out(");
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("RRU_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
-
-			//For Move Down Down Left out//
-			general_dir[i].append("),\n.DDL_move_out(");
-
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("DDL_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-			            move_counter++;
-
-			//For Move Down Down Right out//
-			general_dir[i].append("),.DDR_move_out(");
-
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("DDR_move_out");
-            move_out[move_counter].append(converted_self);
-          general_dir[i].append(move_out[move_counter]);
-			  move_counter++;
-
-
-			//For Move Left Left Down out//
-			general_dir[i].append("),.LLD_move_out(");
-
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("LLD_move_out");
-            move_out[move_counter].append(converted_self);
-			general_dir[i].append(move_out[move_counter]);
-            move_counter++;
-
-
-
-			//For Move Right Right Down out//
-			general_dir[i].append("),.RRD_move_out(");
-
-
-
-            //Save Move_out connection
-            move_out[move_counter].append("RRD_move_out");
-            move_out[move_counter].append(converted_self);
-
-
-			general_dir[i].append(move_out[move_counter]);
-			 move_counter++;
-
+			//////////////////////////////////////
+			if(move_knight_UUL_out)
+				print_move_knight_UUL_out(i);
+			
+			if(move_knight_UUR_out)
+				print_move_knight_UUR_out(i);
+			
+			if(move_knight_LLU_out)
+				print_move_knight_LLU_out(i);
+			
+			if(move_knight_RRU_out)
+				print_move_knight_RRU_out( i);
+			
+			if(move_knight_DDL_out)
+				print_move_knight_DDL_out(i);
+			
+			if(move_knight_DDR_out)
+				print_move_knight_DDR_out(i);
+			
+			if(move_knight_LLD_out)
+				print_move_knight_LLD_out(i);
+			
+			if(move_knight_RRD_out)
+				print_move_knight_RRD_out(i);
+	
 
 
 	     /////////For knights in //////////////////////
-				///input [7:0] UUL_in,
-			//	input [7:0] UUR_in,
-				//input [7:0] LLU_in,
-				//input [7:0] RRU_in,
-				//input [7:0] DDL_in,
-				//input [7:0] DDR_in,
-			//	input [7:0] LLD_in,
-			//	input [7:0] RRD_in,
+			///input [7:0] UUL_in,
+			//input [7:0] UUR_in,
+			//input [7:0] LLU_in,
+			//input [7:0] RRU_in,
+			//input [7:0] DDL_in,
+			//input [7:0] DDR_in,
+			//input [7:0] LLD_in,
+			//input [7:0] RRD_in,
 
-			//For Up Up Left in
-			knight_dir[i].append("),\n.UUL_in(transmit");
-            temp << i + 8 + 8 +1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Up Up Right in
-			 knight_dir[i].append("),.UUR_in(transmit");
-            temp << i + 8 + 8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Left Left Up in
-			 knight_dir[i].append("),.LLU_in(transmit");
-            temp << i + 1 + 1 +8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Right Right Up in
-			 knight_dir[i].append("),.RRU_in(transmit");
-            temp << i - 1 -1 +8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-			   //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			//For Down Down Left in
-			knight_dir[i].append("),\n.DDL_in(transmit");
-            temp << i - 8 -8 +1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Down Down Right in
-			 knight_dir[i].append("),.DDR_in(transmit");
-            temp << i - 8 -8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For  Left Left Down in
-			 knight_dir[i].append("),.LLD_in(transmit");
-            temp << i + 1 +1 -8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Right Right Down
-			 knight_dir[i].append("),.RRD_in(transmit");
-            temp << i - 1 -1 -8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_temp);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_self);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire_counter++;
-			temp.str("");
-
+				if(knight_UUL_in)
+				print_knight_UUL_in(i);
+			
+			if(knight_UUR_in)
+				print_knight_UUR_in(i);
+			
+			if(knight_LLU_in)
+				print_knight_LLU_in(i);
+			
+			if(knight_RRU_in)
+				print_knight_RRU_in(i);
+			
+			if(knight_DDL_in)
+				print_knight_DDL_in(i);
+			
+			if(knight_DDR_in)
+				print_knight_DDR_in(i);
+			
+			if(knight_LLD_in)
+				print_knight_LLD_in(i);
+			
+			if(knight_RRD_in)
+				print_knight_RRD_in(i);
+	
 
 
 ///For Knight Out/////////////////////////////////
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-
-			//For Up Up Left Out
-			knight_dir[i].append("),\n.UUL_out(transmit");
-            temp << i + 8 + 8 +1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Up Up Right out
-			 knight_dir[i].append("),.UUR_out(transmit");
-            temp << i + 8 + 8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Left Left Up Out
-			 knight_dir[i].append("),.LLU_out(transmit");
-            temp << i + 1 + 1 +8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Right Right Up in
-			 knight_dir[i].append("),.RRU_out(transmit");
-            temp << i - 1 -1 +8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-			   //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			//For Down Down Left in
-			knight_dir[i].append("),\n.DDL_out(transmit");
-            temp << i - 8 -8 +1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Down Down Right in
-			 knight_dir[i].append("),.DDR_out(transmit");
-            temp << i - 8 -8 -1;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For  Left Left Down out
-			 knight_dir[i].append("),.LLD_out(transmit");
-            temp << i + 1 +1 -8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
-			 //For Right Right Down Out
-			 knight_dir[i].append("),.RRD_out(transmit");
-            temp << i - 1 -1 -8;
-            converted_temp = temp.str();
-
-            knight_dir[i].append(converted_self);
-            knight_dir[i].append("_");
-            knight_dir[i].append(converted_temp);
-
-            //Save knight_wire connection
-            knight_wire[knight_wire_counter].append("transmit");
-            knight_wire[knight_wire_counter].append(converted_self);
-            knight_wire[knight_wire_counter].append("_");
-            knight_wire[knight_wire_counter].append(converted_temp);
-            knight_wire_counter++;
-			temp.str("");
-
+			if(knight_UUL_out)
+				print_knight_UUL_out(i);
+			
+			if(knight_UUR_out)
+				print_knight_UUR_out(i);
+			
+			if(knight_LLU_out)
+				print_knight_LLU_out(i);
+			
+			if(knight_RRU_out)
+				print_knight_RRU_out(i);
+			
+			if(knight_DDL_out)
+				print_knight_DDL_out(i);
+			
+			if(knight_DDR_out)
+				print_knight_DDR_out(i);
+			
+			if(knight_LLD_out)
+				print_knight_LLD_out(i);
+			
+			if(knight_RRD_out)
+				print_knight_RRD_out(i);
+			
 
 
 
@@ -3112,7 +3482,9 @@ int main()
 	} //Group 2 North knight
 	i = 0;
 	
-        //Print
+   ////////////////////////////Print////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////
+   /////////////////////////////////////////////////////////////////////////////////////
         for (int i = 0; i < SQUARES; i++){
             myfile << "Square[" <<i<<"]:" <<endl << general_dir[i] << knight_dir[i] <<") );"<< endl;
 
