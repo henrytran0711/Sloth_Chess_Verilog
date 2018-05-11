@@ -2017,7 +2017,7 @@ int main()
 	Move_Up_left_out = 0;
 	Move_Up_right_out = 1;
 
-	for (int j = 7 ; j < 56 ; j = j+8){
+	for (int j = 15 ; j < 56 ; j = j+8){
         for (int k = 0; k < 1; k++){ //7->55
 			i = k + j;
 
@@ -4924,7 +4924,7 @@ move_knight_UUL_out = 1;
 	 move_knight_UUR_out = 0;
 	 move_knight_LLU_out = 1;
 	 move_knight_RRU_out = 0;
-	 move_knight_DDL_out = 1;
+	 move_knight_DDL_out = 0;
 	 move_knight_DDR_out = 0;
 	 move_knight_LLD_out = 1;
 	 move_knight_RRD_out = 0;
@@ -4933,7 +4933,7 @@ move_knight_UUL_out = 1;
 	knight_UUR_out = 0;
 	knight_LLU_out = 1;
 	knight_RRU_out = 0;
-	knight_DDL_out = 1;
+	knight_DDL_out = 0;
 	 knight_DDR_out = 0;
 	 knight_LLD_out = 1;
 	 knight_RRD_out = 0;
@@ -4942,7 +4942,7 @@ move_knight_UUL_out = 1;
 	knight_UUR_in = 0;
 	knight_LLU_in = 1;
 	knight_RRU_in = 0;
-	knight_DDL_in = 1;
+	knight_DDL_in = 0;
 	 knight_DDR_in = 0;
 	 knight_LLD_in = 1;
 	 knight_RRD_in = 0;
