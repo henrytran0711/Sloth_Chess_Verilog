@@ -18,10 +18,38 @@ string knight_wire[SIZE];
 string move_out[SIZE];
 string converted_self;
 string converted_temp;
+string converted_square_number;
 ostringstream temp;
 ostringstream self;
- ofstream myfile;
-
+ostringstream square_number;
+ofstream myfile;
+string chessboard;
+ void print_chessboard(){
+	chessboard.append ("chessBoard 8by8");
+	chessboard.append("(\n.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),");
+	for(int i = 0; i <64; i++){
+		square_number << i;
+		converted_square_number = square_number.str();
+		chessboard.append("\n.pieceReg");
+		chessboard.append( converted_square_number );
+		chessboard.append("(pieceReg");
+		chessboard.append( converted_square_number );
+		chessboard.append("),");
+		square_number.str("");
+	}
+	for(int i = 0; i < move_counter; i++){
+		chessboard.append("\n.");
+		chessboard.append(move_out[i]);
+		chessboard.append("(");
+		chessboard.append(move_out[i]);
+		chessboard.append("),");
+	}
+	chessboard.append("\n);");
+	myfile << chessboard;
+	
+	
+	
+ }
 void print_setup (int i){
 general_dir[i].append("square Square");
 self << i;
@@ -5797,6 +5825,9 @@ move_knight_UUL_out = 1;
 		for (int i = 0; i < 64; i++){
             myfile << "posReg" << i << " = 6'b000000;" << endl;
         }
+		
+		myfile << endl <<endl <<"Chessboard TB instantiation:\n";
+		print_chessboard();
 
         myfile.close();
     return 0;
