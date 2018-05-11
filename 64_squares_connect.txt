@@ -718,16 +718,6 @@ wire [10:0] transmit48_56;
 wire [10:0] transmit48_49;
 wire [10:0] transmit48_41;
 wire [10:0] transmit48_57;
-wire [10:0] transmit-1_7;
-wire [10:0] transmit15_7;
-wire [10:0] transmit6_7;
-wire [10:0] transmit-2_7;
-wire [10:0] transmit14_7;
-wire [10:0] transmit7_-1;
-wire [10:0] transmit7_15;
-wire [10:0] transmit7_6;
-wire [10:0] transmit7_-2;
-wire [10:0] transmit7_14;
 wire [10:0] transmit7_15;
 wire [10:0] transmit23_15;
 wire [10:0] transmit14_15;
@@ -1466,11 +1456,9 @@ wire [7:0] transmit55_38;
 wire [7:0] transmit55_45;
 wire [7:0] transmit25_8;
 wire [7:0] transmit18_8;
-wire [7:0] transmit-7_8;
 wire [7:0] transmit2_8;
 wire [7:0] transmit8_25;
 wire [7:0] transmit8_18;
-wire [7:0] transmit8_-7;
 wire [7:0] transmit8_2;
 wire [7:0] transmit26_9;
 wire [7:0] transmit24_9;
@@ -1866,11 +1854,6 @@ output [31:0] U_move_out48,
 output [31:0] L_move_out48,
 output [31:0] DL_move_out48,
 output [31:0] UL_move_out48,
-output [31:0] D_move_out7,
-output [31:0] U_move_out7,
-output [31:0] R_move_out7,
-output [31:0] DR_move_out7,
-output [31:0] UR_move_out7,
 output [31:0] D_move_out15,
 output [31:0] U_move_out15,
 output [31:0] R_move_out15,
@@ -2241,7 +2224,6 @@ output [31:0] DDR_move_out55,
 output [31:0] RRD_move_out55,
 output [31:0] UUL_move_out8,
 output [31:0] LLU_move_out8,
-output [31:0] DDL_move_out8,
 output [31:0] LLD_move_out8,
 output [31:0] UUL_move_out9,
 output [31:0] UUR_move_out9,
@@ -2367,10 +2349,7 @@ square Square6(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear)
 .UUL_in(transmit23_6),.UUR_in(transmit21_6),.RRU_in(transmit12_6),
 .UUL_out(transmit6_23),.UUR_out(transmit6_21),.RRU_out(transmit6_12) );
 //Square[7]:
-square Square7(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg7),.posReg(6'd7),.U_in(transmit15_7),.R_in(transmit6_7),.UR_in(transmit14_7),.U_out(transmit7_15),.R_out(transmit7_6),.UR_out(transmit7_14),.U_move_out(U_move_out7),.R_move_out(R_move_out7),.UR_move_out(UR_move_out7square Square7(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg7),.posReg(6'd7),
-.D_in(transmit-1_7),.U_in(transmit15_7),.R_in(transmit6_7),.DR_in(transmit-2_7),.UR_in(transmit14_7),
-.D_out(transmit7_-1),.U_out(transmit7_15),.R_out(transmit7_6),.DR_out(transmit7_-2),.UR_out(transmit7_14),
-.D_move_out(D_move_out7),.U_move_out(U_move_out7),.R_move_out(R_move_out7),.DR_move_out(DR_move_out7),.UR_move_out(UR_move_out7),.UUR_move_out(UUR_move_out7),.RRU_move_out(RRU_move_out7),.UUR_in(transmit22_7),.RRU_in(transmit13_7),.UUR_out(transmit7_22),.RRU_out(transmit7_13) );
+square Square7(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg7),.posReg(6'd7),.U_in(transmit15_7),.R_in(transmit6_7),.UR_in(transmit14_7),.U_out(transmit7_15),.R_out(transmit7_6),.UR_out(transmit7_14),.U_move_out(U_move_out7),.R_move_out(R_move_out7),.UR_move_out(UR_move_out7),.UUR_move_out(UUR_move_out7),.RRU_move_out(RRU_move_out7),.UUR_in(transmit22_7),.RRU_in(transmit13_7),.UUR_out(transmit7_22),.RRU_out(transmit7_13) );
 //Square[8]:
 square Square8(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg8),.posReg(6'd8),
 .D_in(transmit0_8),.U_in(transmit16_8),.L_in(transmit9_8),
@@ -2379,12 +2358,9 @@ square Square8(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear)
 .DL_out(transmit8_1),.UL_out(transmit8_17),
 .D_move_out(D_move_out8),.U_move_out(U_move_out8),.L_move_out(L_move_out8),.DL_move_out(DL_move_out8),
 .UL_move_out(UL_move_out8),
-.UUL_move_out(UUL_move_out8),.LLU_move_out(LLU_move_out8),
-.DDL_move_out(DDL_move_out8),.LLD_move_out(LLD_move_out8),
-.UUL_in(transmit25_8),.LLU_in(transmit18_8),
-.DDL_in(transmit-7_8),.LLD_in(transmit2_8),
-.UUL_out(transmit8_25),.LLU_out(transmit8_18),
-.DDL_out(transmit8_-7),.LLD_out(transmit8_2) );
+.UUL_move_out(UUL_move_out8),.LLU_move_out(LLU_move_out8),.LLD_move_out(LLD_move_out8),
+.UUL_in(transmit25_8),.LLU_in(transmit18_8),.LLD_in(transmit2_8),
+.UUL_out(transmit8_25),.LLU_out(transmit8_18),.LLD_out(transmit8_2) );
 //Square[9]:
 square Square9(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg9),.posReg(6'd9),
 .D_in(transmit1_9),.U_in(transmit17_9),.L_in(transmit10_9),.R_in(transmit8_9),
