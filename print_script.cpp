@@ -903,7 +903,7 @@ int main()
 	int knight_LLD_in = 0;
 	int knight_RRD_in = 0;
 
-
+    bool print;
 	//////////////General Direction, Group 1/////////
 	//In//
 	Down_in = 1;
@@ -5746,25 +5746,38 @@ move_knight_UUL_out = 1;
    //////////////////////////////////////////////////////////////////////////////////
    /////////////////////////////////////////////////////////////////////////////////////
         for (int i = 0; i < wire_counter; i++){
-              for (int dupe = 0; dupe < wire_counter; dupe++){
-                if (wire[i] != wire[dupe])
+                print = true;
+              for (int dupe = 0; dupe < i; dupe++){
+                if (wire[i] == wire[dupe])
+                    print = false;
+                    }
+                if (print)
                     myfile << "wire [10:0] " << wire[i] <<";" << endl;
-                }
+
         }
 
          for (int i = 0; i < knight_wire_counter; i++){
-             for (int dupe = 0; dupe < knight_wire_counter; dupe++){
-                if (knight_wire[i] != knight_wire[dupe])
-                    myfile << "wire [7:0] " << knight_wire[i] <<";" << endl;
-                }
+                print = true;
+             for (int dupe = 0; dupe < i; dupe++){
+                 if (knight_wire[i] == knight_wire[dupe])
+                        print = false;
+                        }
+                    if (print)
+                        myfile << "wire [7:0] " << knight_wire[i] <<";" << endl;
+
          }
 
 
 		for (int i = 0; i < move_counter; i++){
-            for (int dupe = 0; dupe < move_counter; dupe++){
-                if (move_out[i] != move_out[dupe])
-                    myfile << "output [31:0] " << move_out[i] <<"," << endl;
+                print = true;
+            for (int dupe = 0; dupe <i; dupe++){
+
+                if (move_out[i] == move_out[dupe])
+                    print = false;
             }
+                if (print)
+                    myfile << "output [31:0] " << move_out[i] <<"," << endl;
+
 		}
 		for (int i = 0; i < 64; i++){
             myfile << "input [5:0] " << "posReg" << i <<"," << endl;
