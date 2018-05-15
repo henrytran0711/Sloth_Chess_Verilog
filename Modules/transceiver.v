@@ -105,6 +105,10 @@ parameter EMPTY_KNIGHT_MOVE = 8'b0000_0000;
 
 parameter EMPTY_PIECE_REG = 6'b00_0000;
 
+parameter WHITE = 1'b1;
+parameter BLACK = 1'b0;
+
+
 Transmitter Trans(
 
 .engine_color(engineColor), 
@@ -243,8 +247,14 @@ always @(*) begin
 	
 	if (L_move != EMPTY_MOVE && L_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		R_out = L_move;
+		
+	if (L_move != EMPTY_MOVE && L_move[7] == 1'b1 && pieceReg == EMPTY_PIECE_REG && (posReg == 6'd02 || posReg == 6'd58)) //king passthru for castling
+		R_out = L_move;
 	
 	if (R_move != EMPTY_MOVE && R_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
+		L_out = R_move;
+		
+	if (R_move != EMPTY_MOVE && R_move[7] == 1'b1 && pieceReg == EMPTY_PIECE_REG && (posReg == 6'd04 || posReg == 6'd60)) //king passthru for castling
 		L_out = R_move;
 	
 	if (UL_move != EMPTY_MOVE && UL_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
