@@ -8,6 +8,8 @@ input clear,
 
 input[5:0] pieceReg,
 input[5:0] posReg,
+input castling,
+
 //Input Reg
 input [10:0] U_in,
 input [10:0] D_in,
@@ -48,23 +50,23 @@ output [7:0] RRD_out,
 
 
 //Output Non knight
-output reg [31:0] U_move_out,
-output reg [31:0] D_move_out,
-output reg [31:0] L_move_out,
-output reg [31:0] R_move_out,
-output reg [31:0] UL_move_out,
-output reg [31:0] UR_move_out,
-output reg [31:0] DL_move_out,
-output reg [31:0] DR_move_out,
+output reg [39:0] U_move_out,
+output reg [39:0] D_move_out,
+output reg [39:0] L_move_out,
+output reg [39:0] R_move_out,
+output reg [39:0] UL_move_out,
+output reg [39:0] UR_move_out,
+output reg [39:0] DL_move_out,
+output reg [39:0] DR_move_out,
 //Output knight
-output reg [31:0] UUL_move_out,
-output reg [31:0] UUR_move_out,
-output reg [31:0] LLU_move_out,
-output reg [31:0] RRU_move_out,
-output reg [31:0] DDL_move_out,
-output reg [31:0] DDR_move_out,
-output reg [31:0] LLD_move_out,
-output reg [31:0] RRD_move_out
+output reg [39:0] UUL_move_out,
+output reg [39:0] UUR_move_out,
+output reg [39:0] LLU_move_out,
+output reg [39:0] RRU_move_out,
+output reg [39:0] DDL_move_out,
+output reg [39:0] DDR_move_out,
+output reg [39:0] LLD_move_out,
+output reg [39:0] RRD_move_out
 
 );
 
@@ -107,14 +109,26 @@ reg [5:0] capturedPieceDDR;
 reg [5:0] capturedPieceLLD;
 reg [5:0] capturedPieceRRD;
 
+reg [3:0] castlingL;
+reg [3:0] castlingR;
+
 
 parameter EMPTY_MOVE = 11'b000_0000_0000;
 parameter EMPTY_KNIGHT_MOVE = 8'b0000_0000;
 
-parameter EMPTY_MOVE_OUT = 32'h0000_0000;
-parameter EMPTY_KNIGHT_MOVE_OUT = 32'h0000_0000;
+parameter EMPTY_MOVE_OUT = 40'h0000_0000_0000;
+parameter EMPTY_KNIGHT_MOVE_OUT = 40'h0000_0000_0000;
 
 parameter EMPTY_PIECE_REG = 6'b00_0000;
+
+parameter WHITE_KINGS_SIDE = 4'b0001;
+parameter WHITE_QUEENS_SIDE = 4'b0010;
+parameter BLACK_KINGS_SIDE = 4'b0100;
+parameter BLACK_QUEENS_SIDE = 4'b1000;
+
+parameter WHITE = 1'b1;
+parameter BLACK = 1'b0;
+
 
 pieceReg pieceReg1(
   pieceReg,
@@ -194,24 +208,59 @@ always @(*) begin
 	if (RRD_move[7] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceRRD = pieceRegOut; 
 		
+	
+	if (castling == 1'b1) begin
+		if (engineColor == WHITE) begin
+			if (pieceRegOut == EMPTY_PIECE_REG && L_move[7] == 1'b1 && L_move[5:0] == 6'd03)
+				castlingL = WHITE_KINGS_SIDE;
+			else
+				castlingL = 4'b0000;
+				
+			if (pieceRegOut == EMPTY_PIECE_REG && R_move[7] == 1'b1 && R_move[5:0] == 6'd03)
+				castlingR = WHITE_QUEENS_SIDE;
+			else
+				castlingR = 4'b0000;	
+			
+		end
+		
+		else begin //enginecolor == black
+			if (pieceRegOut == EMPTY_PIECE_REG && L_move[7] == 1'b1 && L_move[5:0] == 6'd59)
+				castlingL = BLACK_KINGS_SIDE;
+			else
+				castlingL = 4'b0000;
+				
+			if (pieceRegOut == EMPTY_PIECE_REG && R_move[7] == 1'b1 && R_move[5:0] == 6'd59)
+				castlingR = BLACK_QUEENS_SIDE;
+			else
+				castlingR = 4'b0000;	
+		end
+	
+	end
+	
+	else begin //no castling
+		castlingL = 4'b0000;
+		castlingR = 4'b0000;
+	end
+	
 
-	U_move_out = {2'b00, capturedPieceU, 2'b00, posReg, 2'b00, U_move[10:6], 1'b0, 2'b00, U_move[5:0]};
-	D_move_out = {2'b00, capturedPieceD, 2'b00, posReg, 2'b00, D_move[10:6], 1'b0, 2'b00, D_move[5:0]};
-	L_move_out = {2'b00, capturedPieceL, 2'b00, posReg, 2'b00, L_move[10:6], 1'b0, 2'b00, L_move[5:0]};
-	R_move_out = {2'b00, capturedPieceR, 2'b00, posReg, 2'b00, R_move[10:6], 1'b0, 2'b00, R_move[5:0]};
-	UL_move_out = {2'b00, capturedPieceUL, 2'b00, posReg, 2'b00, UL_move[10:6], 1'b0, 2'b00, UL_move[5:0]};
-	UR_move_out = {2'b00, capturedPieceUR, 2'b00, posReg, 2'b00, UR_move[10:6], 1'b0, 2'b00, UR_move[5:0]};
-	DL_move_out = {2'b00, capturedPieceDL, 2'b00, posReg, 2'b00, DL_move[10:6], 1'b0, 2'b00, DL_move[5:0]};
-	DR_move_out = {2'b00, capturedPieceDR, 2'b00, posReg, 2'b00, DR_move[10:6], 1'b0, 2'b00, DR_move[5:0]};
+		
+	U_move_out = {8'b0000_0000, 2'b00, capturedPieceU, 2'b00, posReg, 2'b00, U_move[10:6], 1'b0, 2'b00, U_move[5:0]};
+	D_move_out = {8'b0000_0000, 2'b00, capturedPieceD, 2'b00, posReg, 2'b00, D_move[10:6], 1'b0, 2'b00, D_move[5:0]};
+	L_move_out = {4'b0000, castlingL, 2'b00, capturedPieceL, 2'b00, posReg, 2'b00, L_move[10:6], 1'b0, 2'b00, L_move[5:0]};
+	R_move_out = {4'b0000, castlingR, 2'b00, capturedPieceR, 2'b00, posReg, 2'b00, R_move[10:6], 1'b0, 2'b00, R_move[5:0]};
+	UL_move_out = {8'b0000_0000, 2'b00, capturedPieceUL, 2'b00, posReg, 2'b00, UL_move[10:6], 1'b0, 2'b00, UL_move[5:0]};
+	UR_move_out = {8'b0000_0000, 2'b00, capturedPieceUR, 2'b00, posReg, 2'b00, UR_move[10:6], 1'b0, 2'b00, UR_move[5:0]};
+	DL_move_out = {8'b0000_0000, 2'b00, capturedPieceDL, 2'b00, posReg, 2'b00, DL_move[10:6], 1'b0, 2'b00, DL_move[5:0]};
+	DR_move_out = {8'b0000_0000, 2'b00, capturedPieceDR, 2'b00, posReg, 2'b00, DR_move[10:6], 1'b0, 2'b00, DR_move[5:0]};
 
-	UUL_move_out = {2'b00, capturedPieceUUL, 2'b00, posReg, 2'b00, UUL_move[7], 4'b0000, UUL_move[6], 2'b00, UUL_move[5:0]};
-	UUR_move_out = {2'b00, capturedPieceUUR, 2'b00, posReg, 2'b00, UUR_move[7], 4'b0000, UUR_move[6], 2'b00, UUR_move[5:0]};
-	LLU_move_out = {2'b00, capturedPieceLLU, 2'b00, posReg, 2'b00, LLU_move[7], 4'b0000, LLU_move[6], 2'b00, LLU_move[5:0]};
-	RRU_move_out = {2'b00, capturedPieceRRU, 2'b00, posReg, 2'b00, RRU_move[7], 4'b0000, RRU_move[6], 2'b00, RRU_move[5:0]};
-	DDL_move_out = {2'b00, capturedPieceDDL, 2'b00, posReg, 2'b00, DDL_move[7], 4'b0000, DDL_move[6], 2'b00, DDL_move[5:0]};
-	DDR_move_out = {2'b00, capturedPieceDDR, 2'b00, posReg, 2'b00, DDR_move[7], 4'b0000, DDR_move[6], 2'b00, DDR_move[5:0]};
-	LLD_move_out = {2'b00, capturedPieceLLD, 2'b00, posReg, 2'b00, LLD_move[7], 4'b0000, LLD_move[6], 2'b00, LLD_move[5:0]};
-	RRD_move_out = {2'b00, capturedPieceRRD, 2'b00, posReg, 2'b00, RRD_move[7], 4'b0000, RRD_move[6], 2'b00, RRD_move[5:0]};
+	UUL_move_out = {8'b0000_0000, 2'b00, capturedPieceUUL, 2'b00, posReg, 2'b00, UUL_move[7], 4'b0000, UUL_move[6], 2'b00, UUL_move[5:0]};
+	UUR_move_out = {8'b0000_0000, 2'b00, capturedPieceUUR, 2'b00, posReg, 2'b00, UUR_move[7], 4'b0000, UUR_move[6], 2'b00, UUR_move[5:0]};
+	LLU_move_out = {8'b0000_0000, 2'b00, capturedPieceLLU, 2'b00, posReg, 2'b00, LLU_move[7], 4'b0000, LLU_move[6], 2'b00, LLU_move[5:0]};
+	RRU_move_out = {8'b0000_0000, 2'b00, capturedPieceRRU, 2'b00, posReg, 2'b00, RRU_move[7], 4'b0000, RRU_move[6], 2'b00, RRU_move[5:0]};
+	DDL_move_out = {8'b0000_0000, 2'b00, capturedPieceDDL, 2'b00, posReg, 2'b00, DDL_move[7], 4'b0000, DDL_move[6], 2'b00, DDL_move[5:0]};
+	DDR_move_out = {8'b0000_0000, 2'b00, capturedPieceDDR, 2'b00, posReg, 2'b00, DDR_move[7], 4'b0000, DDR_move[6], 2'b00, DDR_move[5:0]};
+	LLD_move_out = {8'b0000_0000, 2'b00, capturedPieceLLD, 2'b00, posReg, 2'b00, LLD_move[7], 4'b0000, LLD_move[6], 2'b00, LLD_move[5:0]};
+	RRD_move_out = {8'b0000_0000, 2'b00, capturedPieceRRD, 2'b00, posReg, 2'b00, RRD_move[7], 4'b0000, RRD_move[6], 2'b00, RRD_move[5:0]};
 	
 	if (U_move == EMPTY_MOVE)
 		U_move_out = EMPTY_MOVE_OUT;
@@ -245,6 +294,14 @@ always @(*) begin
 		LLD_move_out = EMPTY_KNIGHT_MOVE_OUT;
 	if (RRD_move == EMPTY_KNIGHT_MOVE)
 		RRD_move_out = EMPTY_KNIGHT_MOVE_OUT;		
+		
+		
+	if (castling == 1'b1) begin
+		if (castlingL == 4'b0000)
+			L_move_out = EMPTY_MOVE_OUT;
+		if (castlingR == 4'b0000)
+			R_move_out = EMPTY_MOVE_OUT;
+	end
 	
 end
 endmodule
