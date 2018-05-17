@@ -13,7 +13,7 @@ input [5:0] movingPiece,//000001: pawn, 000010: rook, 000100: knight , 001000: b
 input [5:0] capturedPiece,//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
 input [2:0] castling, //001: no castling 010: Queens side 100: King Side
 input [4:0] enpassant,//00001: no enpassant, 00010:UL, 00100: UR , 01000: DL,10000:DR 
-
+input undo,
 
 
 
@@ -115,39 +115,245 @@ transceiver Transceiver1(
  always @ (posedge clk) begin
 	case(movingPiece)
 		6'b000000: //Never happen, dont care
-			moved_PieceReg = {6'b000000}
+			moved_PieceReg = {6'b000000};
 		6'b000001:// Pawn
-			moved_PieceReg = {engineColor,PAWN}
+			moved_PieceReg = {engineColor,PAWN};
 		6'b000010:// Rook
-			moved_PieceReg = {engineColor,ROOK}
+			moved_PieceReg = {engineColor,ROOK};
 		6'b000100:// Knight
-			moved_PieceReg = {engineColor,KNIGHT}
+			moved_PieceReg = {engineColor,KNIGHT};
 		6'b001000:// Bishop
-			moved_PieceReg = {engineColor,BISHOP}		
+			moved_PieceReg = {engineColor,BISHOP};		
 		6'b010000:// Queen
-			moved_PieceReg = {engineColor,QUEEN}	
+			moved_PieceReg = {engineColor,QUEEN};	
 		6'b100000:// King
-			moved_PieceReg = {engineColor,KING}				
+			moved_PieceReg = {engineColor,KING};			
 	endcase
 	
 	case(capturedPiece)
 		6'b000000: //Quiet
-			moved_PieceReg = {6'b000000}
+			captured_PieceReg = {6'b000000};
 		6'b000001:// Pawn
-			moved_PieceReg = {!engineColor,PAWN}
+			captured_PieceReg = {!engineColor,PAWN};
 		6'b000010:// Rook
-			moved_PieceReg = {!engineColor,ROOK}
+			captured_PieceReg = {!engineColor,ROOK};
 		6'b000100:// Knight
-			moved_PieceReg = {!engineColor,KNIGHT}
+			captured_PieceReg = {!engineColor,KNIGHT};
 		6'b001000:// Bishop
-			moved_PieceReg = {!engineColor,BISHOP}		
+			captured_PieceReg = {!engineColor,BISHOP};	
 		6'b010000:// Queen
-			moved_PieceReg = {!engineColor,QUEEN}	
+			captured_PieceReg = {!engineColor,QUEEN};	
 		6'b100000:// King
-			moved_PieceReg = {!engineColor,KING}				
+			captured_PieceReg = {!engineColor,KING};				
 	endcase
-
-		
+	
+	enable_out = initialPosition & movedPosition;
+	pieceReg0_out = 6'b000000;
+	pieceReg1_out = 6'b000000;
+	pieceReg2_out = 6'b000000;
+	pieceReg3_out = 6'b000000;
+	pieceReg4_out = 6'b000000;
+	pieceReg5_out = 6'b000000;
+	pieceReg6_out = 6'b000000;
+	pieceReg7_out = 6'b000000;
+	pieceReg8_out = 6'b000000;
+	pieceReg9_out = 6'b000000;
+	pieceReg10_out = 6'b000000;
+	pieceReg11_out = 6'b000000;
+	pieceReg12_out = 6'b000000;
+	pieceReg13_out = 6'b000000;
+	pieceReg14_out = 6'b000000;
+	pieceReg15_out = 6'b000000;
+	pieceReg16_out = 6'b000000;
+	pieceReg17_out = 6'b000000;
+	pieceReg18_out = 6'b000000;
+	pieceReg19_out = 6'b000000;
+	pieceReg20_out = 6'b000000;
+	pieceReg21_out = 6'b000000;
+	pieceReg22_out = 6'b000000;
+	pieceReg23_out = 6'b000000;
+	pieceReg24_out = 6'b000000;
+	pieceReg25_out = 6'b000000;
+	pieceReg26_out = 6'b000000;
+	pieceReg27_out = 6'b000000;
+	pieceReg28_out = 6'b000000;
+	pieceReg29_out = 6'b000000;
+	pieceReg30_out = 6'b000000;
+	pieceReg31_out = 6'b000000;
+	pieceReg32_out = 6'b000000;
+	pieceReg33_out = 6'b000000;
+	pieceReg34_out = 6'b000000;
+	pieceReg35_out = 6'b000000;
+	pieceReg36_out = 6'b000000;
+	pieceReg37_out = 6'b000000;
+	pieceReg38_out = 6'b000000;
+	pieceReg39_out = 6'b000000;
+	pieceReg40_out = 6'b000000;
+	pieceReg41_out = 6'b000000;
+	pieceReg42_out = 6'b000000;
+	pieceReg43_out = 6'b000000;
+	pieceReg44_out = 6'b000000;
+	pieceReg45_out = 6'b000000;
+	pieceReg46_out = 6'b000000;
+	pieceReg47_out = 6'b000000;
+	pieceReg48_out = 6'b000000;
+	pieceReg49_out = 6'b000000;
+	pieceReg50_out = 6'b000000;
+	pieceReg51_out = 6'b000000;
+	pieceReg52_out = 6'b000000;
+	pieceReg53_out = 6'b000000;
+	pieceReg54_out = 6'b000000;
+	pieceReg55_out = 6'b000000;
+	pieceReg56_out = 6'b000000;
+	pieceReg57_out = 6'b000000;
+	pieceReg58_out = 6'b000000;
+	pieceReg59_out = 6'b000000;
+	pieceReg60_out = 6'b000000;
+	pieceReg61_out = 6'b000000;
+	pieceReg62_out = 6'b000000;
+	pieceReg63_out = 6'b000000;
+	
+	if( !captured_PieceReg && !castling &&!undo) begin // Normal Quiet
+		//Only the corresponding enable bit will be sent, so we dont
+		//care about the initial position
+	
+		case (movedPosition)
+			64'd1:
+				pieceReg0_out = moved_PieceReg;
+			64'd2:
+				pieceReg1_out = moved_PieceReg;
+			64'd4:
+				pieceReg2_out = moved_PieceReg;
+			64'd8:
+				pieceReg3_out = moved_PieceReg;
+			64'd16:
+				pieceReg4_out = moved_PieceReg;
+			64'd32:
+				pieceReg5_out = moved_PieceReg;
+			64'd64:
+				pieceReg6_out = moved_PieceReg;
+			64'd128:
+				pieceReg7_out = moved_PieceReg;
+			64'd256:
+				pieceReg8_out = moved_PieceReg;
+			64'd512:
+				pieceReg9_out = moved_PieceReg;
+			64'd1024:
+				pieceReg10_out = moved_PieceReg;
+			64'd2048:
+				pieceReg11_out = moved_PieceReg;
+			64'd12:
+				pieceReg12_out = moved_PieceReg;
+			64'd13:
+				pieceReg13_out = moved_PieceReg;
+			64'd14:
+				pieceReg14_out = moved_PieceReg;
+			64'd15:
+				pieceReg15_out = moved_PieceReg;
+			64'd16:
+				pieceReg16_out = moved_PieceReg;
+			64'd17:
+				pieceReg17_out = moved_PieceReg;
+			64'd18:
+				pieceReg18_out = moved_PieceReg;
+			64'd19:
+				pieceReg19_out = moved_PieceReg;
+			64'd20:
+				pieceReg20_out = moved_PieceReg;
+			64'd21:
+				pieceReg21_out = moved_PieceReg;
+			64'd22:
+				pieceReg22_out = moved_PieceReg;
+			64'd23:
+				pieceReg23_out = moved_PieceReg;
+			64'd24:
+				pieceReg24_out = moved_PieceReg;
+			64'd25:
+				pieceReg25_out = moved_PieceReg;
+			64'd26:
+				pieceReg26_out = moved_PieceReg;
+			64'd27:
+				pieceReg27_out = moved_PieceReg;
+			64'd28:
+				pieceReg28_out = moved_PieceReg;
+			64'd29:
+				pieceReg29_out = moved_PieceReg;
+			64'd30:
+				pieceReg30_out = moved_PieceReg;
+			64'd31:
+				pieceReg31_out = moved_PieceReg;
+			64'd32:
+				pieceReg32_out = moved_PieceReg;
+			64'd33:
+				pieceReg33_out = moved_PieceReg;
+			64'd34:
+				pieceReg34_out = moved_PieceReg;
+			64'd35:
+				pieceReg35_out = moved_PieceReg;
+			64'd36:
+				pieceReg36_out = moved_PieceReg;
+			64'd37:
+				pieceReg37_out = moved_PieceReg;
+			64'd38:
+				pieceReg38_out = moved_PieceReg;
+			64'd39:
+				pieceReg39_out = moved_PieceReg;
+			64'd40:
+				pieceReg40_out = moved_PieceReg;
+			64'd41:
+				pieceReg41_out = moved_PieceReg;
+			64'd42:
+				pieceReg42_out = moved_PieceReg;
+			64'd43:
+				pieceReg43_out = moved_PieceReg;
+			64'd44:
+				pieceReg44_out = moved_PieceReg;
+			64'd45:
+				pieceReg45_out = moved_PieceReg;
+			64'd46:
+				pieceReg46_out = moved_PieceReg;
+			64'd47:
+				pieceReg47_out = moved_PieceReg;
+			64'd48:
+				pieceReg48_out = moved_PieceReg;
+			64'd49:
+				pieceReg49_out = moved_PieceReg;
+			64'd50:
+				pieceReg50_out = moved_PieceReg;
+			64'd51:
+				pieceReg51_out = moved_PieceReg;
+			64'd52:
+				pieceReg52_out = moved_PieceReg;
+			64'd53:
+				pieceReg53_out = moved_PieceReg;
+			64'd54:
+				pieceReg54_out = moved_PieceReg;
+			64'd55:
+				pieceReg55_out = moved_PieceReg;
+			64'd56:
+				pieceReg56_out = moved_PieceReg;
+			64'd57:
+				pieceReg57_out = moved_PieceReg;
+			64'd58:
+				pieceReg58_out = moved_PieceReg;
+			64'd59:
+				pieceReg59_out = moved_PieceReg;
+			64'd60:
+				pieceReg60_out = moved_PieceReg;
+			64'd61:
+				pieceReg61_out = moved_PieceReg;
+			64'd62:
+				pieceReg62_out = moved_PieceReg;
+			64'd63:
+				pieceReg63_out = moved_PieceReg;		
+		end case
+	
+	end
+	
+	if( captured_PieceReg && !castling &&!undo) begin // Normal Capture
+	
+	
+	end
 	
 	
 end
