@@ -2,7 +2,7 @@ module tb_chessBoard();
 
 reg clk;
 reg engineColor;
-reg enable;
+reg [63:0] enable;
 reg clear;
 reg [5:0] pieceReg0;
 reg [5:0] pieceReg1;
@@ -1650,7 +1650,7 @@ parameter EMPTY_PIECE = 6'b00_0000;
 initial begin
 
 clk = 1'b1;
-enable = 1'b1;
+enable = 64'hFFFF_FFFF_FFFF_FFFF;
 clear = 1'b0;
 
 engineColor = WHITE;
@@ -1720,24 +1720,34 @@ pieceReg61 = 6'b000000;
 pieceReg62 = 6'b000000;
 pieceReg63 = 6'b000000;
 
-#200;
+#100;
 //check castling
-$display(" L Move wire (40 bits) for SQUARE 1:");
+$display(" L Move wire (32 bits) for SQUARE 1:");
 	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_move_out1[27:24],L_move_out1[23:18],L_move_out1[17:12],L_move_out1[11:6],L_move_out1[5:0]);
 	
-$display(" R Move wire (40 bits) for SQUARE 5:");
+$display(" R Move wire (32 bits) for SQUARE 5:");
 	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move_out5[27:24],R_move_out5[23:18],R_move_out5[17:12],R_move_out5[11:6],R_move_out5[5:0]);
 	
 	
-$display(" L Move wire (40 bits) for SQUARE 57:");
+$display(" L Move wire (32 bits) for SQUARE 57:");
 	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_move_out57[27:24],L_move_out57[23:18],L_move_out57[17:12],L_move_out57[11:6],L_move_out57[5:0]);
 	
-$display(" R Move wire (40 bits) for SQUARE 61:");
+$display(" R Move wire (32 bits) for SQUARE 61:");
 	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move_out61[27:24],R_move_out61[23:18],R_move_out61[17:12],R_move_out61[11:6],R_move_out61[5:0]);
 	
 	
+	enable[3] = 1'b0;
+	pieceReg3 = {WHITE, BISHOP_PIECE};
+#100;
+
+	$display(" L Move wire (32 bits) for SQUARE 1:");
+	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",L_move_out1[27:24],L_move_out1[23:18],L_move_out1[17:12],L_move_out1[11:6],L_move_out1[5:0]);
 	
-$display(" DL Move wire (40 bits) for SQUARE 14:");
+$display(" R Move wire (32 bits) for SQUARE 5:");
+	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",R_move_out5[27:24],R_move_out5[23:18],R_move_out5[17:12],R_move_out5[11:6],R_move_out5[5:0]);
+	
+	
+$display(" DL Move wire (32 bits) for SQUARE 14:");
 	$display("Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b",DL_move_out14[27:24],DL_move_out14[23:18],DL_move_out14[17:12],DL_move_out14[11:6],DL_move_out14[5:0]);
 	
 	$display(" DL Move wire (32 bits) for SQUARE 21:");
