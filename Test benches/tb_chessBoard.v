@@ -4,6 +4,7 @@ reg clk;
 reg engineColor;
 reg [63:0] enable;
 reg clear;
+reg [3:0] castlingFlags;
 reg [5:0] pieceReg0;
 reg [5:0] pieceReg1;
 reg [5:0] pieceReg2;
@@ -820,7 +821,7 @@ wire [31:0] RRU_move_out6;
 
 
 chessBoard board(
-.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),
+.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear), .castlingFlags(castlingFlags),
 .pieceReg0(pieceReg0),
 .pieceReg1(pieceReg1),
 .pieceReg2(pieceReg2),
@@ -1720,6 +1721,8 @@ pieceReg61 = 6'b000000;
 pieceReg62 = 6'b000000;
 pieceReg63 = 6'b000000;
 
+
+castlingFlags = 4'b1111;
 #100;
 //check castling
 $display(" L Move wire (32 bits) for SQUARE 1:");
