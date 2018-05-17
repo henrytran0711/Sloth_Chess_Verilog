@@ -5,6 +5,7 @@ input clk,
 input engineColor,
 input [63:0] enable,
 input clear,
+input [3:0] castlingFlags,
 input [5:0] pieceReg0,
 input [5:0] pieceReg1,
 input [5:0] pieceReg2,
@@ -371,7 +372,7 @@ output [31:0] U_move_out7,
 output [31:0] R_move_out7,
 output [31:0] UR_move_out7,
 output [31:0] U_move_out1,
-output [31:0] L_move_out1,
+output reg [31:0] L_move_out1,
 output [31:0] R_move_out1,
 output [31:0] UL_move_out1,
 output [31:0] UR_move_out1,
@@ -392,7 +393,7 @@ output [31:0] UL_move_out4,
 output [31:0] UR_move_out4,
 output [31:0] U_move_out5,
 output [31:0] L_move_out5,
-output [31:0] R_move_out5,
+output reg [31:0] R_move_out5,
 output [31:0] UL_move_out5,
 output [31:0] UR_move_out5,
 output [31:0] U_move_out6,
@@ -461,7 +462,7 @@ output [31:0] R_move_out55,
 output [31:0] DR_move_out55,
 output [31:0] UR_move_out55,
 output [31:0] D_move_out57,
-output [31:0] L_move_out57,
+output reg [31:0] L_move_out57,
 output [31:0] R_move_out57,
 output [31:0] DL_move_out57,
 output [31:0] DR_move_out57,
@@ -482,7 +483,7 @@ output [31:0] DL_move_out60,
 output [31:0] DR_move_out60,
 output [31:0] D_move_out61,
 output [31:0] L_move_out61,
-output [31:0] R_move_out61,
+output reg [31:0] R_move_out61,
 output [31:0] DL_move_out61,
 output [31:0] DR_move_out61,
 output [31:0] D_move_out62,
@@ -819,6 +820,12 @@ output [31:0] UUL_move_out6,
 output [31:0] UUR_move_out6,
 output [31:0] RRU_move_out6
 );
+
+	
+wire [31:0] R_move_out61_tmp;
+wire [31:0] L_move_out57_tmp;
+wire [31:0] R_move_out5_tmp;
+wire [31:0] L_move_out1_tmp;
 
 wire [10:0] transmit1_9;
 wire [10:0] transmit17_9;
@@ -1577,6 +1584,13 @@ wire [7:0] transmit48_33;
 wire [7:0] transmit25_8;
 wire [7:0] transmit8_25;
 
+parameter EMPTY_MOVE_OUT = 32'h0000_0000; 
+
+parameter WHITE_KINGS_SIDE = 4'b0001;
+parameter WHITE_QUEENS_SIDE = 4'b0010;
+parameter BLACK_KINGS_SIDE = 4'b0100;
+parameter BLACK_QUEENS_SIDE = 4'b1000;
+
 //Square[0]:
 square Square0(.clk(clk),.engineColor(engineColor),.enable(enable[0]),.clear(clear),.pieceReg(pieceReg0),.posReg(6'd0),.castling(1'b0),.U_in(transmit8_0),.L_in(transmit1_0),.UL_in(transmit9_0),.U_out(transmit0_8),.L_out(transmit0_1),.UL_out(transmit0_9),.U_move_out(U_move_out0),.L_move_out(L_move_out0),
 .UL_move_out(UL_move_out0),
@@ -1584,7 +1598,7 @@ square Square0(.clk(clk),.engineColor(engineColor),.enable(enable[0]),.clear(cle
 .UUL_in(transmit17_0),.LLU_in(transmit10_0),
 .UUL_out(transmit0_17),.LLU_out(transmit0_10) );
 //Square[1]:
-square Square1(.clk(clk),.engineColor(engineColor),.enable(enable[1]),.clear(clear),.pieceReg(pieceReg1),.posReg(6'd1),.castling(1'b1),.U_in(transmit9_1),.L_in(transmit2_1),.R_in(transmit0_1),.UL_in(transmit10_1),.UR_in(transmit8_1),.U_out(transmit1_9),.L_out(transmit1_2),.R_out(transmit1_0),.UL_out(transmit1_10),.UR_out(transmit1_8),.U_move_out(U_move_out1),.L_move_out(L_move_out1),.R_move_out(R_move_out1),
+square Square1(.clk(clk),.engineColor(engineColor),.enable(enable[1]),.clear(clear),.pieceReg(pieceReg1),.posReg(6'd1),.castling(1'b1),.U_in(transmit9_1),.L_in(transmit2_1),.R_in(transmit0_1),.UL_in(transmit10_1),.UR_in(transmit8_1),.U_out(transmit1_9),.L_out(transmit1_2),.R_out(transmit1_0),.UL_out(transmit1_10),.UR_out(transmit1_8),.U_move_out(U_move_out1),.L_move_out(L_move_out1_tmp),.R_move_out(R_move_out1),
 .UL_move_out(UL_move_out1),.UR_move_out(UR_move_out1),
 .UUL_move_out(UUL_move_out1),.UUR_move_out(UUR_move_out1),.LLU_move_out(LLU_move_out1),
 .UUL_in(transmit18_1),.UUR_in(transmit16_1),.LLU_in(transmit11_1),
@@ -1608,7 +1622,7 @@ square Square4(.clk(clk),.engineColor(engineColor),.enable(enable[4]),.clear(cle
 .UUL_in(transmit21_4),.UUR_in(transmit19_4),.LLU_in(transmit14_4),.RRU_in(transmit10_4),
 .UUL_out(transmit4_21),.UUR_out(transmit4_19),.LLU_out(transmit4_14),.RRU_out(transmit4_10) );
 //Square[5]:
-square Square5(.clk(clk),.engineColor(engineColor),.enable(enable[5]),.clear(clear),.pieceReg(pieceReg5),.posReg(6'd5),.castling(1'b1),.U_in(transmit13_5),.L_in(transmit6_5),.R_in(transmit4_5),.UL_in(transmit14_5),.UR_in(transmit12_5),.U_out(transmit5_13),.L_out(transmit5_6),.R_out(transmit5_4),.UL_out(transmit5_14),.UR_out(transmit5_12),.U_move_out(U_move_out5),.L_move_out(L_move_out5),.R_move_out(R_move_out5),
+square Square5(.clk(clk),.engineColor(engineColor),.enable(enable[5]),.clear(clear),.pieceReg(pieceReg5),.posReg(6'd5),.castling(1'b1),.U_in(transmit13_5),.L_in(transmit6_5),.R_in(transmit4_5),.UL_in(transmit14_5),.UR_in(transmit12_5),.U_out(transmit5_13),.L_out(transmit5_6),.R_out(transmit5_4),.UL_out(transmit5_14),.UR_out(transmit5_12),.U_move_out(U_move_out5),.L_move_out(L_move_out5),.R_move_out(R_move_out5_tmp),
 .UL_move_out(UL_move_out5),.UR_move_out(UR_move_out5),
 .UUL_move_out(UUL_move_out5),.UUR_move_out(UUR_move_out5),.LLU_move_out(LLU_move_out5),.RRU_move_out(RRU_move_out5),
 .UUL_in(transmit22_5),.UUR_in(transmit20_5),.LLU_in(transmit15_5),.RRU_in(transmit11_5),
@@ -2213,7 +2227,7 @@ square Square57(.clk(clk),.engineColor(engineColor),.enable(enable[57]),.clear(c
 .DL_in(transmit50_57),.DR_in(transmit48_57),
 .D_out(transmit57_49),.L_out(transmit57_58),.R_out(transmit57_56),
 .DL_out(transmit57_50),.DR_out(transmit57_48),
-.D_move_out(D_move_out57),.L_move_out(L_move_out57),.R_move_out(R_move_out57),.DL_move_out(DL_move_out57),.DR_move_out(DR_move_out57),
+.D_move_out(D_move_out57),.L_move_out(L_move_out57_tmp),.R_move_out(R_move_out57),.DL_move_out(DL_move_out57),.DR_move_out(DR_move_out57),
 .DDL_move_out(DDL_move_out57),.DDR_move_out(DDR_move_out57),.LLD_move_out(LLD_move_out57),
 .DDL_in(transmit42_57),.DDR_in(transmit40_57),.LLD_in(transmit51_57),
 .DDL_out(transmit57_42),.DDR_out(transmit57_40),.LLD_out(transmit57_51) );
@@ -2253,7 +2267,7 @@ square Square61(.clk(clk),.engineColor(engineColor),.enable(enable[61]),.clear(c
 .DL_in(transmit54_61),.DR_in(transmit52_61),
 .D_out(transmit61_53),.L_out(transmit61_62),.R_out(transmit61_60),
 .DL_out(transmit61_54),.DR_out(transmit61_52),
-.D_move_out(D_move_out61),.L_move_out(L_move_out61),.R_move_out(R_move_out61),.DL_move_out(DL_move_out61),.DR_move_out(DR_move_out61),
+.D_move_out(D_move_out61),.L_move_out(L_move_out61),.R_move_out(R_move_out61_tmp),.DL_move_out(DL_move_out61),.DR_move_out(DR_move_out61),
 .DDL_move_out(DDL_move_out61),.DDR_move_out(DDR_move_out61),.LLD_move_out(LLD_move_out61),.RRD_move_out(RRD_move_out61),
 .DDL_in(transmit46_61),.DDR_in(transmit44_61),.LLD_in(transmit55_61),.RRD_in(transmit51_61),
 .DDL_out(transmit61_46),.DDR_out(transmit61_44),.LLD_out(transmit61_55),.RRD_out(transmit61_51) );
@@ -2273,4 +2287,29 @@ square Square63(.clk(clk),.engineColor(engineColor),.enable(enable[63]),.clear(c
 .D_out(transmit63_55),.R_out(transmit63_62),.DR_out(transmit63_54),
 .D_move_out(D_move_out63),.R_move_out(R_move_out63),.DR_move_out(DR_move_out63),.DDR_move_out(DDR_move_out63),.RRD_move_out(RRD_move_out63),.DDR_in(transmit46_63),.RRD_in(transmit53_63),.DDR_out(transmit63_46),.RRD_out(transmit63_53) );
 
+
+
+
+//check for illegal castlings based on flags
+always @(*) begin
+
+L_move_out1 = L_move_out1_tmp;
+R_move_out5 = R_move_out5_tmp;
+L_move_out57 = L_move_out57_tmp;
+R_move_out61 = R_move_out61_tmp;
+
+if (castlingFlags[0] == 1'b0 && L_move_out1_tmp[27:24] == WHITE_KINGS_SIDE)
+	L_move_out1 = EMPTY_MOVE_OUT;
+	
+if (castlingFlags[1] == 1'b0 && R_move_out5_tmp[27:24] == WHITE_QUEENS_SIDE)
+	R_move_out5 = EMPTY_MOVE_OUT;
+	
+if (castlingFlags[2] == 1'b0 && L_move_out57_tmp[27:24] == BLACK_KINGS_SIDE)
+	L_move_out57 = EMPTY_MOVE_OUT;
+	
+if (castlingFlags[3] == 1'b0 && R_move_out61_tmp[27:24] == BLACK_QUEENS_SIDE)
+	R_move_out61 = EMPTY_MOVE_OUT;
+end
+		
+	
 endmodule
