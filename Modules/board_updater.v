@@ -2,9 +2,10 @@ module board_updater(
 								
 //CLOCK
 input clk,
-input engineColor,
+input color_type,
 input enable,
 input clear,
+input init,
 
 
 input [63:0] initialPosition,
@@ -113,38 +114,43 @@ transceiver Transceiver1(
 );
 */
  always @ (posedge clk) begin
+ if (init)	begin // Initialize all bit reges
+	
+	end
+else if (!init)	begin //Update board state
+	
 	case(movingPiece)
 		6'b000000: //Never happen, dont care
 			moved_PieceReg = {6'b000000};
 		6'b000001:// Pawn
-			moved_PieceReg = {engineColor,PAWN};
+			moved_PieceReg = {color_type,PAWN};
 		6'b000010:// Rook
-			moved_PieceReg = {engineColor,ROOK};
+			moved_PieceReg = {color_type,ROOK};
 		6'b000100:// Knight
-			moved_PieceReg = {engineColor,KNIGHT};
+			moved_PieceReg = {color_type,KNIGHT};
 		6'b001000:// Bishop
-			moved_PieceReg = {engineColor,BISHOP};		
+			moved_PieceReg = {color_type,BISHOP};		
 		6'b010000:// Queen
-			moved_PieceReg = {engineColor,QUEEN};	
+			moved_PieceReg = {color_type,QUEEN};	
 		6'b100000:// King
-			moved_PieceReg = {engineColor,KING};			
+			moved_PieceReg = {color_type,KING};			
 	endcase
 	
 	case(capturedPiece)
 		6'b000000: //Quiet
 			captured_PieceReg = {6'b000000};
 		6'b000001:// Pawn
-			captured_PieceReg = {!engineColor,PAWN};
+			captured_PieceReg = {!color_type,PAWN};
 		6'b000010:// Rook
-			captured_PieceReg = {!engineColor,ROOK};
+			captured_PieceReg = {!color_type,ROOK};
 		6'b000100:// Knight
-			captured_PieceReg = {!engineColor,KNIGHT};
+			captured_PieceReg = {!color_type,KNIGHT};
 		6'b001000:// Bishop
-			captured_PieceReg = {!engineColor,BISHOP};	
+			captured_PieceReg = {!color_type,BISHOP};	
 		6'b010000:// Queen
-			captured_PieceReg = {!engineColor,QUEEN};	
+			captured_PieceReg = {!color_type,QUEEN};	
 		6'b100000:// King
-			captured_PieceReg = {!engineColor,KING};				
+			captured_PieceReg = {!color_type,KING};				
 	endcase
 	
 	enable_out = initialPosition & movedPosition;
@@ -218,134 +224,133 @@ transceiver Transceiver1(
 		//care about the initial position
 	
 		case (movedPosition)
-			64'd1:
-				pieceReg0_out = moved_PieceReg;
-			64'd2:
-				pieceReg1_out = moved_PieceReg;
-			64'd4:
-				pieceReg2_out = moved_PieceReg;
-			64'd8:
-				pieceReg3_out = moved_PieceReg;
-			64'd16:
-				pieceReg4_out = moved_PieceReg;
-			64'd32:
-				pieceReg5_out = moved_PieceReg;
-			64'd64:
-				pieceReg6_out = moved_PieceReg;
-			64'd128:
-				pieceReg7_out = moved_PieceReg;
-			64'd256:
-				pieceReg8_out = moved_PieceReg;
-			64'd512:
-				pieceReg9_out = moved_PieceReg;
-			64'd1024:
-				pieceReg10_out = moved_PieceReg;
-			64'd2048:
-				pieceReg11_out = moved_PieceReg;
-			64'd12:
-				pieceReg12_out = moved_PieceReg;
-			64'd13:
-				pieceReg13_out = moved_PieceReg;
-			64'd14:
-				pieceReg14_out = moved_PieceReg;
-			64'd15:
-				pieceReg15_out = moved_PieceReg;
-			64'd16:
-				pieceReg16_out = moved_PieceReg;
-			64'd17:
-				pieceReg17_out = moved_PieceReg;
-			64'd18:
-				pieceReg18_out = moved_PieceReg;
-			64'd19:
-				pieceReg19_out = moved_PieceReg;
-			64'd20:
-				pieceReg20_out = moved_PieceReg;
-			64'd21:
-				pieceReg21_out = moved_PieceReg;
-			64'd22:
-				pieceReg22_out = moved_PieceReg;
-			64'd23:
-				pieceReg23_out = moved_PieceReg;
-			64'd24:
-				pieceReg24_out = moved_PieceReg;
-			64'd25:
-				pieceReg25_out = moved_PieceReg;
-			64'd26:
-				pieceReg26_out = moved_PieceReg;
-			64'd27:
-				pieceReg27_out = moved_PieceReg;
-			64'd28:
-				pieceReg28_out = moved_PieceReg;
-			64'd29:
-				pieceReg29_out = moved_PieceReg;
-			64'd30:
-				pieceReg30_out = moved_PieceReg;
-			64'd31:
-				pieceReg31_out = moved_PieceReg;
-			64'd32:
-				pieceReg32_out = moved_PieceReg;
-			64'd33:
-				pieceReg33_out = moved_PieceReg;
-			64'd34:
-				pieceReg34_out = moved_PieceReg;
-			64'd35:
-				pieceReg35_out = moved_PieceReg;
-			64'd36:
-				pieceReg36_out = moved_PieceReg;
-			64'd37:
-				pieceReg37_out = moved_PieceReg;
-			64'd38:
-				pieceReg38_out = moved_PieceReg;
-			64'd39:
-				pieceReg39_out = moved_PieceReg;
-			64'd40:
-				pieceReg40_out = moved_PieceReg;
-			64'd41:
-				pieceReg41_out = moved_PieceReg;
-			64'd42:
-				pieceReg42_out = moved_PieceReg;
-			64'd43:
-				pieceReg43_out = moved_PieceReg;
-			64'd44:
-				pieceReg44_out = moved_PieceReg;
-			64'd45:
-				pieceReg45_out = moved_PieceReg;
-			64'd46:
-				pieceReg46_out = moved_PieceReg;
-			64'd47:
-				pieceReg47_out = moved_PieceReg;
-			64'd48:
-				pieceReg48_out = moved_PieceReg;
-			64'd49:
-				pieceReg49_out = moved_PieceReg;
-			64'd50:
-				pieceReg50_out = moved_PieceReg;
-			64'd51:
-				pieceReg51_out = moved_PieceReg;
-			64'd52:
-				pieceReg52_out = moved_PieceReg;
-			64'd53:
-				pieceReg53_out = moved_PieceReg;
-			64'd54:
-				pieceReg54_out = moved_PieceReg;
-			64'd55:
-				pieceReg55_out = moved_PieceReg;
-			64'd56:
-				pieceReg56_out = moved_PieceReg;
-			64'd57:
-				pieceReg57_out = moved_PieceReg;
-			64'd58:
-				pieceReg58_out = moved_PieceReg;
-			64'd59:
-				pieceReg59_out = moved_PieceReg;
-			64'd60:
-				pieceReg60_out = moved_PieceReg;
-			64'd61:
-				pieceReg61_out = moved_PieceReg;
-			64'd62:
-				pieceReg62_out = moved_PieceReg;
-			64'd63:
-				pieceReg63_out = moved_PieceReg;		
+		64'd1 :
+			pieceReg0_out = moved_PieceReg;
+		64'd2 :
+			pieceReg1_out = moved_PieceReg;
+		64'd4 :
+			pieceReg2_out = moved_PieceReg;
+		64'd8 :
+			pieceReg3_out = moved_PieceReg;
+		64'd16 :
+			pieceReg4_out = moved_PieceReg;
+		64'd32 :
+			pieceReg5_out = moved_PieceReg;
+		64'd64 :
+			pieceReg6_out = moved_PieceReg;
+		64'd128 :
+			pieceReg7_out = moved_PieceReg;
+		64'd256 :
+			pieceReg8_out = moved_PieceReg;
+		64'd512 :
+			pieceReg9_out = moved_PieceReg;
+		64'd1024 :
+			pieceReg10_out = moved_PieceReg;
+		64'd2048 :
+			pieceReg11_out = moved_PieceReg;
+		64'd4096 :
+			pieceReg12_out = moved_PieceReg;
+		64'd8192 :
+			pieceReg13_out = moved_PieceReg;
+		64'd16384 :
+			pieceReg14_out = moved_PieceReg;
+		64'd32768 :
+			pieceReg15_out = moved_PieceReg;
+		64'd65536 :
+			pieceReg16_out = moved_PieceReg;
+		64'd131072 :
+			pieceReg17_out = moved_PieceReg;
+		64'd262144 :
+			pieceReg18_out = moved_PieceReg;
+		64'd524288 :
+			pieceReg19_out = moved_PieceReg;
+		64'd1048576 :
+			pieceReg20_out = moved_PieceReg;
+		64'd2097152 :
+			pieceReg21_out = moved_PieceReg;
+		64'd4194304 :
+			pieceReg22_out = moved_PieceReg;
+		64'd8388608 :
+			pieceReg23_out = moved_PieceReg;
+		64'd16777216 :
+			pieceReg24_out = moved_PieceReg;
+		64'd33554432 :
+			pieceReg25_out = moved_PieceReg;
+		64'd67108864 :
+			pieceReg26_out = moved_PieceReg;
+		64'd134217728 :
+			pieceReg27_out = moved_PieceReg;
+		64'd268435456 :
+			pieceReg28_out = moved_PieceReg;
+		64'd536870912 :
+			pieceReg29_out = moved_PieceReg;
+		64'd1073741824 :
+			pieceReg30_out = moved_PieceReg;
+		64'd2147483648 :
+			pieceReg31_out = moved_PieceReg;
+		64'd4294967296 :
+			pieceReg32_out = moved_PieceReg;
+		64'd8589934592 :
+			pieceReg33_out = moved_PieceReg;
+		64'd17179869184 :
+			pieceReg34_out = moved_PieceReg;
+		64'd34359738368 :
+			pieceReg35_out = moved_PieceReg;
+		64'd68719476736 :
+			pieceReg36_out = moved_PieceReg;
+		64'd137438953472 :
+			pieceReg37_out = moved_PieceReg;
+		64'd274877906944 :
+			pieceReg38_out = moved_PieceReg;
+		64'd549755813888 :
+			pieceReg39_out = moved_PieceReg;
+		64'd1099511627776 :
+			pieceReg40_out = moved_PieceReg;
+		64'd2199023255552 :
+			pieceReg41_out = moved_PieceReg;
+		64'd4398046511104 :
+			pieceReg42_out = moved_PieceReg;
+		64'd8796093022208 :
+			pieceReg43_out = moved_PieceReg;
+		64'd17592186044416 :
+			pieceReg44_out = moved_PieceReg;
+		64'd35184372088832 :
+			pieceReg45_out = moved_PieceReg;
+		64'd70368744177664 :
+			pieceReg46_out = moved_PieceReg;
+		64'd140737488355328 :
+			pieceReg47_out = moved_PieceReg;
+		64'd281474976710656 :
+			pieceReg48_out = moved_PieceReg;
+		64'd562949953421312 :
+			pieceReg49_out = moved_PieceReg;
+		64'd1125899906842624 :
+			pieceReg50_out = moved_PieceReg;
+		64'd2251799813685248 :
+			pieceReg51_out = moved_PieceReg;
+		64'd4503599627370496 :
+			pieceReg52_out = moved_PieceReg;
+		64'd9007199254740992 :
+			pieceReg53_out = moved_PieceReg;
+		64'd18014398509481984 :
+			pieceReg54_out = moved_PieceReg;
+		64'd36028797018963968 :
+			pieceReg55_out = moved_PieceReg;
+		64'd72057594037927936 :
+			pieceReg56_out = moved_PieceReg;
+		64'd144115188075855872 :
+			pieceReg57_out = moved_PieceReg;
+		64'd288230376151711744 :
+			pieceReg58_out = moved_PieceReg;
+		64'd576460752303423488 :
+			pieceReg59_out = moved_PieceReg;
+		64'd1152921504606846976 :
+			pieceReg60_out = moved_PieceReg;
+		64'd2305843009213693952 :
+			pieceReg61_out = moved_PieceReg;
+		64'd4611686018427387904 :
+			pieceReg62_out = moved_PieceReg;
+		
 		end case
 	
 	end
@@ -355,6 +360,6 @@ transceiver Transceiver1(
 	
 	end
 	
-	
+end
 end
 endmodule
