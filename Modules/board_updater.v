@@ -502,10 +502,152 @@ else if (!init)	begin //Update board state
 	end //End non-promotion quiet
 	end// End forward quiet
 	
-	if( captured_PieceReg && !castling &&!undo) begin // Normal Capture
+	if( captured_PieceReg && !castling &&!undo) begin // Capture Forward
 	
+		if (moved_PieceReg == {color_type,PAWN} 
+		&&( ( color_type == 1'b1 && (movedPosition & 64'hff00000000000000) ) || //If White Pawn
+		 ( color_type == 1'b0 && (movedPosition & 64'h00000000000000ff) ) //If black pawn
+		 )) begin// If Queen Promotion Capture
+	//Don't care about inital position Piece_Reg (Gets set to 0)
+		case (movedPosition)// Moved position Piece Reg gets set to Queen
+		64'd1 :
+			pieceReg0_out = {color_type,QUEEN};
+		64'd2 :
+			pieceReg1_out = {color_type,QUEEN};
+		64'd4 :
+			pieceReg2_out = {color_type,QUEEN};
+		64'd8 :
+			pieceReg3_out = {color_type,QUEEN};
+		64'd16 :
+			pieceReg4_out = {color_type,QUEEN};
+		64'd32 :
+			pieceReg5_out = {color_type,QUEEN};
+		64'd64 :
+			pieceReg6_out = {color_type,QUEEN};
+		64'd128 :
+			pieceReg7_out = {color_type,QUEEN};
+		64'd256 :
+			pieceReg8_out = {color_type,QUEEN};
+		64'd512 :
+			pieceReg9_out = {color_type,QUEEN};
+		64'd1024 :
+			pieceReg10_out = {color_type,QUEEN};
+		64'd2048 :
+			pieceReg11_out = {color_type,QUEEN};
+		64'd4096 :
+			pieceReg12_out = {color_type,QUEEN};
+		64'd8192 :
+			pieceReg13_out = {color_type,QUEEN};
+		64'd16384 :
+			pieceReg14_out = {color_type,QUEEN};
+		64'd32768 :
+			pieceReg15_out = {color_type,QUEEN};
+		64'd65536 :
+			pieceReg16_out = {color_type,QUEEN};
+		64'd131072 :
+			pieceReg17_out = {color_type,QUEEN};
+		64'd262144 :
+			pieceReg18_out = {color_type,QUEEN};
+		64'd524288 :
+			pieceReg19_out = {color_type,QUEEN};
+		64'd1048576 :
+			pieceReg20_out = {color_type,QUEEN};
+		64'd2097152 :
+			pieceReg21_out = {color_type,QUEEN};
+		64'd4194304 :
+			pieceReg22_out = {color_type,QUEEN};
+		64'd8388608 :
+			pieceReg23_out = {color_type,QUEEN};
+		64'd16777216 :
+			pieceReg24_out = {color_type,QUEEN};
+		64'd33554432 :
+			pieceReg25_out = {color_type,QUEEN};
+		64'd67108864 :
+			pieceReg26_out = {color_type,QUEEN};
+		64'd134217728 :
+			pieceReg27_out = {color_type,QUEEN};
+		64'd268435456 :
+			pieceReg28_out = {color_type,QUEEN};
+		64'd536870912 :
+			pieceReg29_out = {color_type,QUEEN};
+		64'd1073741824 :
+			pieceReg30_out = {color_type,QUEEN};
+		64'd2147483648 :
+			pieceReg31_out = {color_type,QUEEN};
+		64'd4294967296 :
+			pieceReg32_out = {color_type,QUEEN};
+		64'd8589934592 :
+			pieceReg33_out = {color_type,QUEEN};
+		64'd17179869184 :
+			pieceReg34_out = {color_type,QUEEN};
+		64'd34359738368 :
+			pieceReg35_out = {color_type,QUEEN};
+		64'd68719476736 :
+			pieceReg36_out = {color_type,QUEEN};
+		64'd137438953472 :
+			pieceReg37_out = {color_type,QUEEN};
+		64'd274877906944 :
+			pieceReg38_out = {color_type,QUEEN};
+		64'd549755813888 :
+			pieceReg39_out = {color_type,QUEEN};
+		64'd1099511627776 :
+			pieceReg40_out = {color_type,QUEEN};
+		64'd2199023255552 :
+			pieceReg41_out = {color_type,QUEEN};
+		64'd4398046511104 :
+			pieceReg42_out = {color_type,QUEEN};
+		64'd8796093022208 :
+			pieceReg43_out = {color_type,QUEEN};
+		64'd17592186044416 :
+			pieceReg44_out = {color_type,QUEEN};
+		64'd35184372088832 :
+			pieceReg45_out = {color_type,QUEEN};
+		64'd70368744177664 :
+			pieceReg46_out = {color_type,QUEEN};
+		64'd140737488355328 :
+			pieceReg47_out = {color_type,QUEEN};
+		64'd281474976710656 :
+			pieceReg48_out = {color_type,QUEEN};
+		64'd562949953421312 :
+			pieceReg49_out = {color_type,QUEEN};
+		64'd1125899906842624 :
+			pieceReg50_out = {color_type,QUEEN};
+		64'd2251799813685248 :
+			pieceReg51_out = {color_type,QUEEN};
+		64'd4503599627370496 :
+			pieceReg52_out = {color_type,QUEEN};
+		64'd9007199254740992 :
+			pieceReg53_out = {color_type,QUEEN};
+		64'd18014398509481984 :
+			pieceReg54_out = {color_type,QUEEN};
+		64'd36028797018963968 :
+			pieceReg55_out = {color_type,QUEEN};
+		64'd72057594037927936 :
+			pieceReg56_out = {color_type,QUEEN};
+		64'd144115188075855872 :
+			pieceReg57_out = {color_type,QUEEN};
+		64'd288230376151711744 :
+			pieceReg58_out = {color_type,QUEEN};
+		64'd576460752303423488 :
+			pieceReg59_out = {color_type,QUEEN};
+		64'd1152921504606846976 :
+			pieceReg60_out = {color_type,QUEEN};
+		64'd2305843009213693952 :
+			pieceReg61_out = {color_type,QUEEN};
+		64'd4611686018427387904 :
+			pieceReg62_out = {color_type,QUEEN};
+		64'd9223372036854775808:
+			pieceReg63_out = {color_type,QUEEN};	
+		
+		endcase
+
+		end
+	
+	
+	else begin // Not Pawn Promotion capture
 	//Forward capture, don't care about initial position
 	//that gets set to 0
+		 
 		case (movedPosition)
 		64'd1 :
 			pieceReg0_out = moved_PieceReg;
@@ -639,8 +781,9 @@ else if (!init)	begin //Update board state
 		endcase
 	
 	end
-
-if( !captured_PieceReg && !castling && undo) begin // Undo Quiet
+end
+	
+	if( !captured_PieceReg && !castling && undo) begin // Undo Quiet
 	
 	//Undo Quiet
 	//initial Square gets moved Piece reg
@@ -778,7 +921,7 @@ if( !captured_PieceReg && !castling && undo) begin // Undo Quiet
 	
 	end 
 
-if( captured_PieceReg && !castling && undo) begin // Undo Capture
+	if( captured_PieceReg && !castling && undo) begin // Undo Capture
 	
 	//Undo capture
 	//initial Square gets moved_Piece_reg
