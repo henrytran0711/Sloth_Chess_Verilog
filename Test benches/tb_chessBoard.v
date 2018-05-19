@@ -818,7 +818,14 @@ wire [31:0] LLU_move_out1;
 wire [31:0] UUL_move_out6;
 wire [31:0] UUR_move_out6;
 wire [31:0] RRU_move_out6;
-
+wire [31:0] UUR_move_out17;
+wire [31:0] DDR_move_out17;
+wire [31:0] UUR_move_out25;
+wire [31:0] DDR_move_out25;
+wire [31:0] UUR_move_out33;
+wire [31:0] DDR_move_out33;
+wire [31:0] UUR_move_out41;
+wire [31:0] DDR_move_out41;
 
 chessBoard board(
 .clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear), .castlingFlags(castlingFlags),
@@ -1633,7 +1640,16 @@ chessBoard board(
 .LLU_move_out1(LLU_move_out1),
 .UUL_move_out6(UUL_move_out6),
 .UUR_move_out6(UUR_move_out6),
-.RRU_move_out6(RRU_move_out6)
+.RRU_move_out6(RRU_move_out6),
+.UUR_move_out17(UUR_move_out17),
+.DDR_move_out17(DDR_move_out17),
+.UUR_move_out25(UUR_move_out25),
+.DDR_move_out25(DDR_move_out25),
+.UUR_move_out33(UUR_move_out33),
+.DDR_move_out33(DDR_move_out33),
+.UUR_move_out41(UUR_move_out41),
+.DDR_move_out41(DDR_move_out41)
+
 );
 
 integer f0;

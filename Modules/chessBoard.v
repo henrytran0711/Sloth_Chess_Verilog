@@ -818,7 +818,15 @@ output [31:0] UUR_move_out1,
 output [31:0] LLU_move_out1,
 output [31:0] UUL_move_out6,
 output [31:0] UUR_move_out6,
-output [31:0] RRU_move_out6
+output [31:0] RRU_move_out6,
+output [31:0] UUR_move_out17,
+output [31:0] DDR_move_out17,
+output [31:0] UUR_move_out25,
+output [31:0] DDR_move_out25,
+output [31:0] UUR_move_out33,
+output [31:0] DDR_move_out33,
+output [31:0] UUR_move_out41,
+output [31:0] DDR_move_out41
 );
 
 	
