@@ -58,7 +58,9 @@ self << i;
 converted_self = self.str();
 
 general_dir[i].append(converted_self);
-general_dir[i].append("(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg");
+general_dir[i].append("(.clk(clk),.engineColor(engineColor),.enable(enable[");
+general_dir[i].append(converted_self);
+general_dir[i].append("]),.clear(clear),.pieceReg(pieceReg");
 general_dir[i].append(converted_self);
 general_dir[i].append("),.posReg(6'd");
 general_dir[i].append(converted_self);
