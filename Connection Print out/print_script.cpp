@@ -2618,7 +2618,7 @@ int main()
  /////////////////Group 1 East Knight Directions ://///////////////////////
 
 move_knight_UUL_out = 1;
-	 move_knight_UUR_out = 0;
+	 move_knight_UUR_out = 1;
 	 move_knight_LLU_out = 1;
 	 move_knight_RRU_out = 0;
 	 move_knight_DDL_out = 1;
@@ -2627,7 +2627,7 @@ move_knight_UUL_out = 1;
 	 move_knight_RRD_out = 0;
 
 	knight_UUL_out = 1;
-	knight_UUR_out = 0;
+	knight_UUR_out = 1;
 	knight_LLU_out = 1;
 	knight_RRU_out = 0;
 	knight_DDL_out = 1;
@@ -2636,7 +2636,7 @@ move_knight_UUL_out = 1;
 	 knight_RRD_out = 0;
 
 	 knight_UUL_in = 1;
-	knight_UUR_in = 0;
+	knight_UUR_in = 1;
 	knight_LLU_in = 1;
 	knight_RRU_in = 0;
 	knight_DDL_in = 1;

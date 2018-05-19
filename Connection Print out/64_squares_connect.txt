@@ -467,38 +467,46 @@ wire [7:0] transmit53_36;
 wire [7:0] transmit53_47;
 wire [7:0] transmit53_43;
 wire [7:0] transmit34_17;
+wire [7:0] transmit32_17;
 wire [7:0] transmit27_17;
 wire [7:0] transmit2_17;
 wire [7:0] transmit0_17;
 wire [7:0] transmit11_17;
 wire [7:0] transmit17_34;
+wire [7:0] transmit17_32;
 wire [7:0] transmit17_27;
 wire [7:0] transmit17_2;
 wire [7:0] transmit17_0;
 wire [7:0] transmit17_11;
 wire [7:0] transmit42_25;
+wire [7:0] transmit40_25;
 wire [7:0] transmit35_25;
 wire [7:0] transmit10_25;
 wire [7:0] transmit8_25;
 wire [7:0] transmit19_25;
 wire [7:0] transmit25_42;
+wire [7:0] transmit25_40;
 wire [7:0] transmit25_35;
 wire [7:0] transmit25_10;
 wire [7:0] transmit25_8;
 wire [7:0] transmit25_19;
+wire [7:0] transmit48_33;
 wire [7:0] transmit43_33;
 wire [7:0] transmit18_33;
 wire [7:0] transmit16_33;
 wire [7:0] transmit27_33;
+wire [7:0] transmit33_48;
 wire [7:0] transmit33_43;
 wire [7:0] transmit33_18;
 wire [7:0] transmit33_16;
 wire [7:0] transmit33_27;
 wire [7:0] transmit58_41;
+wire [7:0] transmit56_41;
 wire [7:0] transmit26_41;
 wire [7:0] transmit24_41;
 wire [7:0] transmit35_41;
 wire [7:0] transmit41_58;
+wire [7:0] transmit41_56;
 wire [7:0] transmit41_26;
 wire [7:0] transmit41_24;
 wire [7:0] transmit41_35;
@@ -722,8 +730,6 @@ wire [7:0] transmit55_45;
 wire [7:0] transmit45_62;
 wire [7:0] transmit45_60;
 wire [7:0] transmit45_55;
-wire [7:0] transmit41_56;
-wire [7:0] transmit56_41;
 wire [7:0] transmit8_2;
 wire [7:0] transmit2_8;
 wire [7:0] transmit9_3;
@@ -737,13 +743,9 @@ wire [7:0] transmit16_1;
 wire [7:0] transmit9_24;
 wire [7:0] transmit24_9;
 wire [7:0] transmit49_32;
-wire [7:0] transmit17_32;
 wire [7:0] transmit32_49;
-wire [7:0] transmit32_17;
 wire [7:0] transmit57_40;
-wire [7:0] transmit25_40;
 wire [7:0] transmit40_57;
-wire [7:0] transmit40_25;
 wire [7:0] transmit48_58;
 wire [7:0] transmit58_48;
 wire [7:0] transmit49_59;
@@ -752,8 +754,6 @@ wire [7:0] transmit54_60;
 wire [7:0] transmit60_54;
 wire [7:0] transmit55_61;
 wire [7:0] transmit61_55;
-wire [7:0] transmit33_48;
-wire [7:0] transmit48_33;
 output [31:0] D_move_out9,
 output [31:0] U_move_out9,
 output [31:0] L_move_out9,
@@ -1199,21 +1199,25 @@ output [31:0] DDR_move_out53,
 output [31:0] LLD_move_out53,
 output [31:0] RRD_move_out53,
 output [31:0] UUL_move_out17,
+output [31:0] UUR_move_out17,
 output [31:0] LLU_move_out17,
 output [31:0] DDL_move_out17,
 output [31:0] DDR_move_out17,
 output [31:0] LLD_move_out17,
 output [31:0] UUL_move_out25,
+output [31:0] UUR_move_out25,
 output [31:0] LLU_move_out25,
 output [31:0] DDL_move_out25,
 output [31:0] DDR_move_out25,
 output [31:0] LLD_move_out25,
 output [31:0] UUL_move_out33,
+output [31:0] UUR_move_out33,
 output [31:0] LLU_move_out33,
 output [31:0] DDL_move_out33,
 output [31:0] DDR_move_out33,
 output [31:0] LLD_move_out33,
 output [31:0] UUL_move_out41,
+output [31:0] UUR_move_out41,
 output [31:0] LLU_move_out41,
 output [31:0] DDL_move_out41,
 output [31:0] DDR_move_out41,
@@ -1718,11 +1722,11 @@ square Square17(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear
 .DL_out(transmit17_10),.DR_out(transmit17_8),.UL_out(transmit17_26),.UR_out(transmit17_24),
 .D_move_out(D_move_out17),.U_move_out(U_move_out17),.L_move_out(L_move_out17),.R_move_out(R_move_out17),.DL_move_out(DL_move_out17),.DR_move_out(DR_move_out17),
 .UL_move_out(UL_move_out17),.UR_move_out(UR_move_out17),
-.UUL_move_out(UUL_move_out17),.LLU_move_out(LLU_move_out17),
+.UUL_move_out(UUL_move_out17),.UUR_move_out(UUR_move_out17),.LLU_move_out(LLU_move_out17),
 .DDL_move_out(DDL_move_out17),.DDR_move_out(DDR_move_out17),.LLD_move_out(LLD_move_out17),
-.UUL_in(transmit34_17),.LLU_in(transmit27_17),
+.UUL_in(transmit34_17),.UUR_in(transmit32_17),.LLU_in(transmit27_17),
 .DDL_in(transmit2_17),.DDR_in(transmit0_17),.LLD_in(transmit11_17),
-.UUL_out(transmit17_34),.LLU_out(transmit17_27),
+.UUL_out(transmit17_34),.UUR_out(transmit17_32),.LLU_out(transmit17_27),
 .DDL_out(transmit17_2),.DDR_out(transmit17_0),.LLD_out(transmit17_11) );
 //Square[18]:
 square Square18(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg18),.posReg(6'd18),
@@ -1821,11 +1825,11 @@ square Square25(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear
 .DL_out(transmit25_18),.DR_out(transmit25_16),.UL_out(transmit25_34),.UR_out(transmit25_32),
 .D_move_out(D_move_out25),.U_move_out(U_move_out25),.L_move_out(L_move_out25),.R_move_out(R_move_out25),.DL_move_out(DL_move_out25),.DR_move_out(DR_move_out25),
 .UL_move_out(UL_move_out25),.UR_move_out(UR_move_out25),
-.UUL_move_out(UUL_move_out25),.LLU_move_out(LLU_move_out25),
+.UUL_move_out(UUL_move_out25),.UUR_move_out(UUR_move_out25),.LLU_move_out(LLU_move_out25),
 .DDL_move_out(DDL_move_out25),.DDR_move_out(DDR_move_out25),.LLD_move_out(LLD_move_out25),
-.UUL_in(transmit42_25),.LLU_in(transmit35_25),
+.UUL_in(transmit42_25),.UUR_in(transmit40_25),.LLU_in(transmit35_25),
 .DDL_in(transmit10_25),.DDR_in(transmit8_25),.LLD_in(transmit19_25),
-.UUL_out(transmit25_42),.LLU_out(transmit25_35),
+.UUL_out(transmit25_42),.UUR_out(transmit25_40),.LLU_out(transmit25_35),
 .DDL_out(transmit25_10),.DDR_out(transmit25_8),.LLD_out(transmit25_19) );
 //Square[26]:
 square Square26(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg26),.posReg(6'd26),
@@ -1924,11 +1928,11 @@ square Square33(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear
 .DL_out(transmit33_26),.DR_out(transmit33_24),.UL_out(transmit33_42),.UR_out(transmit33_40),
 .D_move_out(D_move_out33),.U_move_out(U_move_out33),.L_move_out(L_move_out33),.R_move_out(R_move_out33),.DL_move_out(DL_move_out33),.DR_move_out(DR_move_out33),
 .UL_move_out(UL_move_out33),.UR_move_out(UR_move_out33),
-.UUL_move_out(UUL_move_out33),.LLU_move_out(LLU_move_out33),
+.UUL_move_out(UUL_move_out33),.UUR_move_out(UUR_move_out33),.LLU_move_out(LLU_move_out33),
 .DDL_move_out(DDL_move_out33),.DDR_move_out(DDR_move_out33),.LLD_move_out(LLD_move_out33),
-.UUL_in(transmit50_33),.LLU_in(transmit43_33),
+.UUL_in(transmit50_33),.UUR_in(transmit48_33),.LLU_in(transmit43_33),
 .DDL_in(transmit18_33),.DDR_in(transmit16_33),.LLD_in(transmit27_33),
-.UUL_out(transmit33_50),.LLU_out(transmit33_43),
+.UUL_out(transmit33_50),.UUR_out(transmit33_48),.LLU_out(transmit33_43),
 .DDL_out(transmit33_18),.DDR_out(transmit33_16),.LLD_out(transmit33_27) );
 //Square[34]:
 square Square34(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg34),.posReg(6'd34),
@@ -2027,11 +2031,11 @@ square Square41(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear
 .DL_out(transmit41_34),.DR_out(transmit41_32),.UL_out(transmit41_50),.UR_out(transmit41_48),
 .D_move_out(D_move_out41),.U_move_out(U_move_out41),.L_move_out(L_move_out41),.R_move_out(R_move_out41),.DL_move_out(DL_move_out41),.DR_move_out(DR_move_out41),
 .UL_move_out(UL_move_out41),.UR_move_out(UR_move_out41),
-.UUL_move_out(UUL_move_out41),.LLU_move_out(LLU_move_out41),
+.UUL_move_out(UUL_move_out41),.UUR_move_out(UUR_move_out41),.LLU_move_out(LLU_move_out41),
 .DDL_move_out(DDL_move_out41),.DDR_move_out(DDR_move_out41),.LLD_move_out(LLD_move_out41),
-.UUL_in(transmit58_41),.LLU_in(transmit51_41),
+.UUL_in(transmit58_41),.UUR_in(transmit56_41),.LLU_in(transmit51_41),
 .DDL_in(transmit26_41),.DDR_in(transmit24_41),.LLD_in(transmit35_41),
-.UUL_out(transmit41_58),.LLU_out(transmit41_51),
+.UUL_out(transmit41_58),.UUR_out(transmit41_56),.LLU_out(transmit41_51),
 .DDL_out(transmit41_26),.DDR_out(transmit41_24),.LLD_out(transmit41_35) );
 //Square[42]:
 square Square42(.clk(clk),.engineColor(engineColor),.enable(enable),.clear(clear),.pieceReg(pieceReg42),.posReg(6'd42),
