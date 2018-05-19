@@ -12,6 +12,8 @@ int knight_wire_counter = 0;
 int move_counter = 0;
 int i = 0;
 string general_dir[SQUARES];
+string TB_general_dir[SQUARES];
+string TB_knight_dir[SQUARES];
 string knight_dir[SQUARES];
 string wire[SIZE];
 string knight_wire[SIZE];
@@ -46,9 +48,9 @@ string chessboard;
 	}
 	chessboard.append("\n);");
 	myfile << chessboard;
-	
-	
-	
+
+
+
  }
 void print_setup (int i){
 general_dir[i].append("square Square");
@@ -62,6 +64,135 @@ general_dir[i].append("),.posReg(6'd");
 general_dir[i].append(converted_self);
 }
 
+///////TB///////////
+//Want:
+
+
+void print_TB_general_direction (int i,int Down_in,int Up_in, int Left_in, int Right_in,
+int Down_left_in, int Down_right_in, int Up_left_in,int Up_right_in){
+
+int TB_concat_general_dir[8] = {Down_in,Up_in,Left_in,Right_in,
+Down_left_in,Down_right_in,Up_left_in,Up_right_in};
+
+const string GENERAL_DIR[8] = {"D","U","L","R","DL","DR","UL","UR"} ;
+self << i;
+converted_self = self.str();
+self.str("");
+
+
+	for(int j = 0; j < 8; j++){
+		if(TB_concat_general_dir[j] != 0){
+			TB_general_dir[i].append("$fwrite(f");
+			
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append(",\"");
+			TB_general_dir[i].append(GENERAL_DIR[j]);
+			TB_general_dir[i].append(": Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b Piece Reg:%b\\n\" ");
+			TB_general_dir[i].append(",");
+
+			TB_general_dir[i].append(GENERAL_DIR[j]);
+			TB_general_dir[i].append("_move_out");
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append("[27:24],");
+
+			TB_general_dir[i].append(GENERAL_DIR[j]);
+			TB_general_dir[i].append("_move_out");
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append("[23:18],");
+
+			TB_general_dir[i].append(GENERAL_DIR[j]);
+			TB_general_dir[i].append("_move_out");
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append("[17:12],");
+
+			TB_general_dir[i].append(GENERAL_DIR[j]);
+			TB_general_dir[i].append("_move_out");
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append("[11:6],");
+
+			TB_general_dir[i].append(GENERAL_DIR[j]);
+			TB_general_dir[i].append("_move_out");
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append("[5:0],");
+			
+			TB_general_dir[i].append("pieceReg");
+			TB_general_dir[i].append(converted_self);
+			TB_general_dir[i].append(");\n");
+		}// end if
+
+
+		}//endfor
+
+}
+
+void print_TB_knight_direction (int i, int knight_UUL_in,
+int	knight_UUR_in ,
+int	knight_LLU_in,
+int	knight_RRU_in,
+int knight_DDL_in,
+int	 knight_DDR_in,
+int	 knight_LLD_in ,
+int	 knight_RRD_in){
+
+int TB_concat_knight_dir[8] = { knight_UUL_in,knight_UUR_in,
+								knight_LLU_in,
+								knight_RRU_in,
+								knight_DDL_in,
+								knight_DDR_in,
+								knight_LLD_in,
+								knight_RRD_in};
+
+const string KNIGHT_DIR[8] = {"UUL","UUR","LLU","RRU","DDL","DDR","LLD","RRD"} ;
+
+
+			self << i;
+			converted_self = self.str();
+			self.str("");
+	for(int j = 0; j < 8; j++){
+		if(TB_concat_knight_dir[j] != 0){
+			TB_knight_dir[i].append("$fwrite(f");
+			
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append(",\"");
+			TB_knight_dir[i].append(KNIGHT_DIR[j]);
+			TB_knight_dir[i].append(": Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b Piece Reg:%b\\n\" ");
+			TB_knight_dir[i].append(",");
+
+			TB_knight_dir[i].append(KNIGHT_DIR[j]);
+			TB_knight_dir[i].append("_move_out");
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append("[27:24],");
+
+			TB_knight_dir[i].append(KNIGHT_DIR[j]);
+			TB_knight_dir[i].append("_move_out");
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append("[23:18],");
+
+			TB_knight_dir[i].append(KNIGHT_DIR[j]);
+			TB_knight_dir[i].append("_move_out");
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append("[17:12],");
+
+			TB_knight_dir[i].append(KNIGHT_DIR[j]);
+			TB_knight_dir[i].append("_move_out");
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append("[11:6],");
+
+			TB_knight_dir[i].append(KNIGHT_DIR[j]);
+			TB_knight_dir[i].append("_move_out");
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append("[5:0],");
+			
+			TB_knight_dir[i].append("pieceReg");
+			TB_knight_dir[i].append(converted_self);
+			TB_knight_dir[i].append(");\n");
+		}// end if
+
+
+		}//endfor
+
+}
+///////////////////////////////
 void print_Down_in (int i){
 //For Down in
 general_dir[i].append("),\n.D_in(transmit");
@@ -964,10 +1095,12 @@ int main()
 	Move_Up_left_out = 1;
 	Move_Up_right_out = 1;
 
+
 	for (int j = 9 ; j < 50 ; j = j+8){
         for (int k = 0; k < 6; k++){ //For Group 9-> 14 till  49->54
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -1122,6 +1255,8 @@ int main()
 	for (int j = 63 ; j < 64 ; j++){
         for (int k = 0; k < 1; k++){ //For Group 63
 			i = k + j;
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 
 			print_setup (i);
 
@@ -1276,7 +1411,8 @@ int main()
 	for (int j = 56 ; j < 57 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 56
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -1430,7 +1566,8 @@ int main()
 	for (int j = 0 ; j < 1 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 0
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -1584,7 +1721,8 @@ int main()
 	for (int j = 7; j < 8 ; j++){
         for (int k = 0; k < 1; k++){ //For Group 7
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -1738,7 +1876,8 @@ int main()
 	for (int j = 1 ; j < 7 ; j++){
         for (int k = 0; k < 1; k++){ //For Group 1->6
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -1892,7 +2031,8 @@ int main()
 	for (int j = 8 ; j < 49 ; j = j+8){
         for (int k = 0; k < 1; k++){ //8->48
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -2048,7 +2188,8 @@ int main()
 	for (int j = 15 ; j < 56 ; j = j+8){
         for (int k = 0; k < 1; k++){ //7->55
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -2203,7 +2344,8 @@ int main()
 	for (int j = 57 ; j < 63 ; j++){
         for (int k = 0; k < 1; k++){ //57-63
 			i = k + j;
-
+			print_TB_general_direction (i, Down_in, Up_in,  Left_in,  Right_in,
+			Down_left_in, Down_right_in, Up_left_in,Up_right_in);
 			print_setup (i);
 
 			//Print Down in
@@ -2359,6 +2501,14 @@ int main()
 	for (int j = 50 ; j < 54 ; j++){
         for (int k = 0; k < 1; k++){ //For Group  50->53
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -2472,7 +2622,7 @@ move_knight_UUL_out = 1;
 	 move_knight_LLU_out = 1;
 	 move_knight_RRU_out = 0;
 	 move_knight_DDL_out = 1;
-	 move_knight_DDR_out = 0;
+	 move_knight_DDR_out = 1;
 	 move_knight_LLD_out = 1;
 	 move_knight_RRD_out = 0;
 
@@ -2481,7 +2631,7 @@ move_knight_UUL_out = 1;
 	knight_LLU_out = 1;
 	knight_RRU_out = 0;
 	knight_DDL_out = 1;
-	 knight_DDR_out = 0;
+	 knight_DDR_out = 1;
 	 knight_LLD_out = 1;
 	 knight_RRD_out = 0;
 
@@ -2490,13 +2640,21 @@ move_knight_UUL_out = 1;
 	knight_LLU_in = 1;
 	knight_RRU_in = 0;
 	knight_DDL_in = 1;
-	 knight_DDR_in = 0;
+	 knight_DDR_in = 1;
 	 knight_LLD_in = 1;
 	 knight_RRD_in = 0;
 
 	for (int j = 17 ; j < 42 ; j = j+8){
         for (int k = 0; k < 1; k++){ //For Group 1 East
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -2637,6 +2795,14 @@ move_knight_UUL_out = 1;
 	for (int j = 22 ; j < 47 ; j = j+8){
         for (int k = 0; k < 1; k++){ //For 22, 30, 38, 46
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -2776,6 +2942,14 @@ move_knight_UUL_out = 1;
 		for (int j = 10 ; j < 14 ; j++){
         for (int k = 0; k < 1; k++){ //For Group 10->13, knight
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -2915,7 +3089,16 @@ move_knight_UUL_out = 0;
         for (int k = 0; k < 1; k++){ //For Group 23->47, left most knight move
 
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
+
             converted_self = self.str();
 
 			///Knight Move Outs/////
@@ -3051,6 +3234,14 @@ move_knight_UUL_out = 0;
 	for (int j = 18 ; j < 43 ; j = j+8){
         for (int k = 0; k < 4; k++){ //For Group 18-> 21,  26->29, 34-> 37, 42 -> 45
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -3189,6 +3380,14 @@ move_knight_UUL_out = 0;
 	for (int j = 63 ; j < 64 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 63
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -3327,6 +3526,14 @@ move_knight_UUL_out = 0;
 	for (int j = 56 ; j < 57 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 56
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -3465,6 +3672,14 @@ move_knight_UUL_out = 0;
 	for (int j = 7 ; j < 8 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 7
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -3603,6 +3818,14 @@ move_knight_UUL_out = 0;
 	for (int j = 0 ; j < 1 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 63
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -3741,6 +3964,14 @@ move_knight_UUL_out = 1;
 	for (int j = 2 ; j < 6 ; j++){
         for (int k = 0; k < 1; k++){ //2,3,4,5
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -3878,6 +4109,14 @@ move_knight_UUL_out = 1;
 	for (int j = 16 ; j < 41 ; j = j + 8){
         for (int k = 0; k < 1; k++){ //For Group 16 24 32 40
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4017,6 +4256,14 @@ move_knight_UUL_out = 1;
 	for (int j = 58 ; j < 62 ; j++){
         for (int k = 0; k < 1; k++){ //For Group 58->61
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4155,6 +4402,14 @@ move_knight_UUL_out = 1;
 	for (int j = 57 ; j < 58 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 57
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4293,6 +4548,14 @@ move_knight_UUL_out = 1;
 	for (int j = 62 ; j < 63 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 62
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4431,6 +4694,14 @@ move_knight_UUL_out = 1;
 	for (int j = 48 ; j < 49 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 48
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4568,6 +4839,14 @@ move_knight_UUL_out = 1;
 	for (int j = 49 ; j < 50 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 49
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4704,6 +4983,14 @@ move_knight_UUL_out = 0;
 	for (int j = 54 ; j < 55 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 54
 			i = k + j;
+			print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4841,6 +5128,14 @@ move_knight_UUL_out = 0;
 	for (int j = 55 ; j < 56 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 55
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -4978,6 +5273,14 @@ move_knight_UUL_out = 1;
 	for (int j = 8 ; j < 9 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 8
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -5115,6 +5418,14 @@ move_knight_UUL_out = 1;
 	for (int j = 9 ; j < 10 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 9
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -5252,6 +5563,14 @@ move_knight_UUL_out = 1;
 	for (int j = 14 ; j < 15 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 14
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -5389,6 +5708,14 @@ move_knight_UUL_out = 0;
 	for (int j = 15 ; j < 16 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 15
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -5526,6 +5853,14 @@ move_knight_UUL_out = 1;
 	for (int j = 1 ; j < 2 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 1
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -5663,6 +5998,14 @@ move_knight_UUL_out = 1;
 	for (int j = 6 ; j < 7 ; j++){
         for (int k = 0; k < 1; k++){ //For Square 6
 			i = k + j;
+			 print_TB_knight_direction ( i,  knight_UUL_in,
+				knight_UUR_in ,
+				knight_LLU_in,
+				knight_RRU_in,
+				knight_DDL_in,
+				 knight_DDR_in,
+				 knight_LLD_in ,
+				 knight_RRD_in);
             self << i;
             converted_self = self.str();
 
@@ -5773,7 +6116,8 @@ move_knight_UUL_out = 1;
    ////////////////////////////Print////////////////////////////////////////////////
    //////////////////////////////////////////////////////////////////////////////////
    /////////////////////////////////////////////////////////////////////////////////////
-        for (int i = 0; i < wire_counter; i++){
+        
+		for (int i = 0; i < wire_counter; i++){
                 print = true;
               for (int dupe = 0; dupe < i; dupe++){
                 if (wire[i] == wire[dupe])
@@ -5825,10 +6169,19 @@ move_knight_UUL_out = 1;
 		for (int i = 0; i < 64; i++){
             myfile << "posReg" << i << " = 6'b000000;" << endl;
         }
-		
+/*
 		myfile << endl <<endl <<"Chessboard TB instantiation:\n";
 		print_chessboard();
+		
+		//Printing Fopen:
 
+		
+		for (int i = 0; i < 64; i++){
+			myfile << "f"<<i<<" = $fopen(\""<< "square" << i <<".txt\");" <<endl;
+            myfile << TB_general_dir[i] << TB_knight_dir[i] << endl;
+        }
+
+	*/
         myfile.close();
     return 0;
 }
