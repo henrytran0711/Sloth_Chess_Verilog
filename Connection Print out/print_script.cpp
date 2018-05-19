@@ -89,7 +89,7 @@ self.str("");
 			TB_general_dir[i].append(converted_self);
 			TB_general_dir[i].append(",\"");
 			TB_general_dir[i].append(GENERAL_DIR[j]);
-			TB_general_dir[i].append(": Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b Piece Reg:%b\\n\" ");
+			TB_general_dir[i].append(": Castling: %b Captured Piece:%b Final Position:%d Initial Piece:%b Inital Position:%d Piece Reg:%b\\n\" ");
 			TB_general_dir[i].append(",");
 
 			TB_general_dir[i].append(GENERAL_DIR[j]);
@@ -157,7 +157,7 @@ const string KNIGHT_DIR[8] = {"UUL","UUR","LLU","RRU","DDL","DDR","LLD","RRD"} ;
 			TB_knight_dir[i].append(converted_self);
 			TB_knight_dir[i].append(",\"");
 			TB_knight_dir[i].append(KNIGHT_DIR[j]);
-			TB_knight_dir[i].append(": Castling: %b Captured Piece:%b Final Position:%b Initial Piece:%b Inital Position:%b Piece Reg:%b\\n\" ");
+			TB_knight_dir[i].append(": Castling: %b Captured Piece:%b Final Position:%d Initial Piece:%b Inital Position:%d Piece Reg:%b\\n\" ");
 			TB_knight_dir[i].append(",");
 
 			TB_knight_dir[i].append(KNIGHT_DIR[j]);
@@ -6118,7 +6118,7 @@ move_knight_UUL_out = 1;
    ////////////////////////////Print////////////////////////////////////////////////
    //////////////////////////////////////////////////////////////////////////////////
    /////////////////////////////////////////////////////////////////////////////////////
-        
+        /*
 		for (int i = 0; i < wire_counter; i++){
                 print = true;
               for (int dupe = 0; dupe < i; dupe++){
@@ -6171,10 +6171,10 @@ move_knight_UUL_out = 1;
 		for (int i = 0; i < 64; i++){
             myfile << "posReg" << i << " = 6'b000000;" << endl;
         }
-/*
-		myfile << endl <<endl <<"Chessboard TB instantiation:\n";
+*/
+	/*	myfile << endl <<endl <<"Chessboard TB instantiation:\n";
 		print_chessboard();
-		
+		*/
 		//Printing Fopen:
 
 		
@@ -6183,7 +6183,7 @@ move_knight_UUL_out = 1;
             myfile << TB_general_dir[i] << TB_knight_dir[i] << endl;
         }
 
-	*/
+		
         myfile.close();
     return 0;
 }
