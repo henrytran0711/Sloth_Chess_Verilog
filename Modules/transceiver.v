@@ -5,6 +5,7 @@ input clk,
 input engineColor,
 input[5:0] pieceReg,
 input[5:0] posReg,
+input pawnPass,
 //Input Reg
 input [10:0] U_in,
 input [10:0] D_in,
@@ -268,6 +269,14 @@ always @(*) begin
 
 	if (DR_move != EMPTY_MOVE && DR_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
 		UL_out = DR_move;
+		
+	if (pawnPass == 1'b1) begin
+		if (U_move[6] == 1'b1)
+			D_out = U_move;
+		if (D_move[6] == 1'b1)
+			U_out = D_move;
+	end
+
 		
 end
 

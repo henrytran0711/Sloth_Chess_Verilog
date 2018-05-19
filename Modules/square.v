@@ -9,6 +9,7 @@ input clear,
 input[5:0] pieceReg,
 input[5:0] posReg,
 input castling,
+input pawnPass,
 
 //Input Reg
 input [10:0] U_in,
@@ -141,7 +142,7 @@ pieceReg pieceReg1(
 
 transceiver Transceiver1(
 
-.clk(clk), .engineColor(engineColor), .pieceReg(pieceRegOut), .posReg(posReg),
+.clk(clk), .engineColor(engineColor), .pieceReg(pieceRegOut), .posReg(posReg), .pawnPass(pawnPass),
 
 .U_in(U_in), .D_in(D_in), .L_in(L_in), .R_in(R_in), .UL_in(UL_in), .UR_in(UR_in), .DL_in(DL_in), .DR_in(DR_in), 
 .UUL_in(UUL_in), .UUR_in(UUR_in), .LLU_in(LLU_in), .RRU_in(RRU_in), .DDL_in(DDL_in), .DDR_in(DDR_in), .LLD_in(LLD_in), .RRD_in(RRD_in),
