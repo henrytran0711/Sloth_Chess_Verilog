@@ -3,8 +3,7 @@ module board_updater(
 //CLOCK
 input clk,
 input color_type, //1 is white, 0 is black
-input enable,
-input clear,
+
 input init,
 
 
