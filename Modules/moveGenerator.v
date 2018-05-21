@@ -841,7 +841,7 @@ wire [5:0] pieceReg61_out;
 wire [5:0] pieceReg62_out;
 wire [5:0] pieceReg63_out;
 
-board_updater board_updater0
+board_updater_tester board_updater0
 (
 .clk(clk),
 .init(init),
