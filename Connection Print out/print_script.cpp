@@ -6172,9 +6172,9 @@ move_knight_UUL_out = 1;
             myfile << "posReg" << i << " = 6'b000000;" << endl;
         }
 */
-	/*	myfile << endl <<endl <<"Chessboard TB instantiation:\n";
-		print_chessboard();
-		*/
+	//	myfile << endl <<endl <<"Chessboard TB instantiation:\n";
+	//	print_chessboard();
+/*		
 		//Printing Fopen:
 
 		
@@ -6183,6 +6183,14 @@ move_knight_UUL_out = 1;
             myfile << TB_general_dir[i] << TB_knight_dir[i] << endl;
         }
 
+*/
+//Printing TB updater
+	for (int i = 0; i < 64; i++){
+			myfile << "$fwrite(f,\"Enable["<<i<<"]:%b\\n\" ,enable["<< i<<"]);" <<endl;
+        }
+	for (int i = 0; i < 64; i++){
+			myfile << "$fwrite(f,\"PieceReg"<<i<<":%b\\n\" , pieceReg"<< i <<"_out);" <<endl;
+        }
 		
         myfile.close();
     return 0;

@@ -12,79 +12,79 @@ input [63:0] initialPosition,
 input [63:0] movedPosition,
 input [5:0] movingPiece,//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
 input [5:0] capturedPiece,//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
-input [2:0] castling, //001: no castling 010: Queens side 100: King Side
+input [1:0] castling, //00: no castling 01: Queens side 10: King Side
 input [4:0] enpassant,//00001: no enpassant, 00010:UL, 00100: UR , 01000: DL,10000:DR 
 input undo,
 
 
 
 //Output Enable
-output [63:0] enable_out,
-
-output [5:0] pieceReg0_out,
-output [5:0] pieceReg1_out,
-output [5:0] pieceReg2_out,
-output [5:0] pieceReg3_out,
-output [5:0] pieceReg4_out,
-output [5:0] pieceReg5_out,
-output [5:0] pieceReg6_out,
-output [5:0] pieceReg7_out,
-output [5:0] pieceReg8_out,
-output [5:0] pieceReg9_out,
-output [5:0] pieceReg10_out,
-output [5:0] pieceReg11_out,
-output [5:0] pieceReg12_out,
-output [5:0] pieceReg13_out,
-output [5:0] pieceReg14_out,
-output [5:0] pieceReg15_out,
-output [5:0] pieceReg16_out,
-output [5:0] pieceReg17_out,
-output [5:0] pieceReg18_out,
-output [5:0] pieceReg19_out,
-output [5:0] pieceReg20_out,
-output [5:0] pieceReg21_out,
-output [5:0] pieceReg22_out,
-output [5:0] pieceReg23_out,
-output [5:0] pieceReg24_out,
-output [5:0] pieceReg25_out,
-output [5:0] pieceReg26_out,
-output [5:0] pieceReg27_out,
-output [5:0] pieceReg28_out,
-output [5:0] pieceReg29_out,
-output [5:0] pieceReg30_out,
-output [5:0] pieceReg31_out,
-output [5:0] pieceReg32_out,
-output [5:0] pieceReg33_out,
-output [5:0] pieceReg34_out,
-output [5:0] pieceReg35_out,
-output [5:0] pieceReg36_out,
-output [5:0] pieceReg37_out,
-output [5:0] pieceReg38_out,
-output [5:0] pieceReg39_out,
-output [5:0] pieceReg40_out,
-output [5:0] pieceReg41_out,
-output [5:0] pieceReg42_out,
-output [5:0] pieceReg43_out,
-output [5:0] pieceReg44_out,
-output [5:0] pieceReg45_out,
-output [5:0] pieceReg46_out,
-output [5:0] pieceReg47_out,
-output [5:0] pieceReg48_out,
-output [5:0] pieceReg49_out,
-output [5:0] pieceReg50_out,
-output [5:0] pieceReg51_out,
-output [5:0] pieceReg52_out,
-output [5:0] pieceReg53_out,
-output [5:0] pieceReg54_out,
-output [5:0] pieceReg55_out,
-output [5:0] pieceReg56_out,
-output [5:0] pieceReg57_out,
-output [5:0] pieceReg58_out,
-output [5:0] pieceReg59_out,
-output [5:0] pieceReg60_out,
-output [5:0] pieceReg61_out,
-output [5:0] pieceReg62_out,
-output [5:0] pieceReg63_out,
+output reg [63:0] enable_out,
+//Output Piece reges
+output reg [5:0] pieceReg0_out,
+output reg [5:0] pieceReg1_out,
+output reg  [5:0] pieceReg2_out,
+output reg  [5:0] pieceReg3_out,
+output reg  [5:0] pieceReg4_out,
+output reg  [5:0] pieceReg5_out,
+output reg  [5:0] pieceReg6_out,
+output reg  [5:0] pieceReg7_out,
+output reg  [5:0] pieceReg8_out,
+output reg [5:0] pieceReg9_out,
+output reg [5:0] pieceReg10_out,
+output reg [5:0] pieceReg11_out,
+output reg [5:0] pieceReg12_out,
+output reg [5:0] pieceReg13_out,
+output reg [5:0] pieceReg14_out,
+output reg [5:0] pieceReg15_out,
+output reg [5:0] pieceReg16_out,
+output reg [5:0] pieceReg17_out,
+output reg [5:0] pieceReg18_out,
+output reg [5:0] pieceReg19_out,
+output reg [5:0] pieceReg20_out,
+output reg [5:0] pieceReg21_out,
+output reg [5:0] pieceReg22_out,
+output reg [5:0] pieceReg23_out,
+output reg [5:0] pieceReg24_out,
+output reg [5:0] pieceReg25_out,
+output reg [5:0] pieceReg26_out,
+output reg [5:0] pieceReg27_out,
+output reg [5:0] pieceReg28_out,
+output reg [5:0] pieceReg29_out,
+output reg [5:0] pieceReg30_out,
+output reg [5:0] pieceReg31_out,
+output reg [5:0] pieceReg32_out,
+output reg [5:0] pieceReg33_out,
+output reg [5:0] pieceReg34_out,
+output reg [5:0] pieceReg35_out,
+output reg [5:0] pieceReg36_out,
+output reg [5:0] pieceReg37_out,
+output reg [5:0] pieceReg38_out,
+output reg [5:0] pieceReg39_out,
+output reg [5:0] pieceReg40_out,
+output reg [5:0] pieceReg41_out,
+output reg [5:0] pieceReg42_out,
+output reg [5:0] pieceReg43_out,
+output reg [5:0] pieceReg44_out,
+output reg [5:0] pieceReg45_out,
+output reg [5:0] pieceReg46_out,
+output reg [5:0] pieceReg47_out,
+output reg [5:0] pieceReg48_out,
+output reg [5:0] pieceReg49_out,
+output reg [5:0] pieceReg50_out,
+output reg [5:0] pieceReg51_out,
+output reg [5:0] pieceReg52_out,
+output reg [5:0] pieceReg53_out,
+output reg [5:0] pieceReg54_out,
+output reg [5:0] pieceReg55_out,
+output reg [5:0] pieceReg56_out,
+output reg [5:0] pieceReg57_out,
+output reg [5:0] pieceReg58_out,
+output reg [5:0] pieceReg59_out,
+output reg [5:0] pieceReg60_out,
+output reg [5:0] pieceReg61_out,
+output reg [5:0] pieceReg62_out,
+output reg [5:0] pieceReg63_out
 
 );
 
@@ -94,29 +94,80 @@ parameter KING = 5'b00100;
 parameter QUEEN = 5'b11000;
 parameter ROOK = 5'b10000;
 parameter BISHOP = 5'b01000;
+parameter WHITE = 1'b1;
+parameter BLACK = 1'b0;
 
 reg [5:0] moved_PieceReg;
 reg [5:0] captured_PieceReg;
-/*
-transceiver Transceiver1(
 
-.clk(clk), .engineColor(engineColor), .pieceReg(pieceRegOut), .posReg(posReg),
-
-.U_in(U_in), .D_in(D_in), .L_in(L_in), .R_in(R_in), .UL_in(UL_in), .UR_in(UR_in), .DL_in(DL_in), .DR_in(DR_in), 
-.UUL_in(UUL_in), .UUR_in(UUR_in), .LLU_in(LLU_in), .RRU_in(RRU_in), .DDL_in(DDL_in), .DDR_in(DDR_in), .LLD_in(LLD_in), .RRD_in(RRD_in),
-
-.U_out(U_out), .D_out(D_out), .L_out(L_out), .R_out(R_out), .UL_out(UL_out), .UR_out(UR_out), .DL_out(DL_out), .DR_out(DR_out), 
-.UUL_out(UUL_out), .UUR_out(UUR_out), .LLU_out(LLU_out), .RRU_out(RRU_out), .DDL_out(DDL_out), .DDR_out(DDR_out), .LLD_out(LLD_out), .RRD_out(RRD_out),
-
-.U_move(U_move), .D_move(D_move), .L_move(L_move), .R_move(R_move), .UL_move(UL_move), .UR_move(UR_move), .DL_move(DL_move), .DR_move(DR_move), 
-.UUL_move(UUL_move), .UUR_move(UUR_move), .LLU_move(LLU_move), .RRU_move(RRU_move), .DDL_move(DDL_move), .DDR_move(DDR_move), .LLD_move(LLD_move), .RRD_move(RRD_move)
-
-);
-*/
- always @ (posedge clk) begin
+ always @ (*) begin
  if (init)	begin // Initialize all bit reges
-	
-	end
+	enable_out = 64'hffffffffffffffff;
+	pieceReg0_out = {WHITE,ROOK};
+	pieceReg1_out = {WHITE,KNIGHT};
+	pieceReg2_out = {WHITE,BISHOP};
+	pieceReg3_out = {WHITE,KING};
+	pieceReg4_out = {WHITE,QUEEN};
+	pieceReg5_out = {WHITE,BISHOP};
+	pieceReg6_out = {WHITE,KNIGHT};
+	pieceReg7_out = {WHITE,ROOK};
+	pieceReg8_out = {WHITE,PAWN};
+	pieceReg9_out = {WHITE,PAWN};
+	pieceReg10_out = {WHITE,PAWN};
+	pieceReg11_out = {WHITE,PAWN};
+	pieceReg12_out = {WHITE,PAWN};
+	pieceReg13_out = {WHITE,PAWN};
+	pieceReg14_out = {WHITE,PAWN};
+	pieceReg15_out = {WHITE,PAWN};
+	pieceReg16_out = 6'b000000;
+	pieceReg17_out = 6'b000000;
+	pieceReg18_out = 6'b000000;
+	pieceReg19_out = 6'b000000;
+	pieceReg20_out = 6'b000000;
+	pieceReg21_out = 6'b000000;
+	pieceReg22_out = 6'b000000;
+	pieceReg23_out = 6'b000000;
+	pieceReg24_out = 6'b000000;
+	pieceReg25_out = 6'b000000;
+	pieceReg26_out = 6'b000000;
+	pieceReg27_out = 6'b000000;
+	pieceReg28_out = 6'b000000;
+	pieceReg29_out = 6'b000000;
+	pieceReg30_out = 6'b000000;
+	pieceReg31_out = 6'b000000;
+	pieceReg32_out = 6'b000000;
+	pieceReg33_out = 6'b000000;
+	pieceReg34_out = 6'b000000;
+	pieceReg35_out = 6'b000000;
+	pieceReg36_out = 6'b000000;
+	pieceReg37_out = 6'b000000;
+	pieceReg38_out = 6'b000000;
+	pieceReg39_out = 6'b000000;
+	pieceReg40_out = 6'b000000;
+	pieceReg41_out = 6'b000000;
+	pieceReg42_out = 6'b000000;
+	pieceReg43_out = 6'b000000;
+	pieceReg44_out = 6'b000000;
+	pieceReg45_out = 6'b000000;
+	pieceReg46_out = 6'b000000;
+	pieceReg47_out = 6'b000000;
+	pieceReg48_out = {BLACK,PAWN};
+	pieceReg49_out = {BLACK,PAWN};
+	pieceReg50_out = {BLACK,PAWN};
+	pieceReg51_out = {BLACK,PAWN};
+	pieceReg52_out = {BLACK,PAWN};
+	pieceReg53_out = {BLACK,PAWN};
+	pieceReg54_out = {BLACK,PAWN};
+	pieceReg55_out = {BLACK,PAWN};
+	pieceReg56_out = {BLACK,ROOK};
+	pieceReg57_out = {BLACK,KNIGHT};
+	pieceReg58_out = {BLACK,BISHOP};
+	pieceReg59_out = {BLACK,KING};
+	pieceReg60_out = {BLACK,QUEEN};
+	pieceReg61_out = {BLACK,BISHOP};
+	pieceReg62_out = {BLACK,KNIGHT};
+	pieceReg63_out = {BLACK,ROOK};	
+end
 else if (!init)	begin //Update board state
 	
 	case(movingPiece)
@@ -153,7 +204,7 @@ else if (!init)	begin //Update board state
 			captured_PieceReg = {!color_type,KING};				
 	endcase
 	
-	enable_out = initialPosition & movedPosition;
+	enable_out = initialPosition | movedPosition;
 	pieceReg0_out = 6'b000000;
 	pieceReg1_out = 6'b000000;
 	pieceReg2_out = 6'b000000;
@@ -1062,11 +1113,10 @@ else if (!init)	begin //Update board state
 	end 
 
 	if( captured_PieceReg && !castling && undo) begin // Undo Capture
-	
-	//Undo capture
-	//initial Square gets moved_Piece_reg
-	//moved Square gets captured_Piece_reg
-	
+		if (moved_PieceReg == {color_type,PAWN}  //Queen Promotion Quiet Forward
+		&&( ( color_type == 1'b1 && (movedPosition & 64'hff00000000000000) ) || //If White Pawn
+		 ( color_type == 1'b0 && (movedPosition & 64'h00000000000000ff) ) //If black pawn
+		 )) begin// If Queen Promotion Undo Quiet
 		case (initialPosition)
 		64'd1 :
 			pieceReg0_out = moved_PieceReg;
@@ -1198,7 +1248,7 @@ else if (!init)	begin //Update board state
 			pieceReg63_out = moved_PieceReg;	
 		
 		endcase
-	case (movedPosition)
+		case (movedPosition)
 		64'd1 :
 			pieceReg0_out = captured_PieceReg;
 		64'd2 :
@@ -1330,8 +1380,356 @@ else if (!init)	begin //Update board state
 		
 		endcase
 	
+		end
+	else begin
+	//Undo capture
+	//initial Square gets moved_Piece_reg
+	//moved Square gets captured_Piece_reg
+		case (initialPosition)
+		64'd1 :
+			pieceReg0_out = moved_PieceReg;
+		64'd2 :
+			pieceReg1_out = moved_PieceReg;
+		64'd4 :
+			pieceReg2_out = moved_PieceReg;
+		64'd8 :
+			pieceReg3_out = moved_PieceReg;
+		64'd16 :
+			pieceReg4_out = moved_PieceReg;
+		64'd32 :
+			pieceReg5_out = moved_PieceReg;
+		64'd64 :
+			pieceReg6_out = moved_PieceReg;
+		64'd128 :
+			pieceReg7_out = moved_PieceReg;
+		64'd256 :
+			pieceReg8_out = moved_PieceReg;
+		64'd512 :
+			pieceReg9_out = moved_PieceReg;
+		64'd1024 :
+			pieceReg10_out = moved_PieceReg;
+		64'd2048 :
+			pieceReg11_out = moved_PieceReg;
+		64'd4096 :
+			pieceReg12_out = moved_PieceReg;
+		64'd8192 :
+			pieceReg13_out = moved_PieceReg;
+		64'd16384 :
+			pieceReg14_out = moved_PieceReg;
+		64'd32768 :
+			pieceReg15_out = moved_PieceReg;
+		64'd65536 :
+			pieceReg16_out = moved_PieceReg;
+		64'd131072 :
+			pieceReg17_out = moved_PieceReg;
+		64'd262144 :
+			pieceReg18_out = moved_PieceReg;
+		64'd524288 :
+			pieceReg19_out = moved_PieceReg;
+		64'd1048576 :
+			pieceReg20_out = moved_PieceReg;
+		64'd2097152 :
+			pieceReg21_out = moved_PieceReg;
+		64'd4194304 :
+			pieceReg22_out = moved_PieceReg;
+		64'd8388608 :
+			pieceReg23_out = moved_PieceReg;
+		64'd16777216 :
+			pieceReg24_out = moved_PieceReg;
+		64'd33554432 :
+			pieceReg25_out = moved_PieceReg;
+		64'd67108864 :
+			pieceReg26_out = moved_PieceReg;
+		64'd134217728 :
+			pieceReg27_out = moved_PieceReg;
+		64'd268435456 :
+			pieceReg28_out = moved_PieceReg;
+		64'd536870912 :
+			pieceReg29_out = moved_PieceReg;
+		64'd1073741824 :
+			pieceReg30_out = moved_PieceReg;
+		64'd2147483648 :
+			pieceReg31_out = moved_PieceReg;
+		64'd4294967296 :
+			pieceReg32_out = moved_PieceReg;
+		64'd8589934592 :
+			pieceReg33_out = moved_PieceReg;
+		64'd17179869184 :
+			pieceReg34_out = moved_PieceReg;
+		64'd34359738368 :
+			pieceReg35_out = moved_PieceReg;
+		64'd68719476736 :
+			pieceReg36_out = moved_PieceReg;
+		64'd137438953472 :
+			pieceReg37_out = moved_PieceReg;
+		64'd274877906944 :
+			pieceReg38_out = moved_PieceReg;
+		64'd549755813888 :
+			pieceReg39_out = moved_PieceReg;
+		64'd1099511627776 :
+			pieceReg40_out = moved_PieceReg;
+		64'd2199023255552 :
+			pieceReg41_out = moved_PieceReg;
+		64'd4398046511104 :
+			pieceReg42_out = moved_PieceReg;
+		64'd8796093022208 :
+			pieceReg43_out = moved_PieceReg;
+		64'd17592186044416 :
+			pieceReg44_out = moved_PieceReg;
+		64'd35184372088832 :
+			pieceReg45_out = moved_PieceReg;
+		64'd70368744177664 :
+			pieceReg46_out = moved_PieceReg;
+		64'd140737488355328 :
+			pieceReg47_out = moved_PieceReg;
+		64'd281474976710656 :
+			pieceReg48_out = moved_PieceReg;
+		64'd562949953421312 :
+			pieceReg49_out = moved_PieceReg;
+		64'd1125899906842624 :
+			pieceReg50_out = moved_PieceReg;
+		64'd2251799813685248 :
+			pieceReg51_out = moved_PieceReg;
+		64'd4503599627370496 :
+			pieceReg52_out = moved_PieceReg;
+		64'd9007199254740992 :
+			pieceReg53_out = moved_PieceReg;
+		64'd18014398509481984 :
+			pieceReg54_out = moved_PieceReg;
+		64'd36028797018963968 :
+			pieceReg55_out = moved_PieceReg;
+		64'd72057594037927936 :
+			pieceReg56_out = moved_PieceReg;
+		64'd144115188075855872 :
+			pieceReg57_out = moved_PieceReg;
+		64'd288230376151711744 :
+			pieceReg58_out = moved_PieceReg;
+		64'd576460752303423488 :
+			pieceReg59_out = moved_PieceReg;
+		64'd1152921504606846976 :
+			pieceReg60_out = moved_PieceReg;
+		64'd2305843009213693952 :
+			pieceReg61_out = moved_PieceReg;
+		64'd4611686018427387904 :
+			pieceReg62_out = moved_PieceReg;
+		64'd9223372036854775808:
+			pieceReg63_out = moved_PieceReg;	
+		
+		endcase
+		case (movedPosition)
+		64'd1 :
+			pieceReg0_out = captured_PieceReg;
+		64'd2 :
+			pieceReg1_out = captured_PieceReg;
+		64'd4 :
+			pieceReg2_out = captured_PieceReg;
+		64'd8 :
+			pieceReg3_out = captured_PieceReg;
+		64'd16 :
+			pieceReg4_out = captured_PieceReg;
+		64'd32 :
+			pieceReg5_out = captured_PieceReg;
+		64'd64 :
+			pieceReg6_out = captured_PieceReg;
+		64'd128 :
+			pieceReg7_out = captured_PieceReg;
+		64'd256 :
+			pieceReg8_out = captured_PieceReg;
+		64'd512 :
+			pieceReg9_out = captured_PieceReg;
+		64'd1024 :
+			pieceReg10_out = captured_PieceReg;
+		64'd2048 :
+			pieceReg11_out = captured_PieceReg;
+		64'd4096 :
+			pieceReg12_out = captured_PieceReg;
+		64'd8192 :
+			pieceReg13_out = captured_PieceReg;
+		64'd16384 :
+			pieceReg14_out = captured_PieceReg;
+		64'd32768 :
+			pieceReg15_out = captured_PieceReg;
+		64'd65536 :
+			pieceReg16_out = captured_PieceReg;
+		64'd131072 :
+			pieceReg17_out = captured_PieceReg;
+		64'd262144 :
+			pieceReg18_out = captured_PieceReg;
+		64'd524288 :
+			pieceReg19_out = captured_PieceReg;
+		64'd1048576 :
+			pieceReg20_out = captured_PieceReg;
+		64'd2097152 :
+			pieceReg21_out = captured_PieceReg;
+		64'd4194304 :
+			pieceReg22_out = captured_PieceReg;
+		64'd8388608 :
+			pieceReg23_out = captured_PieceReg;
+		64'd16777216 :
+			pieceReg24_out = captured_PieceReg;
+		64'd33554432 :
+			pieceReg25_out = captured_PieceReg;
+		64'd67108864 :
+			pieceReg26_out = captured_PieceReg;
+		64'd134217728 :
+			pieceReg27_out = captured_PieceReg;
+		64'd268435456 :
+			pieceReg28_out = captured_PieceReg;
+		64'd536870912 :
+			pieceReg29_out = captured_PieceReg;
+		64'd1073741824 :
+			pieceReg30_out = captured_PieceReg;
+		64'd2147483648 :
+			pieceReg31_out = captured_PieceReg;
+		64'd4294967296 :
+			pieceReg32_out = captured_PieceReg;
+		64'd8589934592 :
+			pieceReg33_out = captured_PieceReg;
+		64'd17179869184 :
+			pieceReg34_out = captured_PieceReg;
+		64'd34359738368 :
+			pieceReg35_out = captured_PieceReg;
+		64'd68719476736 :
+			pieceReg36_out = captured_PieceReg;
+		64'd137438953472 :
+			pieceReg37_out = captured_PieceReg;
+		64'd274877906944 :
+			pieceReg38_out = captured_PieceReg;
+		64'd549755813888 :
+			pieceReg39_out = captured_PieceReg;
+		64'd1099511627776 :
+			pieceReg40_out = captured_PieceReg;
+		64'd2199023255552 :
+			pieceReg41_out = captured_PieceReg;
+		64'd4398046511104 :
+			pieceReg42_out = captured_PieceReg;
+		64'd8796093022208 :
+			pieceReg43_out = captured_PieceReg;
+		64'd17592186044416 :
+			pieceReg44_out = captured_PieceReg;
+		64'd35184372088832 :
+			pieceReg45_out = captured_PieceReg;
+		64'd70368744177664 :
+			pieceReg46_out = captured_PieceReg;
+		64'd140737488355328 :
+			pieceReg47_out = captured_PieceReg;
+		64'd281474976710656 :
+			pieceReg48_out = captured_PieceReg;
+		64'd562949953421312 :
+			pieceReg49_out = captured_PieceReg;
+		64'd1125899906842624 :
+			pieceReg50_out = captured_PieceReg;
+		64'd2251799813685248 :
+			pieceReg51_out = captured_PieceReg;
+		64'd4503599627370496 :
+			pieceReg52_out = captured_PieceReg;
+		64'd9007199254740992 :
+			pieceReg53_out = captured_PieceReg;
+		64'd18014398509481984 :
+			pieceReg54_out = captured_PieceReg;
+		64'd36028797018963968 :
+			pieceReg55_out = captured_PieceReg;
+		64'd72057594037927936 :
+			pieceReg56_out = captured_PieceReg;
+		64'd144115188075855872 :
+			pieceReg57_out = captured_PieceReg;
+		64'd288230376151711744 :
+			pieceReg58_out = captured_PieceReg;
+		64'd576460752303423488 :
+			pieceReg59_out = captured_PieceReg;
+		64'd1152921504606846976 :
+			pieceReg60_out = captured_PieceReg;
+		64'd2305843009213693952 :
+			pieceReg61_out = captured_PieceReg;
+		64'd4611686018427387904 :
+			pieceReg62_out = captured_PieceReg;
+		64'd9223372036854775808:
+			pieceReg63_out = captured_PieceReg;	
+		
+		endcase
 	
+	end
 	end	
+	
+	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Castling, Queens Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition << 2) & ( initialPosition << 4) ;
+		//pieceReg3_out = 6'b00000;
+		pieceReg4_out = {WHITE,ROOK};
+		pieceReg5_out = {WHITE,KING};
+		//pieceReg7_out = 6'b00000;
+		
+	end
+	
+	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // White Forward Castling, Kings Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition >> 2) & ( initialPosition >> 3) ;
+		//pieceReg3_out = 6'b00000;
+		pieceReg2_out = {WHITE,ROOK};
+		pieceReg1_out = {WHITE,KING};
+		//pieceReg0_out = 6'b00000;
+	
+	end
+
+	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // BLACK Forward Castling, Queens Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition << 2) & ( initialPosition << 4) ;
+		//pieceReg59_out = 6'b00000;
+		pieceReg60_out = {BLACK,ROOK};
+		pieceReg61_out = {BLACK,KING};
+		//pieceReg63_out = 6'b00000;
+	
+	end
+	
+	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // BLACk Forward Castling, Kings Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition >> 2) & ( initialPosition >> 3) ;
+		//pieceReg59_out = 6'b00000;
+		pieceReg58_out = {BLACK,ROOK};
+		pieceReg57_out = {BLACK,KING};
+		//pieceReg56_out = 6'b00000;
+	
+	end
+	
+	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Undo Castling, Queens Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition << 2) & ( initialPosition << 4) ;
+		pieceReg3_out = {WHITE,KING};
+		//pieceReg4_out = 6'b00000;
+		//pieceReg5_out = 6'b00000;
+		pieceReg7_out = {WHITE,ROOK};
+	
+	end
+	
+	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // White Undo Castling, Kings Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition >> 2) & ( initialPosition >> 3) ;
+		pieceReg3_out = {WHITE,KING};
+		//pieceReg2_out = 6'b00000;
+		//pieceReg1_out = 6'b00000;
+		pieceReg0_out = {WHITE,ROOK};
+	
+	end
+
+	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // BLACK Undo Castling, Queens Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition << 2) & ( initialPosition << 4) ;
+		pieceReg63_out = {BLACK,ROOK};
+		//pieceReg60_out = 6'b00000;
+		//pieceReg61_out = 6'b00000;
+		pieceReg59_out = {BLACK,KING};
+	
+	end
+	
+	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // BLACk Undo Castling, Kings Side
+		//Enable King's initial position, Rook's initial position, and 2 final positions
+		enable_out = initialPosition & movedPosition & ( initialPosition >> 2) & ( initialPosition >> 3) ;
+		pieceReg56_out = {BLACK,ROOK};
+		//pieceReg60_out = 6'b00000;
+		//pieceReg61_out = 6'b00000;
+		pieceReg59_out = {BLACK,KING};
+	end
+	
 	
 end// end if !init
 end//end Always @ Pos Edge clock
