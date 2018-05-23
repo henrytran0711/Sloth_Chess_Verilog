@@ -1650,9 +1650,9 @@ else if (!init)	begin //Update board state
 	end
 	end	
 	
-	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Castling, Queens Side
+if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Castling, Queens Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition << 2) | ( initialPosition << 4) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
 		//pieceReg3_out = 6'b00000;
 		pieceReg4_out = {WHITE,ROOK};
 		pieceReg5_out = {WHITE,KING};
@@ -1662,7 +1662,7 @@ else if (!init)	begin //Update board state
 	
 	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // White Forward Castling, Kings Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition >> 2) | ( initialPosition >> 3) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
 		//pieceReg3_out = 6'b00000;
 		pieceReg2_out = {WHITE,ROOK};
 		pieceReg1_out = {WHITE,KING};
@@ -1670,9 +1670,9 @@ else if (!init)	begin //Update board state
 	
 	end
 
-	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // BLACK Forward Castling, Queens Side
+	if(color_type == 1'b0 && castling == 2'b01 && !undo) begin // BLACK Forward Castling, Queens Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition << 2) | ( initialPosition << 4) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
 		//pieceReg59_out = 6'b00000;
 		pieceReg60_out = {BLACK,ROOK};
 		pieceReg61_out = {BLACK,KING};
@@ -1680,9 +1680,9 @@ else if (!init)	begin //Update board state
 	
 	end
 	
-	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // BLACk Forward Castling, Kings Side
+	if(color_type == 1'b0 && castling == 2'b10 && !undo) begin // BLACk Forward Castling, Kings Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition >> 2) | ( initialPosition >> 3) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
 		//pieceReg59_out = 6'b00000;
 		pieceReg58_out = {BLACK,ROOK};
 		pieceReg57_out = {BLACK,KING};
@@ -1690,9 +1690,9 @@ else if (!init)	begin //Update board state
 	
 	end
 	
-	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Undo Castling, Queens Side
+	if(color_type == 1'b1 && castling == 2'b01 && undo) begin // White Undo Castling, Queens Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition << 2) | ( initialPosition << 4) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
 		pieceReg3_out = {WHITE,KING};
 		//pieceReg4_out = 6'b00000;
 		//pieceReg5_out = 6'b00000;
@@ -1700,9 +1700,9 @@ else if (!init)	begin //Update board state
 	
 	end
 	
-	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // White Undo Castling, Kings Side
+	if(color_type == 1'b1 && castling == 2'b10 && undo) begin // White Undo Castling, Kings Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition >> 2) | ( initialPosition >> 3) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
 		pieceReg3_out = {WHITE,KING};
 		//pieceReg2_out = 6'b00000;
 		//pieceReg1_out = 6'b00000;
@@ -1710,9 +1710,9 @@ else if (!init)	begin //Update board state
 	
 	end
 
-	if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // BLACK Undo Castling, Queens Side
+	if(color_type == 1'b0 && castling == 2'b01 && undo) begin // BLACK Undo Castling, Queens Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition << 2) | ( initialPosition << 4) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
 		pieceReg63_out = {BLACK,ROOK};
 		//pieceReg60_out = 6'b00000;
 		//pieceReg61_out = 6'b00000;
@@ -1720,9 +1720,9 @@ else if (!init)	begin //Update board state
 	
 	end
 	
-	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // BLACk Undo Castling, Kings Side
+	if(color_type == 1'b0 && castling == 2'b10 && undo) begin // BLACk Undo Castling, Kings Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
-		enable_out = initialPosition | movedPosition | ( initialPosition >> 2) | ( initialPosition >> 3) ;
+		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
 		pieceReg56_out = {BLACK,ROOK};
 		//pieceReg60_out = 6'b00000;
 		//pieceReg61_out = 6'b00000;
