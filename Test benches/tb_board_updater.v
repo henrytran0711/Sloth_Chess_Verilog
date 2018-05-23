@@ -83,11 +83,11 @@ wire [5:0] pieceReg61_out;
 wire [5:0] pieceReg62_out;
 wire [5:0] pieceReg63_out;
 
-board_updater update(//CLOCK
+board_updater_tester update(//CLOCK
 .clk(clk),
 .color_type(color_type), //1 is white, 0 is black
-.enable(enable),
-.clear(clear),
+
+
 .init(init),
 
 
