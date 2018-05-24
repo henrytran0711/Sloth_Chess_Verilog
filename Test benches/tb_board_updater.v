@@ -167,6 +167,10 @@ board_updater_tester update(//CLOCK
 .pieceReg62_out(pieceReg62_out),
 .pieceReg63_out(pieceReg63_out));
 
+
+parameter WHITE = 1'b1;
+parameter BLACK = 1'b0;
+
 initial begin
 	clk = 0;
 	color_type = 1'b1; //1 is white, 0 is black
@@ -174,13 +178,14 @@ initial begin
 	clear = 1'b0;
 	init = 1'b0;
 	
-	initialPosition = 64'h0000000000000001 << 49;
-	movedPosition = 64'h0000000000000001 << 56;
-	movingPiece = 6'b000001;//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
-	capturedPiece = 6'b000010;//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
-	castling = 2'b00; //00: no castling 01: Queens side 10: King Side
+	initialPosition = 64'h0000000000000001 << 3;
+	movedPosition = 64'h0000000000000001 << 1;
+	color_type = WHITE;
+	movingPiece = 6'b100000;//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
+	capturedPiece = 6'b000000;//000001: pawn, 000010: rook, 000100: knight , 001000: bishop, 010000: queen, 100000: king
+	castling = 2'b10; //00: no castling 01: Queens side 10: King Side
 	enpassant = 5'b00000;//00001: no enpassant, 00010:UL, 00100: UR , 01000: DL,10000:DR 
-	undo = 1'b1;
+	undo = 1'b0;
 	
 	#200;
 	f = $fopen("board_update.txt");
@@ -312,7 +317,7 @@ $fwrite(f,"PieceReg60:%b\n" , pieceReg60_out);
 $fwrite(f,"PieceReg61:%b\n" , pieceReg61_out);
 $fwrite(f,"PieceReg62:%b\n" , pieceReg62_out);
 $fwrite(f,"PieceReg63:%b\n" , pieceReg63_out);
-
+$fclose(f);
 
 
 	$finish;
