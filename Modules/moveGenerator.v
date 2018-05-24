@@ -13,6 +13,10 @@ input [1:0] castling, //00: no castling 01: Queens side 10: King Side
 input [4:0] enpassant,//00001: no enpassant, 00010:UL, 00100: UR , 01000: DL,10000:DR 
 input undo,
 
+//control in
+input update,
+input gen,
+input reset;
 
 
 //Move Gen out
@@ -773,18 +777,8 @@ output [31:0] DDR_move_out33,
 output [31:0] UUR_move_out41,
 output [31:0] DDR_move_out41,
 
-
-
 //Control out
 output software_stop,
-
-//control in
-input update,
-input gen,
-input reset
-
-
-
 );
 //Control Wire
 wire init_wire;
