@@ -3,7 +3,6 @@ module moveGenerator
 input clk,
 input engineColor,
 input [3:0] castlingFlags,
-input init,
 
 input [63:0] initialPosition,
 input [63:0] movedPosition,
@@ -15,6 +14,8 @@ input [4:0] enpassant,//00001: no enpassant, 00010:UL, 00100: UR , 01000: DL,100
 input undo,
 
 
+
+//Move Gen out
 output [31:0] D_move_out9,
 output [31:0] U_move_out9,
 output [31:0] L_move_out9,
@@ -770,9 +771,25 @@ output [31:0] DDR_move_out25,
 output [31:0] UUR_move_out33,
 output [31:0] DDR_move_out33,
 output [31:0] UUR_move_out41,
-output [31:0] DDR_move_out41
+output [31:0] DDR_move_out41,
+
+
+
+//Control out
+output software_stop,
+
+//control in
+input update,
+input gen,
+input reset
+
+
 
 );
+//Control Wire
+wire init_wire;
+//
+
 
 wire [63:0] enable_out;
 
@@ -841,10 +858,18 @@ wire [5:0] pieceReg61_out;
 wire [5:0] pieceReg62_out;
 wire [5:0] pieceReg63_out;
 
+
+control_block control(.clk(clk),
+ .gen(gen),
+ .update(update), 
+ .reset(reset),
+ .software_stop(software_stop),
+ .init(init_wire));
+
 board_updater_tester board_updater0
 (
 .clk(clk),
-.init(init),
+.init(init_wire),
 
 .initialPosition(initialPosition),
 .movedPosition(movedPosition),

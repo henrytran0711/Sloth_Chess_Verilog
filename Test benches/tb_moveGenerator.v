@@ -4,7 +4,7 @@ reg clk;
 reg engineColor;
 
 reg [3:0] castlingFlags;
-reg init;
+
 
 reg [63:0] initialPosition;
 reg [63:0] movedPosition;
@@ -772,7 +772,15 @@ wire [31:0] UUR_move_out33;
 wire [31:0] DDR_move_out33;
 wire [31:0] UUR_move_out41;
 wire [31:0] DDR_move_out41;
+//Wire Control Out
+wire software_stop;
 
+reg update;
+reg gen;
+reg reset;
+
+
+//
 integer f0;
 integer f1;
 integer f2;
@@ -845,7 +853,12 @@ moveGenerator moveGenerator0
 .clk(clk),
 .engineColor(engineColor),
 .castlingFlags(castlingFlags),
-.init(init),
+
+.gen(gen),
+ .update(update), 
+ .reset(reset),
+ .software_stop(software_stop),
+ 
 
 .initialPosition(initialPosition),
 .movedPosition(movedPosition),
@@ -1623,11 +1636,16 @@ initial begin
 	clk = 1'b1;
 	engineColor = WHITE;
 	castlingFlags = 4'b1111;
-	init = 1'b1;
+	reset = 1'b1;
 	
 	#100;
 	
-	init = 1'b0;
+	reset = 1'b0;
+	
+	#100;
+	//Control
+	update = 1'b1;
+	
 	
 	initialPosition = 64'h0000000000000001 << 3;
 	movedPosition = 64'h0000000000000001 << 1;
@@ -1638,8 +1656,13 @@ initial begin
 	enpassant = 5'b00000;//00001: no enpassant, 00010:UL, 00100: UR , 01000: DL,10000:DR 
 	undo = 1'b0;
 
-	
-	#200;
+	#100;
+	update = 1'b0;
+	#800;
+	gen = 1'b1;
+	#100;
+	gen = 1'b0;
+	#2000;
 
 f0 = $fopen("square0.txt");
 $fwrite(f0,"U: Castling: %b Captured Piece:%b Final Position:%d Initial Piece:%b Inital Position:%d \n" ,U_move_out0[27:24],U_move_out0[23:18],U_move_out0[17:12],U_move_out0[11:6],U_move_out0[5:0]);
