@@ -778,7 +778,7 @@ output [31:0] UUR_move_out41,
 output [31:0] DDR_move_out41,
 
 //Control out
-output software_stop
+output software_stop,
 );
 //Control Wire
 wire init_wire;
