@@ -6174,10 +6174,11 @@ move_knight_UUL_out = 1;
 		//Printing Fopen:
 
 		
-		for (int i = 0; i < 64; i++){
+	/*	for (int i = 0; i < 64; i++){
 			myfile << "f"<<i<<" = $fopen(\""<< "square" << i <<".txt\");" <<endl;
             myfile << TB_general_dir[i] << TB_knight_dir[i] << endl;
         }
+		*/
 
 
 //Printing TB updater
@@ -6189,6 +6190,19 @@ move_knight_UUL_out = 1;
 			myfile << "$fwrite(f,\"PieceReg"<<i<<":%b\\n\" , pieceReg"<< i <<"_out);" <<endl;
         }
 	*/	
+	
+//Printing Serializer Initiation
+for (int i = 0; i < move_counter; i++){
+                print = true;
+            for (int dupe = 0; dupe <i; dupe++){
+
+                if (move_out[i] == move_out[dupe])
+                    print = false;
+            }
+                if (print)
+                    myfile << "output [31:0] " << move_out[i] <<"," << endl;
+
+		}
         myfile.close();
     return 0;
 }

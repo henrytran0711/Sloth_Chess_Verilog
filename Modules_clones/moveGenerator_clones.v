@@ -20,6 +20,20 @@ input reset;
 
 
 //Move Gen out
+
+output [31:0] out1,
+output [31:0] out2,
+output [31:0] out3,
+output [31:0] out,
+output done, // need to be set to wire
+//another done signal for the serializer
+
+//Control out
+output software_stop,
+);
+//Control Wire
+wire init_wire;
+//
 output [31:0] D_move_out9,
 output [31:0] U_move_out9,
 output [31:0] L_move_out9,
@@ -777,13 +791,6 @@ output [31:0] DDR_move_out33,
 output [31:0] UUR_move_out41,
 output [31:0] DDR_move_out41,
 
-//Control out
-output software_stop,
-);
-//Control Wire
-wire init_wire;
-//
-
 
 wire [63:0] enable_out;
 
@@ -859,6 +866,20 @@ control_block control(.clk(clk),
  .reset(reset),
  .software_stop(software_stop),
  .init(init_wire));
+ 
+serializer sr(.clk(clk),
+ .load(load),
+ .in(
+ 
+ 
+ ), 
+ .out1(),
+ .out2(),
+ .out3(),
+ .out4(),
+ .move_counter_out(),
+ .done()
+ );
 
 board_updater_tester board_updater0
 (
