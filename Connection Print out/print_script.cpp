@@ -85,7 +85,7 @@ self.str("");
 	for(int j = 0; j < 8; j++){
 		if(TB_concat_general_dir[j] != 0){
 			TB_general_dir[i].append("$fwrite(f");
-			
+
 			TB_general_dir[i].append(converted_self);
 			TB_general_dir[i].append(",\"");
 			TB_general_dir[i].append(GENERAL_DIR[j]);
@@ -116,8 +116,8 @@ self.str("");
 			TB_general_dir[i].append("_move_out");
 			TB_general_dir[i].append(converted_self);
 			TB_general_dir[i].append("[5:0]);\n");
-			
-		
+
+
 		}// end if
 
 
@@ -151,7 +151,7 @@ const string KNIGHT_DIR[8] = {"UUL","UUR","LLU","RRU","DDL","DDR","LLD","RRD"} ;
 	for(int j = 0; j < 8; j++){
 		if(TB_concat_knight_dir[j] != 0){
 			TB_knight_dir[i].append("$fwrite(f");
-			
+
 			TB_knight_dir[i].append(converted_self);
 			TB_knight_dir[i].append(",\"");
 			TB_knight_dir[i].append(KNIGHT_DIR[j]);
@@ -182,8 +182,8 @@ const string KNIGHT_DIR[8] = {"UUL","UUR","LLU","RRU","DDL","DDR","LLD","RRD"} ;
 			TB_knight_dir[i].append("_move_out");
 			TB_knight_dir[i].append(converted_self);
 			TB_knight_dir[i].append("[5:0]);\n");
-			
-	
+
+
 		}// end if
 
 
@@ -6170,10 +6170,10 @@ move_knight_UUL_out = 1;
 */
 	//	myfile << endl <<endl <<"Chessboard TB instantiation:\n";
 	//	print_chessboard();
-	
+
 		//Printing Fopen:
 
-		
+
 	/*	for (int i = 0; i < 64; i++){
 			myfile << "f"<<i<<" = $fopen(\""<< "square" << i <<".txt\");" <<endl;
             myfile << TB_general_dir[i] << TB_knight_dir[i] << endl;
@@ -6189,19 +6189,27 @@ move_knight_UUL_out = 1;
 	for (int i = 0; i < 64; i++){
 			myfile << "$fwrite(f,\"PieceReg"<<i<<":%b\\n\" , pieceReg"<< i <<"_out);" <<endl;
         }
-	*/	
-	
+	*/
+
 //Printing Serializer Initiation
+int line_counter = 0;// print 5 per line
 for (int i = 0; i < move_counter; i++){
                 print = true;
+
             for (int dupe = 0; dupe <i; dupe++){
 
                 if (move_out[i] == move_out[dupe])
                     print = false;
             }
-                if (print)
-                    myfile << "output [31:0] " << move_out[i] <<"," << endl;
+                if (print){
+                    line_counter ++;
+                    myfile <<move_out[i] <<",";
+						if(line_counter >= 4){
+							myfile << endl;
+							line_counter = 0;
+						}
 
+				}
 		}
         myfile.close();
     return 0;
