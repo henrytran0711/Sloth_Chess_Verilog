@@ -135,7 +135,7 @@ assign RRD_out = RRD_trans;
 
 
 always @(*) begin
-
+	//defaults
 	U_move_in = U_in;	
 	D_move_in = D_in;
 	L_move_in = L_in;
@@ -228,7 +228,7 @@ always @(*) begin
 	if (DR_in[6] == 1'b1 && pieceReg == EMPTY_PIECE_REG)
 		DR_move_in = EMPTY_MOVE;
 	
-
+	//defaults to send to neighboring squares
 	D_out = D_trans;
 	U_out = U_trans;
 	R_out = R_trans;
@@ -238,7 +238,7 @@ always @(*) begin
 	UR_out = UR_trans;
 	UL_out = UL_trans;
 	
-	//pass through
+	//if pass through
 
 	if (U_move != EMPTY_MOVE && U_move[9] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //manhattan
 		D_out = U_move;
@@ -270,6 +270,7 @@ always @(*) begin
 	if (DR_move != EMPTY_MOVE && DR_move[8] == 1'b1 && pieceReg == EMPTY_PIECE_REG) //diagonal
 		UL_out = DR_move;
 		
+	// pawns move two squares
 	if (pawnPass == 1'b1) begin
 		if (U_move[6] == 1'b1)
 			D_out = U_move;

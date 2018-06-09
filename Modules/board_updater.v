@@ -96,6 +96,8 @@ parameter BISHOP = 5'b01000;
 parameter WHITE = 1'b1;
 parameter BLACK = 1'b0;
 
+parameter EMPTY = 6'b000000;
+
 reg [5:0] moved_PieceReg;
 reg [5:0] captured_PieceReg;
 
@@ -1653,40 +1655,32 @@ else if (!init)	begin //Update board state
 if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Castling, Queens Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
-		//pieceReg3_out = 6'b00000;
 		pieceReg4_out = {WHITE,ROOK};
 		pieceReg5_out = {WHITE,KING};
-		//pieceReg7_out = 6'b00000;
 		
 	end
 	
 	if(color_type == 1'b1 && castling == 2'b10 && !undo) begin // White Forward Castling, Kings Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
-		//pieceReg3_out = 6'b00000;
 		pieceReg2_out = {WHITE,ROOK};
 		pieceReg1_out = {WHITE,KING};
-		//pieceReg0_out = 6'b00000;
 	
 	end
 
 	if(color_type == 1'b0 && castling == 2'b01 && !undo) begin // BLACK Forward Castling, Queens Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
-		//pieceReg59_out = 6'b00000;
 		pieceReg60_out = {BLACK,ROOK};
 		pieceReg61_out = {BLACK,KING};
-		//pieceReg63_out = 6'b00000;
 	
 	end
 	
 	if(color_type == 1'b0 && castling == 2'b10 && !undo) begin // BLACk Forward Castling, Kings Side
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
-		//pieceReg59_out = 6'b00000;
 		pieceReg58_out = {BLACK,ROOK};
 		pieceReg57_out = {BLACK,KING};
-		//pieceReg56_out = 6'b00000;
 	
 	end
 	
@@ -1694,8 +1688,6 @@ if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Cast
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
 		pieceReg3_out = {WHITE,KING};
-		//pieceReg4_out = 6'b00000;
-		//pieceReg5_out = 6'b00000;
 		pieceReg7_out = {WHITE,ROOK};
 	
 	end
@@ -1704,8 +1696,6 @@ if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Cast
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
 		pieceReg3_out = {WHITE,KING};
-		//pieceReg2_out = 6'b00000;
-		//pieceReg1_out = 6'b00000;
 		pieceReg0_out = {WHITE,ROOK};
 	
 	end
@@ -1714,8 +1704,6 @@ if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Cast
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition << 1) | ( initialPosition << 4) ;
 		pieceReg63_out = {BLACK,ROOK};
-		//pieceReg60_out = 6'b00000;
-		//pieceReg61_out = 6'b00000;
 		pieceReg59_out = {BLACK,KING};
 	
 	end
@@ -1724,8 +1712,6 @@ if(color_type == 1'b1 && castling == 2'b01 && !undo) begin // White Forward Cast
 		//Enable King's initial position, Rook's initial position, and 2 final positions
 		enable_out = initialPosition | movedPosition | ( initialPosition >> 1) | ( initialPosition >> 3) ;
 		pieceReg56_out = {BLACK,ROOK};
-		//pieceReg60_out = 6'b00000;
-		//pieceReg61_out = 6'b00000;
 		pieceReg59_out = {BLACK,KING};
 	end
 	

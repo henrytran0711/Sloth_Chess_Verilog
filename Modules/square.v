@@ -174,7 +174,7 @@ always @(*) begin
 	capturedPieceLLD = EMPTY_PIECE_REG;
 	capturedPieceRRD = EMPTY_PIECE_REG;
 	
-
+	// if captured move
 	if (U_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
 		capturedPieceU = pieceRegOut; 
 	if (D_move[10] != pieceRegOut[5] && pieceRegOut != EMPTY_PIECE_REG)
@@ -243,7 +243,7 @@ always @(*) begin
 		castlingR = 4'b0000;
 	end
 	
-
+// creating the 32 bit move format
 		
 	U_move_out = {8'b0000_0000, capturedPieceU, posReg, U_move[10:6], 1'b0, U_move[5:0]};
 	D_move_out = {8'b0000_0000, capturedPieceD, posReg, D_move[10:6], 1'b0, D_move[5:0]};

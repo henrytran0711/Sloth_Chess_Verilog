@@ -63,7 +63,7 @@ parameter BISHOP = 5'b01000;
 				LLD  = SEND_EMPTY_KNIGHT;
 				RRD = SEND_EMPTY_KNIGHT;
 			end
-	else if (engine_color == piece_reg[5])
+	else if (engine_color == piece_reg[5]) //if piece is same color as engine color
 			begin
 				case (piece_reg[4:0])
 					PAWN: //Pawn
@@ -73,7 +73,7 @@ parameter BISHOP = 5'b01000;
 								R = SEND_EMPTY;
 								L = SEND_EMPTY;
 								D = SEND_EMPTY;
-
+								//diagonals for capture
 								UL = { piece_reg[5:1], pos_reg};
 								UR ={ piece_reg[5:1], pos_reg};
 								DL = SEND_EMPTY;
@@ -95,7 +95,7 @@ parameter BISHOP = 5'b01000;
 								R = SEND_EMPTY;
 								L = SEND_EMPTY;
 								D = { piece_reg[5:1], pos_reg};
-
+								//diagonals for capture
 								UL = SEND_EMPTY;
 								UR = SEND_EMPTY;
 								DL =	{piece_reg[5:1], pos_reg};
